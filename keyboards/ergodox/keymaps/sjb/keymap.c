@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: Symbol Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+ * |         |  F1  |  F2  |  F3  |  F4  |  F5  | VRSN |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         |      |  Up  |      |      |      |      |           |      |      |      | INS  |      | PRSC |   F12  |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -94,35 +94,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |       | LCK1 | LCK2 | MUTE | VRSN |                                       |      | MSEL |      |      |      |
+ *   |       | LCK2 |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | VOL+ | VOL- |       | Pwr  | Slp  |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      | Del  |Brght+|       | Hue+ |Toggle|Solid |
+ *                                 |      | Del  | MUTE |       | MSEL |      |      |
  *                                 |      |      |------|       |------|      |      |
- *                                 |      |      |Brght-|       | Hue- |      |      |
+ *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       KC_TRNS, KC_F1,    KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_TRNS,
+       KC_TRNS, KC_F1,    KC_F2,    KC_F3,   KC_F4,   KC_F5,   M(VRSN),
        KC_TRNS, KC_TRNS,  KC_UP,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_CAPS, KC_LEFT,  KC_DOWN,  KC_RGHT, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, F(MDIA), KC_TRNS, KC_MUTE, M(VRSN),
+       KC_TRNS, F(MDIA), KC_TRNS, KC_TRNS, KC_TRNS,
                                        KC_VOLU, KC_VOLD,
-                                                RGB_VAI,
-                                       RGB_MOD, KC_DELT, RGB_VAD,
+                                                KC_MUTE,
+                                       KC_TRNS, KC_DELT, KC_TRNS,
        // right hand
        KC_TRNS, KC_F6,   KC_F7,   KC_F8,     KC_F9,   KC_F10,  KC_F11,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_INS,    KC_TRNS,  KC_PSCR, KC_F12,
                 KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS,
-                         KC_TRNS, KC_SELECT, KC_TRNS, KC_TRNS, KC_TRNS,
+                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_PWR,  KC_SLEP,
-       KC_TRNS,
+       KC_SELECT,
        KC_TRNS, KC_TRNS, KC_TRNS
        ),
 /* Keymap 2: Media and mouse keys
@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      | LCK1 | LCK2 | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
+ *   |      | LCK2 |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -162,14 +162,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_TRNS, KC_P4,   KC_P5,    KC_P6,    KC_PPLS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_P1,   KC_P2,    KC_P3,    KC_PENT, KC_TRNS,
                          KC_TRNS, KC_TRNS,  KC_PDOT,  KC_PENT, KC_TRNS,
-       RGB_TOG, RGB_SLD,
+       KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_P0
 ),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-  [SYMB]    = ACTION_LAYER_TAP_TOGGLE(SYMB)
+   [SYMB]    = ACTION_LAYER_TAP_TOGGLE(SYMB)
   ,[MDIA]   = ACTION_LAYER_TOGGLE(MDIA)
   ,[F_LSFT]  = ACTION_MODS_ONESHOT(MOD_LSFT)
   ,[F_RSFT]  = ACTION_MODS_ONESHOT(MOD_RSFT)
@@ -224,7 +224,6 @@ void matrix_scan_user(void) {
             break;
         default:
             lcd_backlight_hal_color(0x00,0x00,0xffff);
-            // none
             break;
     }
 };
