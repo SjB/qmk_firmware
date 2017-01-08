@@ -13,7 +13,12 @@
 enum {
   BASE = 0, // default layer
   SYMB,     // symbols
-  MDIA,      // media keys
+  MDIA     // media keys
+};
+
+enum {
+  F_SYMB = 0,
+  F_MDIA,
   F_LSFT,
   F_RSFT,
   F_LALT,
@@ -62,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,         KC_Q,   KC_W,    KC_E,    KC_R,   KC_T,   KC_LBRC,
         KC_LCTRL,       KC_A,   KC_S,    KC_D,    KC_F,   KC_G,
         F(F_LSFT),      KC_Z,   KC_X,    KC_C,    KC_V,   KC_B,   KC_BSLASH,
-        F(SYMB),        KC_APP, KC_LEFT, KC_LGUI, F(F_LALT),
+        F(F_SYMB),      KC_APP, KC_LEFT, KC_LGUI, F(F_LALT),
                                                           KC_HOME,KC_END,
                                                                   F(F_LALT),
                                               F(F_CTRL), KC_BSPC, KC_LGUI,
@@ -100,11 +105,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       KC_TRNS, KC_F1,    KC_F2,    KC_F3,   KC_F4,   KC_F5,   M(VRSN),
-       KC_TRNS, KC_TRNS,  KC_UP,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_CAPS, KC_LEFT,  KC_DOWN,  KC_RGHT, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, F(MDIA), KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_F1,     KC_F2,    KC_F3,   KC_F4,   KC_F5,   M(VRSN),
+       KC_TRNS, KC_TRNS,   KC_UP,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_CAPS, KC_LEFT,   KC_DOWN,  KC_RGHT, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS,   KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, F(F_MDIA), KC_TRNS, KC_TRNS, KC_TRNS,
                                        KC_VOLU, KC_VOLD,
                                                 KC_MUTE,
                                        KC_TRNS, KC_DELT, KC_TRNS,
@@ -145,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS,  KC_MS_U, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
        KC_TRNS, KC_MS_L,  KC_MS_D, KC_MS_R, KC_TRNS,  KC_TRNS,
        KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-       KC_TRNS, TG(MDIA), KC_TRNS, KC_BTN1, KC_BTN2,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,
                                            KC_TRNS, KC_TRNS,
                                                     KC_TRNS,
                                   KC_TRNS, KC_TRNS, KC_TRNS,
@@ -162,13 +167,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-   [SYMB]    = ACTION_LAYER_TAP_TOGGLE(SYMB)
-  ,[MDIA]   = ACTION_LAYER_TOGGLE(MDIA)
+   [F_SYMB]  = ACTION_LAYER_TAP_TOGGLE(SYMB)
+  ,[F_MDIA]  = ACTION_LAYER_TOGGLE(MDIA)
   ,[F_LSFT]  = ACTION_MODS_ONESHOT(MOD_LSFT)
   ,[F_RSFT]  = ACTION_MODS_ONESHOT(MOD_RSFT)
   ,[F_LALT]  = ACTION_MODS_ONESHOT(MOD_LALT)
   ,[F_RALT]  = ACTION_MODS_ONESHOT(MOD_RALT)
-  ,[F_CTRL] = ACTION_MODS_ONESHOT(MOD_LCTL)
+  ,[F_CTRL]  = ACTION_MODS_ONESHOT(MOD_LCTL)
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
