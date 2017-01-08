@@ -26,14 +26,6 @@ enum {
   VRSN
 };
 
-#ifdef SUBPROJECT_infinity
-void lcd_backlight_hal_color(uint16_t r, uint16_t g, uint16_t b);
-#endif
-
-#ifdef SUBPROJECT_ez
-inline void lcd_backlight_hal_color(uint16_t r, uint16_t g, uint16_t b) { }
-#endif
-
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
   RGB_SLD
@@ -189,7 +181,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       break;
     case EPRM:
       if (record->event.pressed) { // For resetting EEPROM
-        lcd_backlight_hal_color(0xffff, 0x00, 0x00);
         eeconfig_init();
       }
       break;
@@ -216,14 +207,11 @@ void matrix_scan_user(void) {
       // TODO: Make this relevant to the ErgoDox EZ.
         case 1:
             ergodox_right_led_1_on();
-            lcd_backlight_hal_color(0xffff, 0xffff, 0x00);
             break;
         case 2:
             ergodox_right_led_2_on();
-            lcd_backlight_hal_color(0x00, 0xffff,0x00);
             break;
         default:
-            lcd_backlight_hal_color(0x00,0x00,0xffff);
             break;
     }
 };
