@@ -17,7 +17,7 @@ enum {
 };
 
 enum {
-  F_SYMB = 0,
+  F_SYMB = KC_FN1,
   F_MDIA,
   F_LSFT,
   F_RSFT,
@@ -27,7 +27,7 @@ enum {
 };
 
 enum {
-  NONE = 0,
+  PLACE_HOLDER = 0, // can always be here
   EPRM,
   VRSN
 };
