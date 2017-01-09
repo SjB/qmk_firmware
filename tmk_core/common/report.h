@@ -50,6 +50,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AL_EMAIL                0x018A
 #define AL_CALCULATOR           0x0192
 #define AL_LOCAL_BROWSER        0x0194
+#define AL_INTERNET_BROWSER     0x0196
+
 /* application control */
 #define AC_SEARCH               0x0221
 #define AC_HOME                 0x0223
@@ -173,13 +175,14 @@ typedef struct {
     (key == KC_MAIL             ?  AL_EMAIL : \
     (key == KC_CALCULATOR       ?  AL_CALCULATOR : \
     (key == KC_MY_COMPUTER      ?  AL_LOCAL_BROWSER : \
+    (key == KC_BROWSER          ?  AL_INTERNET_BROWSER : \
     (key == KC_WWW_SEARCH       ?  AC_SEARCH : \
     (key == KC_WWW_HOME         ?  AC_HOME : \
     (key == KC_WWW_BACK         ?  AC_BACK : \
     (key == KC_WWW_FORWARD      ?  AC_FORWARD : \
     (key == KC_WWW_STOP         ?  AC_STOP : \
     (key == KC_WWW_REFRESH      ?  AC_REFRESH : \
-    (key == KC_WWW_FAVORITES    ?  AC_BOOKMARKS : 0)))))))))))))))))))))
+    (key == KC_WWW_FAVORITES    ?  AC_BOOKMARKS : 0))))))))))))))))))))))
 
 #ifdef __cplusplus
 }

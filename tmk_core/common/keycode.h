@@ -416,6 +416,7 @@ enum internal_special_keycodes {
     KC_MAIL,
     KC_CALCULATOR,
     KC_MY_COMPUTER,
+    KC_BROWSER,
     KC_WWW_SEARCH,
     KC_WWW_HOME,
     KC_WWW_BACK,
@@ -424,7 +425,7 @@ enum internal_special_keycodes {
     KC_WWW_REFRESH,
     KC_WWW_FAVORITES,
     KC_MEDIA_FAST_FORWARD,
-    KC_MEDIA_REWIND,    /* 0xBC */
+    KC_MEDIA_REWIND,    /* 0xBF */
 
     /* Fn key */
     KC_FN0              = 0xC0,
