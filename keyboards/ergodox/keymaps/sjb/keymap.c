@@ -26,15 +26,10 @@ enum {
   F_CTRL
 };
 
-enum {
+enum custom_keycodes {
   PLACE_HOLDER = 0, // can always be here
   EPRM,
-  VRSN
-};
-
-enum custom_keycodes {
-  PLACEHOLDER = SAFE_RANGE, // can always be here
-  RGB_SLD
+  VRSN,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
