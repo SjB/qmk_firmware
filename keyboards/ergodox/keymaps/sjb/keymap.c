@@ -16,6 +16,14 @@
 
 #define SJB_LCA(kc) (kc | QK_LCTL | QK_LALT)
 
+#define TAP_ONCE_CONSUMER_HID_CODE(code) \
+  host_consumer_send(code); \
+  host_consumer_send(0)
+
+#define TAP_ONCE(code) \
+  register_code(code); \
+  unregister_code(code)
+
 enum {
   BASE = 0, // default layer
   SYMB,     // symbols
@@ -179,12 +187,6 @@ const uint16_t PROGMEM fn_actions[] = {
   ,[F_CTRL]  = ACTION_MODS_ONESHOT(MOD_LCTL)
 };
 
-void send_raw_consumer_key(uint16_t code)
-{
-  host_consumer_send(code);
-  host_consumer_send(0);
-}
-
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
@@ -201,11 +203,15 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       break;
     case BROWSER:
       if (record->event.pressed) { // send AL_INTERNET_BROWSER to OS
-        send_raw_consumer_key(AL_INTERNET_BROWSER);
+        TAP_ONCE_CONSUMER_HID_CODE(AL_INTERNET_BROWSER);
       }
     case TSKSWCH: 
       if (record->event.pressed) { 
-        SEND_STRING ("Send LGUI and LALT")
+        TAP_ONCE(KC_LGUI);
+        wait_ms(250); 
+        register_code(KC_LALT);
+      } else {
+        unregister_code(KC_LALT);
       }
   }
   return MACRO_NONE;
