@@ -120,11 +120,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       KC_TRNS, KC_F1,       KC_F2,    KC_F3,       KC_F4,      KC_F5,          KC_TRNS,
-       KC_TRNS, KC_TRNS,     KC_UP,    KC_TRNS,     KC_TRNS,    KC_TRNS,        KC_TRNS,
-       KC_CAPS, KC_LEFT,     KC_DOWN,  KC_RGHT,     KC_TRNS,    KC_TRNS,
-       KC_TRNS, KC_TRNS,     KC_TRNS,  KC_TRNS,     KC_TRNS,    KC_TRNS,        KC_TRNS,
-       KC_TRNS, OSL(NUMPAD), KC_TRNS,  KC_TRNS,     KC_TRNS,
+       KC_TRNS, KC_F1,    KC_F2,       KC_F3,       KC_F4,      KC_F5,          KC_TRNS,
+       KC_TRNS, KC_TRNS,  KC_UP,       KC_TRNS,     KC_TRNS,    KC_TRNS,        KC_TRNS,
+       KC_CAPS, KC_LEFT,  KC_DOWN,     KC_RGHT,     KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,  KC_TRNS,     KC_TRNS,     KC_TRNS,    KC_TRNS,        KC_TRNS,
+                KC_TRNS,  TG(NUMPAD),  KC_TRNS,     KC_TRNS,    KC_TRNS,
                                                                 KC_VOLU,        KC_VOLD,
                                                                                 KC_MUTE,
                                                     KC_TRNS,    LSS_T(KC_DELT), KC_TRNS,
@@ -161,20 +161,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // MEDIA AND MOUSE
 [NUMPAD] = KEYMAP(
-       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, M(EPRM),
-       KC_TRNS, KC_BTN1,  KC_MS_U, KC_BTN2, KC_TRNS,  KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_MS_L,  KC_MS_D, KC_MS_R, KC_TRNS,  KC_TRNS,
-       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,
-                                            KC_TRNS,  KC_TRNS,
-                                                      KC_TRNS,
-                                   KC_TRNS, KC_TRNS,  KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, M(EPRM),
+       KC_TRNS, KC_BTN1, KC_MS_U,     KC_BTN2, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_MS_L, KC_MS_D,     KC_MS_R, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                KC_TRNS, TG(NUMPAD),  KC_TRNS, KC_TRNS, KC_TRNS,
+                                                        KC_TRNS, KC_TRNS,
+                                                                 KC_TRNS,
+                                               KC_TRNS, KC_TRNS, KC_TRNS,
        // right hand
        M(EPRM), KC_TRNS, KC_NLCK, KC_PSLS,  KC_PAST,  KC_PMNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_P7,   KC_P8,    KC_P9,    KC_PPLS, KC_TRNS,
                 KC_TRNS, KC_P4,   KC_P5,    KC_P6,    KC_PPLS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_P1,   KC_P2,    KC_P3,    KC_PENT, KC_TRNS,
-                         KC_TRNS, KC_TRNS,  KC_PDOT,  KC_PENT, KC_TRNS,
+                KC_TRNS, KC_TRNS, KC_PDOT,  KC_PENT,  KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_P0
