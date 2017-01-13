@@ -17,6 +17,7 @@
 #define AL_EDITOR 0x185
 
 #define LCA(kc) (kc | QK_LCTL | QK_LALT)
+#define LSS(kc) (kc | QK_LSFT | QK_LGUI)
 
 #define LCA_T(kc) MT((MOD_LCTL | MOD_LALT), kc)
 #define LSS_T(kc) MT((MOD_LSFT | MOD_LGUI), kc)  // Shift-Super
@@ -29,6 +30,8 @@
 #define TD_RBRC TD(3)
 #define TD_BSLS TD(4)
 #define TD_GRV  TD(5)
+#define TD_RGHT TD(6)
+#define TD_LEFT TD(7)
 #else
 #define TD_TGAPP LGUI(KC_TAB)
 #define TD_TGWIN LALT(KC_F6),
@@ -36,6 +39,8 @@
 #define TD_RBRC KC_RBRC
 #define TD_BSLS KC_BSLS
 #define TD_GRV  KC_GRV
+#define TD_RGHT KC_RGHT
+#define TD_LEFT KC_LEFT
 #endif
 
 //#define F_SYMB OSL(SYMB)
@@ -118,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,          KC_W,    KC_E,      KC_R,       KC_T,     TD_LBRC,
         F_LCTL,   KC_A,          KC_S,    KC_D,      KC_F,       KC_G,
         F_LSFT,   KC_Z,          KC_X,    KC_C,      KC_V,       KC_B,     TD_BSLS,
-                  F_SYMB,        KC_APP,  KC_LEFT,   F_MAXST,    TD_TGAPP,
+                  F_SYMB,        KC_APP,  TD_LEFT,   F_MAXST,    TD_TGAPP,
                                                                  KC_HOME,  KC_END,
                                                                            F_LALT,
                                                      F_LCTL,     F_BSPC,   KC_LGUI,
@@ -127,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TD_RBRC,  KC_Y,          KC_U,    KC_I,      KC_O,       KC_P,     KC_EQL,
                   KC_H,          KC_J,    KC_K,      KC_L,       KC_SCLN,  KC_QUOT,
         TD_GRV,   KC_N,          KC_M,    KC_COMM,   KC_DOT,     KC_SLSH,  KC_RSFT,
-                  TD_TGWIN,      F_FSMOD, KC_RGHT,   M(TSKSWCH), F_SYMB,
+                  TD_TGWIN,      F_FSMOD, TD_RGHT,   M(TSKSWCH), F_SYMB,
         KC_PGUP,  KC_PGDN,
         F_RALT,
         F_RCTL,   F_ENT, F_SPC
@@ -278,7 +283,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [2] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_LBRC),
   [3] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_RBRC),
   [4] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_BSLS),
-  [5] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_GRV)
+  [5] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_GRV),
+  [6] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
+  [7] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT))
 };
 #endif
 
