@@ -150,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      | Del  | MUTE |       | MSEL |      |      |
  *                                 |      |      |------|       |------|      |      |
- *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      | MNXT |       | MPLY |      |      |
  *                                 `--------------------'       `--------------------'
  */
 // SYMBOLS
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                   KC_TRNS,  F_NUMPAD,    KC_TRNS,   KC_TRNS,    KC_TRNS,
                                                                 KC_VOLU,        KC_VOLD,
                                                                                 KC_MUTE,
-                                                    KC_TRNS,    F_DELT,         KC_TRNS,
+                                                    KC_TRNS,    F_DELT,         KC_MNXT,
        // right hand
        KC_TRNS,   KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,         KC_F11,
        KC_TRNS,   KC_TRNS,   KC_TRNS,    KC_INS,    KC_TRNS,    KC_PSCR,        KC_F12,
@@ -172,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                   KC_TRNS,   KC_TRNS,    KC_TRNS,   KC_TRNS,    KC_TRNS,
        KC_PWR,    KC_SLEP,
        KC_SELECT,
-       KC_TRNS,   KC_TRNS,   KC_TRNS
+       KC_MPLY,   KC_TRNS,   KC_TRNS
        ),
 /* Keymap 2: Numpad and mouse keys
  *
