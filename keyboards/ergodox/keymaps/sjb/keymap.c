@@ -19,35 +19,49 @@
 #define LCA(kc) (kc | QK_LCTL | QK_LALT)
 #define LSS(kc) (kc | QK_LSFT | QK_LGUI)
 
-#define LCA_T(kc) MT((MOD_LCTL | MOD_LALT), kc)
-#define LSS_T(kc) MT((MOD_LSFT | MOD_LGUI), kc)  // Shift-Super
-#define LCS_T(kc) MT((MOD_LCTL | MOD_LGUI), kc)  // Ctrl-Super
+#define F_RALT KC_RALT
+#define F_RCTL KC_RCTL
+#define F_TERM LCA(KC_T)
+#define F_MAX  LALT(KC_F10)  // Toggle maximazation state
 
 #ifdef TAP_DANCE_ENABLE
-#define TD_TGAPP TD(0)
-#define TD_TGWIN TD(1)
+
+#define TD_TERM F_TERM
+#define TD_MYCM KC_MYCM
 #define TD_LBRC TD(2)
 #define TD_RBRC TD(3)
 #define TD_BSLS TD(4)
 #define TD_GRV  TD(5)
 #define TD_RGHT TD(6)
 #define TD_LEFT TD(7)
-#define TD_MAX TD(8)
+#define TD_TGAPP TD(8)
+#define TD_SCLN TD(9)
+
 #else
-#define TD_TGAPP LGUI(KC_TAB)
-#define TD_TGWIN LALT(KC_F6),
+
+#define TD_TERM F_TERM
+#define TD_MYCM KC_MYCM
 #define TD_LBRC KC_LBRC
 #define TD_RBRC KC_RBRC
 #define TD_BSLS KC_BSLS
 #define TD_GRV  KC_GRV
 #define TD_RGHT KC_RGHT
 #define TD_LEFT KC_LEFT
-#define TD_MAX  LALT(KC_F10)  // Toggle maximazation state
+#define TD_TGAPP LALT(KC_F6)
+#define TD_SCLN KC_SCLN
+
 #endif
 
+
 #ifdef QMK_MOD_SHORTCUT_ENABLED
+
+#define LCA_T(kc) MT((MOD_LCTL | MOD_LALT), kc)
+#define LSS_T(kc) MT((MOD_LSFT | MOD_LGUI), kc)  // Shift-Super
+#define LCS_T(kc) MT((MOD_LCTL | MOD_LGUI), kc)  // Ctrl-Super
+
 #define F_MOTION OSL(MOTION)
 #define F_NUMPAD OSL(NUMPAD)
+#define F_FNx OSL(FNx)
 #define F_LSFT OSM(MOD_LSFT)
 #define F_RSFT OSM(MOD_RSFT)
 #define F_LCTL OSM(MOD_LCTL)
@@ -56,12 +70,16 @@
 #define F_SPC LALT_T(KC_SPC)
 #define F_BSPC LSS_T(KC_BSPC)
 #define F_DELT LSS_T(KC_DELT)
-#define F_MEH  MEH_T(KC_NO)
 #define LT_UP  LT(DBG, KC_UP)
 #define LT_DOWN  LT(DBG, KC_DOWN)
+#define F_HYPR OSM(MOD_HYPR)
+#define F_MEH  OSM(MOD_MEH)
+
 #else
-#define F_MOTION KC_FN1
-#define F_NUMPAD KC_FN2
+
+#define F_MOTION KC_FN0
+#define F_NUMPAD KC_FN1
+#define F_FNx KC_FN2
 #define F_LSFT KC_FN3
 #define F_RSFT KC_FN4
 #define F_LCTL KC_FN5
@@ -70,17 +88,14 @@
 #define F_SPC KC_FN8
 #define F_BSPC KC_FN9
 #define F_DELT KC_FN10
-#define F_MEH KC_FN11
-#define LT_UP  LT(DBG, KC_UP)
-#define LT_DOWN  LT(DBG, KC_DOWN)
-    //#define LT_UP  KC_FN12
-//#define LT_DOWN KC_FN13
+#define LT_UP  KC_FN11
+#define LT_DOWN KC_FN12
+#define F_MEH KC_FN13
+#define F_HYPR KC_FN14
+
 #endif
 
-#define F_RALT KC_RALT
-#define F_RCTL KC_RCTL
-
-#define F_TERM  LCA(KC_T)
+#define F_BROWSER M(BROWSER)
 
 #define TAP_ONCE_CONSUMER_HID_CODE(code) \
   host_consumer_send(code); \
@@ -94,24 +109,32 @@ enum keymaps_layers {
   BASE = 0, // default layer
   MOTION,   // Mouse and keyboard motion keys
   NUMPAD,   // numpad 
-  DBG,
+  FNx,
 };
 
 enum custom_keycodes {
   PLACE_HOLDER = 0, // can always be here
   FLSH,
   VRSN,
+  KDBG,
   BROWSER,
   TSKSWCH,
   EDITOR,
-  SWIN
 };
+
+#if KEYLOGGER_ENABLE
+# ifdef AUTOLOG_ENABLE
+bool log_enable = true;
+# else
+bool log_enable = false;
+# endif
+#endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   ESC  |   1  |   2  |   3  |   4  |   5  | BRWS |           | MYCM |   6  |   7  |   8  |   9  |   0  |   -    |
+ * |   ESC  |   1  |   2  |   3  |   4  |   5  | Term |           | MYCM |   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | TAB    |   Q  |   W  |   E  |   R  |   T  |  \   |           |  `   |   Y  |   U  |   I  |   O  |   P  |   =    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -124,37 +147,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | APP  |       | MEH  |        |      |
- *                                 | LCTRL| BKSP |------|       |------|  ENTER |  [ ] |
- *                                 |      |      | LGUI |       | ESC  |        |      |
+ *                                 |      |      | HYPR |       | MEH  |        |      |
+ *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
+ *                                 |      |      | LGUI |       | FNx  |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,       KC_5,     TD_TGAPP,
+        KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,       KC_5,     F_TERM,
         KC_TAB,   KC_Q,    KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
         F_LCTL,   KC_A,    KC_S,    KC_D,  KC_F,       KC_G,
         F_LSFT,   KC_Z,    KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
-        TD_MAX,   F_LALT,  TD_LEFT, LT_UP, F_MOTION,
+        TD_TGAPP, F_LALT,  TD_LEFT, LT_UP, F_MOTION,
                                                        KC_HOME,  KC_END,
-                                                                 KC_APP,
+                                                                 F_HYPR,
                                            F_LCTL,     F_BSPC,   KC_LGUI,
         // right hand
-        TD_TGWIN, KC_6,    KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
+        KC_MYCM,  KC_6,    KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,    KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
-                  KC_H,    KC_J,     KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
+                  KC_H,    KC_J,     KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
         TD_RBRC,  KC_N,    KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_RSFT,
                            F_NUMPAD, LT_DOWN,   TD_RGHT,   F_RALT,   M(TSKSWCH),
         KC_PGUP,  KC_PGDN,
         F_MEH,
-        KC_ESC,   F_ENT, F_SPC
+        F_FNx,   F_ENT, F_SPC
     ),
-/* Keymap 1: Symbol Layer
+/* Keymap 1: Motion Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |  F1  |  F2  |  F3  |  F4  |  F5  | Mute |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+ * |         |  F1  |  F2  |  F3  |  F4  |  F5  | Mute |           | App  |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | Lclk | MsUp | Rclk |      |      | Vol+ |           |      |      |      | INS  |      | PRSC |   F12  |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -172,7 +195,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// SYMBOLS
+// Motion
 [MOTION] = KEYMAP(
        // left hand
        KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          KC_MUTE,
@@ -184,16 +207,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                 KC_TRNS,
                                                     KC_TRNS,    F_DELT,         KC_TRNS,
        // right hand
-       KC_TRNS,   KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
+       KC_APP,    KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
        KC_TRNS,   KC_TRNS,   KC_TRNS,    KC_INS,    KC_TRNS,    KC_PSCR,    KC_F12,
                   KC_LEFT,   KC_UP,      KC_DOWN,   KC_RGHT,    KC_TRNS,    KC_TRNS,
-       KC_TRNS,   KC_CALC,   KC_WSCH,    KC_MAIL,   M(BROWSER), M(EDITOR),  KC_TRNS,
+       KC_TRNS,   KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  M(EDITOR),  KC_TRNS,
                              KC_TRNS,    KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_PWR,    KC_SLEP,
        KC_TRNS,
        KC_TRNS,   KC_TRNS,   KC_TRNS
        ),
-/* Keymap 2: Numpad and mouse keys
+/* Keymap 2: Symbol and Numpad
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
  * |         |      |      |      |      |      |      |           |      |      | NMLK |  P/  |  P*  |  P-  |        |
@@ -209,12 +232,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      | HCKG |       |      |      |      |
+ *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// MEDIA AND MOUSE
+// Symbol and Numpad 
 [NUMPAD] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, KC_TRNS,
@@ -234,32 +257,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
-[DBG] = KEYMAP(
+/* Keymap 1: Symbol Layer
+ *
+ * ,---------------------------------------------------.           ,--------------------------------------------------.
+ * | Version |      |      |      |      |      | FLSH |           | FLSH |      |      |      |      |      | DEBUG  |
+ * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+ * | KDBG    |      |      |      |      |      |      |           |      |      |      |      |      |      |   F12  |
+ * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |         |  F1  |  F2  |  F3  |  F4  |  F5  |------|           |------|  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+ * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |       |      |      |      |      |                                       |      |      |      |      |      |
+ *   `-----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[FNx] = KEYMAP(
        // left hand
-       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  M(FLSH),
-       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
-       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,
-       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
-       KC_NO,     KC_NO,    KC_NO,       KC_TRNS,   KC_NO,
-                                                              M(VRSN),  DEBUG,
-                                                                        KC_NO,
-                                                    KC_NO,      KC_NO,  KC_NO,
+       M(VRSN),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   M(FLSH),
+       M(KDBG),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_NO,
+       KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,
+       KC_TRNS,   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_NO,
+       F_MAX,     KC_TRNS,  KC_NO,       KC_TRNS,   KC_NO,
+                                                                KC_TRNS, KC_TRNS,
+                                                                         KC_TRNS,
+                                                    KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
-       M(FLSH),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
-       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
-                  KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
-       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
-                            KC_NO,       KC_TRNS,   KC_NO,      KC_NO,  KC_NO,
-       KC_NO,    KC_NO,
-       KC_NO,
-       KC_NO,    KC_NO,   KC_NO
+       M(FLSH),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   DEBUG,
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_F12,
+                  KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_TRNS,
+                            KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, KC_NO,
+       KC_TRNS,   KC_TRNS,
+       KC_TRNS,
+       KC_TRNS,   KC_TRNS,  KC_TRNS
        ),
-
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-  [1] = ACTION_LAYER_ONESHOT(MOTION),
-  [2] = ACTION_LAYER_ONESHOT(NUMPAD),
+  [0] = ACTION_LAYER_ONESHOT(MOTION),
+  [1] = ACTION_LAYER_ONESHOT(NUMPAD),
+  [2] = ACTION_LAYER_ONESHOT(FNx),
   [3] = ACTION_MODS_ONESHOT(MOD_LSFT),
   [4] = ACTION_MODS_ONESHOT(MOD_RSFT),
   [5] = ACTION_MODS_ONESHOT(MOD_LCTL),
@@ -268,9 +312,10 @@ const uint16_t PROGMEM fn_actions[] = {
   [8] = ACTION_MODS_TAP_KEY(MOD_LALT, KC_SPC),
   [9] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_BSPC),
   [10] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_DELT),
-  [11] = ACTION_MODS_ONESHOT(KC_MEH),
-  [12] = ACTION_LAYER_TAP_KEY(DBG, KC_UP),
-  [13] = ACTION_LAYER_TAP_KEY(DBG, KC_DOWN)
+  [11] = ACTION_LAYER_TAP_KEY(FNx, KC_UP),    // used for flashing
+  [12] = ACTION_LAYER_TAP_KEY(FNx, KC_DOWN),  // used for flashing
+  [13] = ACTION_MODS_ONESHOT(MOD_MEH),
+  [14] = ACTION_MODS_ONESHOT(MOD_HYPR)
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
@@ -285,6 +330,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case FLSH:
       if (record->event.pressed) { // For resetting EEPROM
         reset_keyboard();
+      }
+      break;
+    case KDBG:
+      if (record->event.pressed) { // For resetting EEPROM
+        debug_keyboard = true;
       }
       break;
     case BROWSER:
@@ -304,7 +354,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case EDITOR:
       if (record->event.pressed) {
         TAP_ONCE(KC_LGUI);
-        wait_ms(250); 
+        wait_ms(250);
         SEND_STRING(DEFAULT_EDITOR "\n");
       }
       break;
@@ -314,18 +364,19 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 #ifdef TAP_DANCE_ENABLE
 
-#define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE(kc, S(kc))
+#define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE(kc, LSFT(kc))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [0] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_TAB), F_TERM),     // switch to last application / start term
-  [1] = ACTION_TAP_DANCE_DOUBLE(LALT(KC_F6), KC_MYCM),     // switch to last window / my files
+  [0] = ACTION_TAP_DANCE_DOUBLE(F_TERM, KC_NO),      // start term
+  [1] = ACTION_TAP_DANCE_DOUBLE(KC_MYCM, KC_NO),     // my files
   [2] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
   [3] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
   [4] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_UNDS),
   [5] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
   [6] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
   [7] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
-  [8] = ACTION_TAP_DANCE_DOUBLE(LALT(KC_F10), KC_F11)
+  [8] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_TAB), LALT(KC_F6)), // switch application / switch windows (gnome)
+  [9] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN)
 };
 #endif
 

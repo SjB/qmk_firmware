@@ -24,4 +24,9 @@
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 
+#ifdef DEBUG_ENABLE 
+#undef NO_PRINT
+#undef NO_DEBUG
+#endif
+
 #endif
