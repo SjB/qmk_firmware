@@ -114,6 +114,10 @@ void update_user_visualizer_state(visualizer_state_t* state) {
       state->target_lcd_color = LCD_COLOR(0xC0, 0xB0, 0xFF);
       state->layer_text = "Layer: 2 ";
       break;
+    case 3:
+      state->target_lcd_color = LCD_COLOR(0x50, 0x30, 0xFF);
+      state->layer_text = "Leave Now";
+      break;
     default:
       state->target_lcd_color = LCD_COLOR(0x50, 0xB0, 0xFF);
       state->layer_text = "Layer: Default ";

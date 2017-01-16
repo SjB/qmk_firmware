@@ -49,6 +49,7 @@
 #define F_MOTION OSL(MOTION)
 #define F_NUMPAD OSL(NUMPAD)
 #define F_LSFT OSM(MOD_LSFT)
+#define F_RSFT OSM(MOD_RSFT)
 #define F_LCTL OSM(MOD_LCTL)
 #define F_LALT OSM(MOD_LALT)
 #define F_ENT LCS_T(KC_ENT)
@@ -56,17 +57,24 @@
 #define F_BSPC LSS_T(KC_BSPC)
 #define F_DELT LSS_T(KC_DELT)
 #define F_MEH  MEH_T(KC_NO)
+#define LT_UP  LT(DBG, KC_UP)
+#define LT_DOWN  LT(DBG, KC_DOWN)
 #else
 #define F_MOTION KC_FN1
 #define F_NUMPAD KC_FN2
 #define F_LSFT KC_FN3
-#define F_LCTL KC_FN4
-#define F_LALT KC_FN5
-#define F_ENT KC_FN6
-#define F_SPC KC_FN7
-#define F_BSPC KC_FN8
-#define F_DELT KC_FN9
-#define F_MEH KC_FN10
+#define F_RSFT KC_FN4
+#define F_LCTL KC_FN5
+#define F_LALT KC_FN6
+#define F_ENT KC_FN7
+#define F_SPC KC_FN8
+#define F_BSPC KC_FN9
+#define F_DELT KC_FN10
+#define F_MEH KC_FN11
+#define LT_UP  LT(DBG, KC_UP)
+#define LT_DOWN  LT(DBG, KC_DOWN)
+    //#define LT_UP  KC_FN12
+//#define LT_DOWN KC_FN13
 #endif
 
 #define F_RALT KC_RALT
@@ -86,11 +94,12 @@ enum keymaps_layers {
   BASE = 0, // default layer
   MOTION,   // Mouse and keyboard motion keys
   NUMPAD,   // numpad 
+  DBG,
 };
 
 enum custom_keycodes {
   PLACE_HOLDER = 0, // can always be here
-  EPRM,
+  FLSH,
   VRSN,
   BROWSER,
   TSKSWCH,
@@ -128,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,    KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
         F_LCTL,   KC_A,    KC_S,    KC_D,  KC_F,       KC_G,
         F_LSFT,   KC_Z,    KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
-        TD_MAX,   F_LALT,  TD_LEFT, KC_UP, F_MOTION,
+        TD_MAX,   F_LALT,  TD_LEFT, LT_UP, F_MOTION,
                                                        KC_HOME,  KC_END,
                                                                  KC_APP,
                                            F_LCTL,     F_BSPC,   KC_LGUI,
@@ -136,8 +145,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TD_TGWIN, KC_6,    KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,    KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,    KC_J,     KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
-        TD_RBRC,  KC_N,    KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_LSFT,
-                           F_NUMPAD, KC_DOWN,   TD_RGHT,   F_RALT,   M(TSKSWCH),
+        TD_RBRC,  KC_N,    KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_RSFT,
+                           F_NUMPAD, LT_DOWN,   TD_RGHT,   F_RALT,   M(TSKSWCH),
         KC_PGUP,  KC_PGDN,
         F_MEH,
         KC_ESC,   F_ENT, F_SPC
@@ -187,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 2: Numpad and mouse keys
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      |      |      |      | FLSH |           | FLSH |      | NMLK |  P/  |  P*  |  P-  |        |
+ * |         |      |      |      |      |      |      |           |      |      | NMLK |  P/  |  P*  |  P-  |        |
  * |---------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |         |   !  |   @  |   {  |   }  |   |  |      |           |      |  \   |  P7  |  P8  |  P9  |  P+  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -200,14 +209,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      | HCKG |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
 // MEDIA AND MOUSE
 [NUMPAD] = KEYMAP(
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, M(EPRM),
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, KC_TRNS,
        KC_CAPS, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,
        KC_TRNS, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, KC_TRNS,
@@ -216,7 +225,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                              KC_TRNS,
                                            KC_TRNS, KC_TRNS, KC_TRNS,
        // right hand
-       M(EPRM), KC_TRNS, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_TRNS,
                 KC_TRNS, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_TRNS,
@@ -225,19 +234,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
+[DBG] = KEYMAP(
+       // left hand
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  M(FLSH),
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
+       KC_NO,     KC_NO,    KC_NO,       KC_TRNS,   KC_NO,
+                                                              M(VRSN),  DEBUG,
+                                                                        KC_NO,
+                                                    KC_NO,      KC_NO,  KC_NO,
+       // right hand
+       M(FLSH),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
+                  KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
+       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,  KC_NO,
+                            KC_NO,       KC_TRNS,   KC_NO,      KC_NO,  KC_NO,
+       KC_NO,    KC_NO,
+       KC_NO,
+       KC_NO,    KC_NO,   KC_NO
+       ),
+
 };
 
 const uint16_t PROGMEM fn_actions[] = {
   [1] = ACTION_LAYER_ONESHOT(MOTION),
   [2] = ACTION_LAYER_ONESHOT(NUMPAD),
   [3] = ACTION_MODS_ONESHOT(MOD_LSFT),
-  [4] = ACTION_MODS_ONESHOT(MOD_LCTL),
-  [5] = ACTION_MODS_ONESHOT(MOD_LALT),
-  [6] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LCTL, KC_ENT),
-  [7] = ACTION_MODS_TAP_KEY(MOD_LALT, KC_SPC),
-  [8] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_BSPC),
-  [9] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_DELT),
-  [10] = ACTION_MODS_ONESHOT(KC_MEH)
+  [4] = ACTION_MODS_ONESHOT(MOD_RSFT),
+  [5] = ACTION_MODS_ONESHOT(MOD_LCTL),
+  [6] = ACTION_MODS_ONESHOT(MOD_LALT),
+  [7] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LCTL, KC_ENT),
+  [8] = ACTION_MODS_TAP_KEY(MOD_LALT, KC_SPC),
+  [9] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_BSPC),
+  [10] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_DELT),
+  [11] = ACTION_MODS_ONESHOT(KC_MEH),
+  [12] = ACTION_LAYER_TAP_KEY(DBG, KC_UP),
+  [13] = ACTION_LAYER_TAP_KEY(DBG, KC_DOWN)
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
@@ -249,9 +282,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
       }
       break;
-    case EPRM:
+    case FLSH:
       if (record->event.pressed) { // For resetting EEPROM
-        eeconfig_init();
+        reset_keyboard();
       }
       break;
     case BROWSER:
