@@ -34,7 +34,7 @@
 #define TD_GRV  TD(5)
 #define TD_RGHT TD(6)
 #define TD_LEFT TD(7)
-#define TD_TGAPP TD(8)
+#define TD_TAB  TD(8)
 #define TD_SCLN TD(9)
 
 #else
@@ -47,7 +47,7 @@
 #define TD_GRV  KC_GRV
 #define TD_RGHT KC_RGHT
 #define TD_LEFT KC_LEFT
-#define TD_TGAPP LALT(KC_F6)
+#define TD_TAB  KC_TAB
 #define TD_SCLN KC_SCLN
 
 #endif
@@ -142,14 +142,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | MAX  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | RALT | SWCH |
+ *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | RALT | SWCH |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | HYPR |       | MEH  |        |      |
  *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
- *                                 |      |      | LGUI |       | FNx  |        |      |
+ *                                 |      |      | LGUI |       | Esc  |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
@@ -157,10 +157,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,       KC_5,     F_TERM,
-        KC_TAB,   KC_Q,    KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
+        TD_TAB,   KC_Q,    KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
         F_LCTL,   KC_A,    KC_S,    KC_D,  KC_F,       KC_G,
         F_LSFT,   KC_Z,    KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
-        TD_TGAPP, F_LALT,  TD_LEFT, LT_UP, F_MOTION,
+        F_FNx,    F_LALT,  TD_LEFT, LT_UP, F_MOTION,
                                                        KC_HOME,  KC_END,
                                                                  F_HYPR,
                                            F_LCTL,     F_BSPC,   KC_LGUI,
@@ -172,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            F_NUMPAD, LT_DOWN,   TD_RGHT,   F_RALT,   M(TSKSWCH),
         KC_PGUP,  KC_PGDN,
         F_MEH,
-        F_FNx,   F_ENT, F_SPC
+        KC_ESC,   F_ENT, F_SPC
     ),
 /* Keymap 1: Motion Layer
  *
@@ -260,11 +260,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: Symbol Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * | Version |      |      |      |      |      | FLSH |           | FLSH |      |      |      |      |      |   F12  |
+ * | Version | KDBG |  DBG |      |      |      | FLSH |           | FLSH |      |      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * | KDBG    |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+ * | Win Max |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |   1  |   2  |   3  |   4  |   5  |------|           |------|   6  |   7  |   8  |   9  |   0  |        |
+ * |         |   1  |   2  |   3  |   4  |   5  |------|           |------|   6  |   7  |   8  |   9  |   0  |   F12  |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -280,19 +280,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [FNx] = KEYMAP(
        // left hand
-       M(VRSN),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   M(FLSH),
-       M(KDBG),   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,   KC_NO,
+       M(VRSN),   M(KDBG),  DEBUG,       KC_NO,     KC_NO,      KC_NO,   M(FLSH),
+       F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,   KC_NO,
        KC_TRNS,   KC_1,     KC_2,        KC_3,      KC_4,       KC_5,
-       KC_TRNS,   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_NO,
-       F_MAX,     KC_TRNS,  KC_NO,       KC_TRNS,   KC_NO,
+       KC_TRNS,   S(KC_1),  S(KC_2),     S(KC_3),   S(KC_4),    S(KC_5), KC_NO,
+       KC_TRNS,   KC_TRNS,  KC_NO,       KC_TRNS,   KC_NO,
                                                                 KC_TRNS, KC_TRNS,
                                                                          KC_TRNS,
                                                     KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
-       M(FLSH),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_F12,
+       M(FLSH),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_NO,
        KC_NO,     KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
-                  KC_6,     KC_7,        KC_8,      KC_9,       KC_0,    KC_NO,
-       KC_NO,     KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_TRNS,
+                  KC_6,     KC_7,        KC_8,      KC_9,       KC_0,    KC_F12,
+       KC_NO,     S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_TRNS,
                             KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, KC_NO,
        KC_TRNS,   KC_TRNS,
        KC_TRNS,
@@ -317,6 +317,9 @@ const uint16_t PROGMEM fn_actions[] = {
   [13] = ACTION_MODS_ONESHOT(MOD_MEH),
   [14] = ACTION_MODS_ONESHOT(MOD_HYPR)
 };
+
+static uint16_t tskswch_timer;
+static bool tskswch_active = false;
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
@@ -344,11 +347,18 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       break;
     case TSKSWCH: 
       if (record->event.pressed) { 
-        TAP_ONCE(KC_LGUI);
-        wait_ms(250); 
-        register_code(KC_LALT);
+          tskswch_timer = timer_read();
+          tskswch_active = true;
+          register_code(KC_LGUI);
       } else {
-        unregister_code(KC_LALT);
+          if (timer_elapsed(tskswch_timer) > TAPPING_TERM) {
+              unregister_code(KC_LALT);
+          } else {
+              tskswch_active = false;
+              // switch to last application
+              TAP_ONCE(KC_TAB);
+              unregister_code(KC_LGUI);
+          }
       }
       break;
     case EDITOR:
@@ -359,6 +369,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       }
       break;
   }
+
   return MACRO_NONE;
 };
 
@@ -375,7 +386,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [5] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
   [6] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
   [7] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
-  [8] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_TAB), LALT(KC_F6)), // switch application / switch windows (gnome)
+  [8] = ACTION_TAP_DANCE_DOUBLE(KC_TAB,  LALT(KC_F6)), // switch application / switch windows (gnome)
   [9] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN)
 };
 #endif
@@ -390,6 +401,14 @@ void matrix_init_user(void) {
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
+
+    // When holding the tskswch button show task switcher
+    if (tskswch_active && timer_elapsed(tskswch_timer) > TAPPING_TERM) {
+        tskswch_active = false;
+        unregister_code(KC_LGUI);
+        wait_ms(250); 
+        register_code(KC_LALT);
+    }
 
     ergodox_board_led_off();
     ergodox_right_led_1_off();
