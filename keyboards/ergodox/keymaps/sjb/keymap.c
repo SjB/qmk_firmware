@@ -385,25 +385,45 @@ void matrix_init_user(void) {
 
 };
 
+#define IS_MOD_ACTIVE(kc) (get_mods() & MOD_BIT(kc) \
+                           || ((get_oneshot_mods() & MOD_BIT(kc)) && !has_oneshot_mods_timed_out()))
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
-
-    uint8_t layer = biton32(layer_state);
 
     ergodox_board_led_off();
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
-    switch (layer) {
-      // TODO: Make this relevant to the ErgoDox EZ.
-        case 1:
-            ergodox_right_led_1_on();
-            break;
-        case 2:
-            ergodox_right_led_2_on();
-            break;
-        default:
-            break;
+
+    if (IS_LAYER_ON(1)) {
+        ergodox_right_led_1_set(LED_BRIGHTNESS_LO);
+        ergodox_right_led_1_on();
     }
+
+    if (IS_LAYER_ON(2)) {
+        ergodox_right_led_2_set(LED_BRIGHTNESS_LO);
+        ergodox_right_led_2_on();
+    }
+
+    if (IS_LAYER_ON(3)) {
+        ergodox_right_led_3_set(LED_BRIGHTNESS_LO);
+        ergodox_right_led_3_on();
+    }
+
+    if (IS_MOD_ACTIVE(KC_LCTL) || IS_MOD_ACTIVE(KC_RCTL)) {
+        ergodox_right_led_1_set(LED_BRIGHTNESS_HI);
+        ergodox_right_led_1_on();
+    }
+
+    if (IS_MOD_ACTIVE(KC_LSFT) || IS_MOD_ACTIVE(KC_RSFT)) {
+        ergodox_right_led_2_set(LED_BRIGHTNESS_HI);
+        ergodox_right_led_2_on();
+    }
+
+    if (IS_MOD_ACTIVE(KC_LALT) || IS_MOD_ACTIVE(KC_RALT)) {
+        ergodox_right_led_3_set(LED_BRIGHTNESS_HI);
+        ergodox_right_led_3_on();
+    }
+
 };
