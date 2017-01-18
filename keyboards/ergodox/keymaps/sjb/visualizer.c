@@ -46,46 +46,6 @@ bool display_layer(keyframe_animation_t* animation, visualizer_state_t* state) {
     return false;
 }
 
-static void format_layer_mod(uint8_t mods, char* buffer) {
-    *buffer = (mods < 10) ? '0' + mods : 'A' + (mods - 10);
-    ++buffer;
-    *buffer = ' ';
-    ++buffer;
-
-    for (int i = 0; i<8; i++)
-    {
-        uint32_t mask = (1u << (7-i));
-        if (mods & mask) {
-            *buffer = '1';
-        } else {
-            *buffer = '0';
-        }
-        ++buffer;
-
-        if (i==3) {
-            *buffer = ' ';
-            ++buffer;
-        }
-    }
-    *buffer = 0;
-}
-
-bool display_mods(keyframe_animation_t* animation, visualizer_state_t* state) {
-    (void)animation;
-
-    const char* layer_title = "Mods and Keycodes";
-    char layer_buffer[16+4];
-    
-    gdispClear(White);
-    gdispDrawString(0, 0, layer_title, state->font_fixed5x8, Black);
-    format_layer_mod(get_mods(), layer_buffer);
-    gdispDrawString(0, 10, layer_buffer, state->font_fixed5x8, Black);
-    format_layer_mod(get_oneshot_mods(), layer_buffer);
-    gdispDrawString(0, 20, layer_buffer, state->font_fixed5x8, Black);
-
-    gdispFlush();
-    return false;
-}
 bool display_suspend(keyframe_animation_t* animation, visualizer_state_t* state) {
     (void)animation;
 
@@ -117,10 +77,10 @@ static keyframe_animation_t color_animation = {
 // The LCD animation alternates between the layer name display and a
 // bitmap that displays all active layers
 static keyframe_animation_t lcd_animation = {
-    .num_frames = 3,
+    .num_frames = 2,
     .loop = true,
-    .frame_lengths = {MS2ST(2000), MS2ST(2000), MS2ST(4000)},
-    .frame_functions = {display_welcome, display_layer, display_mods},
+    .frame_lengths = {MS2ST(2000), MS2ST(3000)},
+    .frame_functions = {display_welcome, display_layer},
 };
 
 static keyframe_animation_t suspend_animation = {
@@ -146,22 +106,15 @@ void initialize_user_visualizer(visualizer_state_t* state) {
     start_keyframe_animation(&startup_animation);
 }
 
-#define is_mod_active(kc)  ((get_mods() & (MOD_BIT(kc)))       \
-                            || ((get_oneshot_mods() & (MOD_BIT(kc))) && !has_oneshot_mods_timed_out()))
-
-#define is_either_mod_active(kc1, kc2)  (get_mods() & (uint8_t)(MOD_BIT(kc1) | MOD_BIT(kc2)) \
-                                         || ((get_oneshot_mods() & (uint8_t)(MOD_BIT(kc1) | MOD_BIT(kc2))) && !has_oneshot_mods_timed_out()))
-
-
-#define mask(kc) ((uint32_t)(1u << ((kc&0x7))))
-#define my_test(kc) (get_mods() || get_oneshot_mods()) // | (1u<<(kc&0x07))))
+#define IS_MOD_ACTIVE(mods_state, kc)  (mods_state & MOD_BIT(kc))
+#define IS_EITHER_MOD_ACTIVE(mods_state, kc1, kc2)  (mods_state & (MOD_BIT(kc1) | MOD_BIT(kc2)))
 
 #define IS_LAYER_ACTIVE(state, layer)  (state & (1UL << (layer)))
 
 void update_user_visualizer_state(visualizer_state_t* state) {
 
     static char status[16];
-    static char blank_status[16] = "Layers:        ";
+    static char blank_status[16] = "L:    M:       ";
     int hue = 0x20;
     int sat = 0x90;
     int intensity = 0x50;
@@ -169,21 +122,47 @@ void update_user_visualizer_state(visualizer_state_t* state) {
     strcpy(status, blank_status);
 
     if (IS_LAYER_ACTIVE(state->status.layer, 1)) {
-        status[9] = '1';
+        status[2] = '1';
         hue = 0x60;
         intensity += 0x20;
     }
 
     if (IS_LAYER_ACTIVE(state->status.layer, 2)) {
-        status[11] = '2';
+        status[3] = '2';
         intensity += 0x20;
         hue = 0x90;
     }
 
     if (IS_LAYER_ACTIVE(state->status.layer, 3)) {
-        status[13] = '3';
+        status[4] = '3';
         intensity += 0x20;
         hue = 0xC0;
+    }
+
+    if (IS_MOD_ACTIVE(state->status.mods, KC_LGUI)) {
+        status[8] = 'G';
+        intensity -= 0x20;
+    }
+
+    if (IS_MOD_ACTIVE(state->status.mods, KC_LALT)) {
+        status[9] = 'A';
+        sat += 0x20;
+    }
+
+    if (IS_EITHER_MOD_ACTIVE(state->status.mods, KC_LSHIFT, KC_RSHIFT)) {
+        status[10] = 'S';
+        sat += 0x20;
+    }
+
+    if (IS_EITHER_MOD_ACTIVE(state->status.mods, KC_LCTL, KC_RCTL)) {
+        status[11] = 'C';
+        sat += 0x20;
+    }
+
+    if (IS_MOD_ACTIVE(state->status.mods, KC_RALT)) {
+        status[13] = 'A';
+        status[14] = 'r';
+        sat += 0x20;
     }
 
     state->target_lcd_color = LCD_COLOR(hue, sat, intensity);
