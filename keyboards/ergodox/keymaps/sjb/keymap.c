@@ -37,6 +37,7 @@
 #define TD_TAB  TD(8)
 #define TD_SCLN TD(9)
 #define TD_TSKSWCH TD(10)
+#define TD_GUI TD(11)
 
 #else
 
@@ -51,6 +52,7 @@
 #define TD_TAB  KC_TAB
 #define TD_SCLN KC_SCLN
 #define TD_TSKSWCH M(TSKSWCH)
+#define TD_GUI KC_LGUI
 
 #endif
 
@@ -76,7 +78,6 @@
 #define LT_DOWN  LT(DBG, KC_DOWN)
 #define F_HYPR OSM(MOD_HYPR)
 #define F_MEH  OSM(MOD_MEH)
-
 #else
 
 #define F_MOTION KC_FN0
@@ -94,7 +95,6 @@
 #define LT_DOWN KC_FN12
 #define F_MEH KC_FN13
 #define F_HYPR KC_FN14
-
 #endif
 
 #define F_BROWSER M(BROWSER)
@@ -114,7 +114,7 @@
 enum keymaps_layers {
   BASE = 0, // default layer
   MOTION,   // Mouse and keyboard motion keys
-  NUMPAD,   // numpad 
+  NUMPAD,   // numpad
   FNx,
 };
 
@@ -161,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         F_FNx,    F_LALT,  TD_LEFT, LT_UP, F_MOTION,
                                                        KC_HOME,  KC_END,
                                                                  F_HYPR,
-                                           F_LCTL,     F_BSPC,   KC_LGUI,
+                                           F_LCTL,     F_BSPC,   TD_GUI,
         // right hand
         KC_MYCM,  KC_6,    KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,    KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
@@ -235,7 +235,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// Symbol and Numpad 
+// Symbol and Numpad
 [NUMPAD] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, KC_TRNS,
@@ -313,7 +313,7 @@ const uint16_t PROGMEM fn_actions[] = {
   [11] = ACTION_LAYER_TAP_KEY(FNx, KC_UP),    // used for flashing
   [12] = ACTION_LAYER_TAP_KEY(FNx, KC_DOWN),  // used for flashing
   [13] = ACTION_MODS_ONESHOT(MOD_MEH),
-  [14] = ACTION_MODS_ONESHOT(MOD_HYPR)
+  [14] = ACTION_MODS_ONESHOT(MOD_HYPR),
 };
 
 static uint16_t tskswch_timer;
@@ -343,8 +343,8 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         TAP_CONSUMER_HID_CODE(AL_INTERNET_BROWSER);
       }
       break;
-    case TSKSWCH: 
-      if (record->event.pressed) { 
+    case TSKSWCH:
+      if (record->event.pressed) {
           tskswch_timer = timer_read();
           tskswch_active = true;
       } else {
@@ -371,10 +371,34 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 #ifdef TAP_DANCE_ENABLE
 
+#define GET_KEYCODE_FROM_VOIDPTR(p) ((uint8_t)*(uint8_t *)&p)
+
+static void td_gui_on_finished(qk_tap_dance_state_t *state, void *user_data) {
+  uint8_t kc = GET_KEYCODE_FROM_VOIDPTR(user_data);
+
+  if (state->pressed) {
+    register_mods(MOD_BIT(kc));
+  } else if (state->count == 1) {
+    register_mods(MOD_BIT(kc));
+  } else if (state->count == ONESHOT_TAP_TOGGLE) {
+    register_mods(MOD_BIT(kc));
+  } else if (state->count == 3) {
+    TAP_KEY16(LGUI(KC_L));
+  }
+}
+
+static void td_gui_on_reset(qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == ONESHOT_TAP_TOGGLE) {
+    return;
+  }
+  uint8_t kc = GET_KEYCODE_FROM_VOIDPTR(user_data);
+  unregister_mods(MOD_BIT(kc));
+}
+
 static void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data) {
   if (state->pressed) {
     TAP_KEY(KC_LGUI);
-    wait_ms(250); 
+    wait_ms(250);
     register_code(KC_LALT);
     state->count = 3;
   } else {
@@ -382,7 +406,7 @@ static void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data)
       case 1:
         register_code16(LGUI(KC_TAB));
         break;
-      case 2: 
+      case 2:
         register_code16(LALT(KC_F6));
         break;
     }
@@ -416,7 +440,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [7] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
   [8] = ACTION_TAP_DANCE_DOUBLE(KC_TAB,  LALT(KC_F6)),        // TAB / switch windows (gnome)
   [9] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
-  [10] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset)  // switch application / switch windows (gnome)
+  [10] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
+  [11] = {
+    .fn = { NULL, td_gui_on_finished, td_gui_on_reset },
+    .user_data = ((void *)KC_LGUI),
+  },
 };
 #endif
 
@@ -435,7 +463,7 @@ void matrix_scan_user(void) {
     if (tskswch_active && timer_elapsed(tskswch_timer) > TAPPING_TERM) {
         tskswch_active = false;
         TAP_KEY(KC_LGUI);
-        wait_ms(250); 
+        wait_ms(250);
         register_code(KC_LALT);
     }
 
