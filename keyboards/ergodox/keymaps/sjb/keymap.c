@@ -101,9 +101,13 @@
   host_consumer_send(code); \
   host_consumer_send(0)
 
-#define TAP_ONCE(code) \
+#define TAP_KEY(code) \
   register_code(code); \
   unregister_code(code)
+
+#define TAP_KEY16(code) \
+  register_code16(code); \
+  unregister_code16(code)
 
 enum keymaps_layers {
   BASE = 0, // default layer
@@ -349,21 +353,19 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       if (record->event.pressed) { 
           tskswch_timer = timer_read();
           tskswch_active = true;
-          register_code(KC_LGUI);
       } else {
           if (timer_elapsed(tskswch_timer) > TAPPING_TERM) {
               unregister_code(KC_LALT);
           } else {
               tskswch_active = false;
               // switch to last application
-              TAP_ONCE(KC_TAB);
-              unregister_code(KC_LGUI);
+              TAP_KEY16(LGUI(KC_TAB));
           }
       }
       break;
     case EDITOR:
       if (record->event.pressed) {
-        TAP_ONCE(KC_LGUI);
+        TAP_KEY(KC_LGUI);
         wait_ms(250);
         SEND_STRING(DEFAULT_EDITOR "\n");
       }
@@ -405,7 +407,7 @@ void matrix_scan_user(void) {
     // When holding the tskswch button show task switcher
     if (tskswch_active && timer_elapsed(tskswch_timer) > TAPPING_TERM) {
         tskswch_active = false;
-        unregister_code(KC_LGUI);
+        TAP_KEY(KC_LGUI);
         wait_ms(250); 
         register_code(KC_LALT);
     }
