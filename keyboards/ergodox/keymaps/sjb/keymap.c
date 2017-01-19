@@ -36,6 +36,7 @@
 #define TD_LEFT TD(7)
 #define TD_TAB  TD(8)
 #define TD_SCLN TD(9)
+#define TD_TSKSWCH TD(10)
 
 #else
 
@@ -49,6 +50,7 @@
 #define TD_LEFT KC_LEFT
 #define TD_TAB  KC_TAB
 #define TD_SCLN KC_SCLN
+#define TD_TSKSWCH M(TSKSWCH)
 
 #endif
 
@@ -165,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TD_GRV,   KC_Y,    KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,    KC_J,     KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
         TD_RBRC,  KC_N,    KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_RSFT,
-                           F_NUMPAD, LT_DOWN,   TD_RGHT,   F_RALT,   M(TSKSWCH),
+                           F_NUMPAD, LT_DOWN,   TD_RGHT,   F_RALT,   TD_TSKSWCH,
         KC_PGUP,  KC_PGDN,
         F_MEH,
         KC_ESC,   F_ENT, F_SPC
@@ -369,6 +371,38 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 #ifdef TAP_DANCE_ENABLE
 
+static void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data) {
+  if (state->pressed) {
+    TAP_KEY(KC_LGUI);
+    wait_ms(250); 
+    register_code(KC_LALT);
+    state->count = 3;
+  } else {
+    switch (state->count) {
+      case 1:
+        register_code16(LGUI(KC_TAB));
+        break;
+      case 2: 
+        register_code16(LALT(KC_F6));
+        break;
+    }
+  }
+}
+
+static void td_tskswch_on_reset(qk_tap_dance_state_t *state, void *user_data) {
+   switch (state->count) {
+      case 1:
+        unregister_code16(LGUI(KC_TAB));
+        break;
+      case 2:
+        unregister_code16(LALT(KC_F6));
+        break;
+      case 3:
+        unregister_code(KC_LALT);
+        break;
+    }
+}
+
 #define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE(kc, LSFT(kc))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
@@ -380,8 +414,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [5] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
   [6] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
   [7] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
-  [8] = ACTION_TAP_DANCE_DOUBLE(KC_TAB,  LALT(KC_F6)), // switch application / switch windows (gnome)
-  [9] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN)
+  [8] = ACTION_TAP_DANCE_DOUBLE(KC_TAB,  LALT(KC_F6)),        // TAB / switch windows (gnome)
+  [9] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
+  [10] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset)  // switch application / switch windows (gnome)
 };
 #endif
 
