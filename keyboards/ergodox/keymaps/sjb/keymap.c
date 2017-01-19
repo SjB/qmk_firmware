@@ -126,14 +126,6 @@ enum custom_keycodes {
   EDITOR,
 };
 
-#if KEYLOGGER_ENABLE
-# ifdef AUTOLOG_ENABLE
-bool log_enable = true;
-# else
-bool log_enable = false;
-# endif
-#endif
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
