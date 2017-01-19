@@ -22,27 +22,37 @@
 #define F_RALT KC_RALT
 #define F_RCTL KC_RCTL
 #define F_TERM LCA(KC_T)
+#define F_LOCK LGUI(KC_L)
 #define F_MAX  LALT(KC_F10)  // Toggle maximazation state
+
+#define F_MOTION KC_FN0
+#define F_NUMPAD KC_FN1
+#define F_FNx KC_FN2
+#define F_LSFT KC_FN3
+#define F_RSFT KC_FN4
+#define F_LCTL KC_FN5
+#define F_LALT KC_FN6
+#define F_MEH KC_FN7
+#define F_HYPR KC_FN8
+#define LT_TAB KC_FN9
+#define F_BROWSER M(BROWSER)
 
 #ifdef TAP_DANCE_ENABLE
 
-#define TD_TERM F_TERM
-#define TD_MYCM KC_MYCM
-#define TD_LBRC TD(2)
-#define TD_RBRC TD(3)
-#define TD_BSLS TD(4)
-#define TD_GRV  TD(5)
-#define TD_RGHT TD(6)
-#define TD_LEFT TD(7)
-#define TD_TAB  TD(8)
-#define TD_SCLN TD(9)
-#define TD_TSKSWCH TD(10)
-#define TD_GUI TD(11)
+#define TD_LBRC TD(0)
+#define TD_RBRC TD(1)
+#define TD_BSLS TD(2)
+#define TD_GRV  TD(3)
+#define TD_RGHT TD(4)
+#define TD_LEFT TD(5)
+#define TD_SCLN TD(6)
+#define TD_TSKSWCH TD(7)
+#define TD_LGUI TD(8)
+#define TD_ESC  TD(9)
+#define TD_TERM TD(10)
 
 #else
 
-#define TD_TERM F_TERM
-#define TD_MYCM KC_MYCM
 #define TD_LBRC KC_LBRC
 #define TD_RBRC KC_RBRC
 #define TD_BSLS KC_BSLS
@@ -53,63 +63,11 @@
 #define TD_SCLN KC_SCLN
 #define TD_TSKSWCH M(TSKSWCH)
 #define TD_GUI KC_LGUI
+#define TD_ESC  KC_ESC
+#define TD_MYCM KC_MYCM
+#define TD_TERM F_TERM
 
 #endif
-
-
-#ifdef QMK_MOD_SHORTCUT_ENABLED
-
-#define LCA_T(kc) MT((MOD_LCTL | MOD_LALT), kc)
-#define LSS_T(kc) MT((MOD_LSFT | MOD_LGUI), kc)  // Shift-Super
-#define LCS_T(kc) MT((MOD_LCTL | MOD_LGUI), kc)  // Ctrl-Super
-
-#define F_MOTION OSL(MOTION)
-#define F_NUMPAD OSL(NUMPAD)
-#define F_FNx OSL(FNx)
-#define F_LSFT OSM(MOD_LSFT)
-#define F_RSFT OSM(MOD_RSFT)
-#define F_LCTL OSM(MOD_LCTL)
-#define F_LALT OSM(MOD_LALT)
-#define F_ENT LCS_T(KC_ENT)
-#define F_SPC LALT_T(KC_SPC)
-#define F_BSPC LSS_T(KC_BSPC)
-#define F_DELT LSS_T(KC_DELT)
-#define LT_UP  LT(DBG, KC_UP)
-#define LT_DOWN  LT(DBG, KC_DOWN)
-#define F_HYPR OSM(MOD_HYPR)
-#define F_MEH  OSM(MOD_MEH)
-#else
-
-#define F_MOTION KC_FN0
-#define F_NUMPAD KC_FN1
-#define F_FNx KC_FN2
-#define F_LSFT KC_FN3
-#define F_RSFT KC_FN4
-#define F_LCTL KC_FN5
-#define F_LALT KC_FN6
-#define F_ENT KC_FN7
-#define F_SPC KC_FN8
-#define F_BSPC KC_FN9
-#define F_DELT KC_FN10
-#define LT_UP  KC_FN11
-#define LT_DOWN KC_FN12
-#define F_MEH KC_FN13
-#define F_HYPR KC_FN14
-#endif
-
-#define F_BROWSER M(BROWSER)
-
-#define TAP_CONSUMER_HID_CODE(code) \
-  host_consumer_send(code); \
-  host_consumer_send(0)
-
-#define TAP_KEY(code) \
-  register_code(code); \
-  unregister_code(code)
-
-#define TAP_KEY16(code) \
-  register_code16(code); \
-  unregister_code16(code)
 
 enum keymaps_layers {
   BASE = 0, // default layer
@@ -140,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | RALT | SWCH |
+ *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | FNx  | SWCH |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
@@ -154,23 +112,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,   KC_1,    KC_2,    KC_3,  KC_4,       KC_5,     F_TERM,
-        TD_TAB,   KC_Q,    KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
-        F_LCTL,   KC_A,    KC_S,    KC_D,  KC_F,       KC_G,
-        F_LSFT,   KC_Z,    KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
-        F_FNx,    F_LALT,  TD_LEFT, LT_UP, F_MOTION,
-                                                       KC_HOME,  KC_END,
-                                                                 F_HYPR,
-                                           F_LCTL,     F_BSPC,   TD_GUI,
+        KC_ESC,   KC_1,      KC_2,    KC_3,  KC_4,       KC_5,     TD_TERM,
+        LT_TAB,   KC_Q,      KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
+        F_LCTL,   KC_A,      KC_S,    KC_D,  KC_F,       KC_G,
+        F_LSFT,   KC_Z,      KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
+        F_FNx,    F_NUMPAD,  TD_LEFT, KC_UP, F_MOTION,
+                                                         KC_HOME,  KC_END,
+                                                                   F_HYPR,
+                                             F_LCTL,     KC_BSPC,  TD_LGUI,
         // right hand
-        KC_MYCM,  KC_6,    KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
-        TD_GRV,   KC_Y,    KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
-                  KC_H,    KC_J,     KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
-        TD_RBRC,  KC_N,    KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_RSFT,
-                           F_NUMPAD, LT_DOWN,   TD_RGHT,   F_RALT,   TD_TSKSWCH,
+        KC_MYCM,  KC_6,      KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
+        TD_GRV,   KC_Y,      KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
+                  KC_H,      KC_J,     KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
+        TD_RBRC,  KC_N,      KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_RSFT,
+                             F_LALT,   KC_DOWN,   TD_RGHT,   F_FNx,    TD_TSKSWCH,
         KC_PGUP,  KC_PGDN,
         F_MEH,
-        KC_ESC,   F_ENT, F_SPC
+        TD_ESC,   KC_ENT,    KC_SPC
     ),
 /* Keymap 1: Motion Layer
  *
@@ -203,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,
                                                                 KC_MPLY,        KC_MNXT,
                                                                                 KC_TRNS,
-                                                    KC_TRNS,    F_DELT,         KC_TRNS,
+                                                    KC_TRNS,    KC_DELT,         KC_TRNS,
        // right hand
        KC_APP,    KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
        KC_NO,     KC_NO,     KC_NO,      KC_INS,    KC_NO,      KC_PSCR,    KC_F12,
@@ -237,7 +195,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // Symbol and Numpad
 [NUMPAD] = KEYMAP(
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TRNS,
        KC_TRNS, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, KC_NO,
        KC_CAPS, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,
        KC_TRNS, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, KC_NO,
@@ -306,18 +264,22 @@ const uint16_t PROGMEM fn_actions[] = {
   [4] = ACTION_MODS_ONESHOT(MOD_RSFT),
   [5] = ACTION_MODS_ONESHOT(MOD_LCTL),
   [6] = ACTION_MODS_ONESHOT(MOD_LALT),
-  [7] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LCTL, KC_ENT),
-  [8] = ACTION_MODS_TAP_KEY(MOD_LALT, KC_SPC),
-  [9] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_BSPC),
-  [10] = ACTION_MODS_TAP_KEY(MOD_LGUI | MOD_LSFT, KC_DELT),
-  [11] = ACTION_LAYER_TAP_KEY(FNx, KC_UP),    // used for flashing
-  [12] = ACTION_LAYER_TAP_KEY(FNx, KC_DOWN),  // used for flashing
-  [13] = ACTION_MODS_ONESHOT(MOD_MEH),
-  [14] = ACTION_MODS_ONESHOT(MOD_HYPR),
+  [7] = ACTION_MODS_ONESHOT(MOD_MEH),
+  [8] = ACTION_MODS_ONESHOT(MOD_HYPR),
+  [9] = ACTION_MODS_TAP_KEY(MOD_RALT, KC_TAB),
 };
 
-static uint16_t tskswch_timer;
-static bool tskswch_active = false;
+#define TAP_CONSUMER_HID_CODE(code) \
+  host_consumer_send(code); \
+  host_consumer_send(0)
+
+#define TAP_KEY(code) \
+  register_code(code); \
+  unregister_code(code)
+
+#define TAP_KEY16(code) \
+  register_code16(code); \
+  unregister_code16(code)
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
@@ -343,20 +305,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         TAP_CONSUMER_HID_CODE(AL_INTERNET_BROWSER);
       }
       break;
-    case TSKSWCH:
-      if (record->event.pressed) {
-          tskswch_timer = timer_read();
-          tskswch_active = true;
-      } else {
-          if (timer_elapsed(tskswch_timer) > TAPPING_TERM) {
-              unregister_code(KC_LALT);
-          } else {
-              tskswch_active = false;
-              // switch to last application
-              TAP_KEY16(LGUI(KC_TAB));
-          }
-      }
-      break;
     case EDITOR:
       if (record->event.pressed) {
         TAP_KEY(KC_LGUI);
@@ -371,28 +319,40 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 #ifdef TAP_DANCE_ENABLE
 
-#define GET_KEYCODE_FROM_VOIDPTR(p) ((uint8_t)*(uint8_t *)&p)
+#define TD_PRESSED_EVENT 10
 
-static void td_gui_on_finished(qk_tap_dance_state_t *state, void *user_data) {
-  uint8_t kc = GET_KEYCODE_FROM_VOIDPTR(user_data);
+#define ACTION_TAP_DANCE_MOD_TAP(kc1, kc2) { \
+    .fn = { NULL, td_mod_tap_on_finished, td_mod_tap_on_reset },    \
+    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }), \
+  }
+
+static void td_mod_tap_on_finished(qk_tap_dance_state_t *state, void *user_data) {
+  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
 
   if (state->pressed) {
-    register_mods(MOD_BIT(kc));
+    register_mods(pair->kc2);
+    state->count = TD_PRESSED_EVENT; // magic number for reset
   } else if (state->count == 1) {
-    register_mods(MOD_BIT(kc));
+    register_code(pair->kc1);
   } else if (state->count == ONESHOT_TAP_TOGGLE) {
-    register_mods(MOD_BIT(kc));
-  } else if (state->count == 3) {
-    TAP_KEY16(LGUI(KC_L));
+    register_mods(pair->kc2);
   }
 }
 
-static void td_gui_on_reset(qk_tap_dance_state_t *state, void *user_data) {
+static void td_mod_tap_on_reset(qk_tap_dance_state_t *state, void *user_data) {
+  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
   if (state->count == ONESHOT_TAP_TOGGLE) {
     return;
   }
-  uint8_t kc = GET_KEYCODE_FROM_VOIDPTR(user_data);
-  unregister_mods(MOD_BIT(kc));
+
+  if (state->count == 1) {
+      unregister_code(pair->kc1);
+      unregister_mods(pair->kc2);
+  }
+
+  if (state->count == TD_PRESSED_EVENT) {
+      unregister_mods(pair->kc2);
+  }
 }
 
 static void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data) {
@@ -430,21 +390,17 @@ static void td_tskswch_on_reset(qk_tap_dance_state_t *state, void *user_data) {
 #define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE(kc, LSFT(kc))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [0] = ACTION_TAP_DANCE_DOUBLE(F_TERM, KC_NO),      // start term
-  [1] = ACTION_TAP_DANCE_DOUBLE(KC_MYCM, KC_NO),     // my files
-  [2] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
-  [3] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
-  [4] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_UNDS),
-  [5] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
-  [6] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
-  [7] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
-  [8] = ACTION_TAP_DANCE_DOUBLE(KC_TAB,  LALT(KC_F6)),        // TAB / switch windows (gnome)
-  [9] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
-  [10] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
-  [11] = {
-    .fn = { NULL, td_gui_on_finished, td_gui_on_reset },
-    .user_data = ((void *)KC_LGUI),
-  },
+  [0] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
+  [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
+  [2] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_UNDS),
+  [3] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
+  [4] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
+  [5] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
+  [6] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
+  [7] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
+  [8] = ACTION_TAP_DANCE_MOD_TAP(KC_LGUI, MOD_LGUI | MOD_LSFT),
+  [9] = ACTION_TAP_DANCE_MOD_TAP(KC_ESC, MOD_LGUI | MOD_LCTL),
+  [10] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
 };
 #endif
 
@@ -458,14 +414,6 @@ void matrix_init_user(void) {
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
-
-    // When holding the tskswch button show task switcher
-    if (tskswch_active && timer_elapsed(tskswch_timer) > TAPPING_TERM) {
-        tskswch_active = false;
-        TAP_KEY(KC_LGUI);
-        wait_ms(250);
-        register_code(KC_LALT);
-    }
 
     ergodox_board_led_off();
     ergodox_right_led_1_off();
