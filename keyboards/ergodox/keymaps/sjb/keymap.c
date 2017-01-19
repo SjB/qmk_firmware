@@ -97,7 +97,7 @@
 
 #define F_BROWSER M(BROWSER)
 
-#define TAP_ONCE_CONSUMER_HID_CODE(code) \
+#define TAP_CONSUMER_HID_CODE(code) \
   host_consumer_send(code); \
   host_consumer_send(0)
 
@@ -342,7 +342,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       break;
     case BROWSER:
       if (record->event.pressed) { // send AL_INTERNET_BROWSER to OS
-        TAP_ONCE_CONSUMER_HID_CODE(AL_INTERNET_BROWSER);
+        TAP_CONSUMER_HID_CODE(AL_INTERNET_BROWSER);
       }
       break;
     case TSKSWCH: 
