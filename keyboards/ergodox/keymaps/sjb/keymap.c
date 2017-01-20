@@ -50,7 +50,8 @@
 #define TD_LGUI TD(8)
 #define TD_ESC  TD(9)
 #define TD_TERM TD(10)
-
+#define TD_PGUP TD(11)
+#define TD_PGDN TD(12)
 #else
 
 #define TD_LBRC KC_LBRC
@@ -66,6 +67,8 @@
 #define TD_ESC  KC_ESC
 #define TD_MYCM KC_MYCM
 #define TD_TERM F_TERM
+#define TD_PGUP KC_PGUP
+#define TD_PGDN KC_PGDN
 
 #endif
 
@@ -74,6 +77,8 @@ enum keymaps_layers {
   MOTION,   // Mouse and keyboard motion keys
   NUMPAD,   // numpad
   FNx,
+  ADORE,
+  NORMAN,
 };
 
 enum custom_keycodes {
@@ -126,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                   KC_H,      KC_J,     KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
         TD_RBRC,  KC_N,      KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_RSFT,
                              F_LALT,   KC_DOWN,   TD_RGHT,   F_FNx,    TD_TSKSWCH,
-        KC_PGUP,  KC_PGDN,
+        TD_PGUP,  TD_PGDN,
         F_MEH,
         TD_ESC,   KC_ENT,    KC_SPC
     ),
@@ -254,6 +259,92 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS,   KC_TRNS,  KC_TRNS
        ),
+/* Keymap ADORE: 
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |   ESC  |   9  |   7  |   5  |   3  |   1  | Term |           | MYCM |   0  |   2  |   4  |   6  |   8  |   -    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | TAB    |   X  |   W  |   C  |   H  |   F  |  \   |           |  `   |   M  |   G  |   L  |   P  |   /  |   =    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | LCTRL  |   A  |   O  |   E  |   I  |   U  |------|           |------|   D  |   R  |   T  |   N  |   S  |   ;    |
+ * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
+ * | LShift |   Z  |   Q  |   '  |   ,  |   .  |      |           |      |   B  |   K  |   V  |   Y  |   J  | RShift |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | FNx  | SWCH |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        | HOME | END  |       | PGUP | PGDN |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | HYPR |       | MEH  |        |      |
+ *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
+ *                                 |      |      | LGUI |       | Esc  |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
+// If it accepts an argument (i.e, is a function), it doesn't need KC_.
+// Otherwise, it needs KC_*
+[ADORE] = KEYMAP(
+        // left hand
+        KC_TRNS,  KC_9,      KC_7,    KC_5,    KC_3,       KC_1,     KC_TRNS,
+        KC_TRNS,  KC_X,      KC_W,    KC_C,    KC_H,       KC_F,     KC_TRNS,
+        KC_TRNS,  KC_A,      KC_O,    KC_E,    KC_I,       KC_U,
+        KC_TRNS,  KC_Z,      KC_Q,    KC_QUOT, KC_COMM,    KC_DOT,   KC_TRNS,
+        KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS,
+                                                           KC_TRNS,  KC_TRNS,
+                                                                     KC_TRNS,
+                                               KC_TRNS,    KC_TRNS,  KC_TRNS,
+ 
+        // right hand
+        KC_TRNS,  KC_0,      KC_2,     KC_4,      KC_6,      KC_8,     KC_MINS,
+        KC_TRNS,  KC_M,      KC_G,     KC_L,      KC_P,      KC_SLSH,  KC_EQL,
+                  KC_D,      KC_R,     KC_T,      KC_N,      KC_S,     TD_SCLN,
+        KC_TRNS,  KC_B,      KC_K,     KC_V,      KC_Y,      KC_J,     KC_TRNS,
+                             KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,  KC_TRNS,
+        KC_TRNS,  KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,  KC_TRNS,   KC_TRNS
+                 ),
+/* Keymap 0: Basic layer
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |   ESC  |   1  |   2  |   3  |   4  |   5  | Term |           | MYCM |   6  |   7  |   8  |   9  |   0  |   -    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | TAB    |   Q  |   W  |   D  |   F  |   K  |  \   |           |  `   |   J  |   U  |   R  |   L  |   ;  |   =    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | LCTRL  |   A  |   S  |   E  |   T  |   G  |------|           |------|   Y  |   N  |   I  |   O  |   H  |   '    |
+ * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   P  |   M  |   ,  |   .  |   /  | RShift |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | FNx  | SWCH |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        | HOME | END  |       | PGUP | PGDN |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | HYPR |       | MEH  |        |      |
+ *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
+ *                                 |      |      | LGUI |       | Esc  |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
+// If it accepts an argument (i.e, is a function), it doesn't need KC_.
+// Otherwise, it needs KC_*
+[NORMAN] = KEYMAP(  // layer 0 : default
+        // left hand
+        KC_TRNS,  KC_1,      KC_2,    KC_3,    KC_4,       KC_5,     KC_TRNS,
+        KC_TRNS,  KC_Q,      KC_W,    KC_D,    KC_F,       KC_K,     KC_TRNS,
+        KC_TRNS,  KC_A,      KC_S,    KC_E,    KC_T,       KC_G,
+        KC_TRNS,  KC_Z,      KC_X,    KC_C,    KC_V,       KC_B,     KC_TRNS,
+        KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS,
+                                                           KC_TRNS,  KC_TRNS,
+                                                                     KC_TRNS,
+                                               KC_TRNS,    KC_TRNS,  KC_TRNS,
+        // right hand
+        KC_TRNS,  KC_6,      KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
+        KC_TRNS,  KC_J,      KC_U,     KC_R,      KC_L,      TD_SCLN,  KC_EQL,
+                  KC_Y,      KC_N,     KC_I,      KC_O,      KC_H,     KC_QUOT,
+        KC_TRNS,  KC_P,      KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  KC_TRNS,
+                             KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,  KC_TRNS,
+        KC_TRNS,  KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,  KC_TRNS,   KC_TRNS
+    ),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -387,6 +478,34 @@ static void td_tskswch_on_reset(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+#define ACTION_TAP_DANCE_LAYER_TAP(kc1, kc2) { \
+    .fn = { NULL, td_layer_toggle_on_finished, td_layer_toggle_on_reset },    \
+    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }), \
+  }
+
+void td_layer_toggle_on_finished (qk_tap_dance_state_t *state, void *user_data) {
+  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
+
+  if (state->count == 1) {
+    register_code16 (pair->kc1);
+  } else if (state->count == 2) {
+    if (IS_LAYER_ON(pair->kc2)) {
+      layer_off(pair->kc2);
+    } else {
+      layer_on(pair->kc2);
+    }
+  }
+}
+
+void td_layer_toggle_on_reset (qk_tap_dance_state_t *state, void *user_data) {
+  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
+
+  if (state->count == 1) {
+    unregister_code16 (pair->kc1);
+  } 
+}
+
+
 #define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE(kc, LSFT(kc))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
@@ -401,6 +520,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [8] = ACTION_TAP_DANCE_MOD_TAP(KC_LGUI, MOD_LGUI | MOD_LSFT),
   [9] = ACTION_TAP_DANCE_MOD_TAP(KC_ESC, MOD_LGUI | MOD_LCTL),
   [10] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
+  [11] = ACTION_TAP_DANCE_LAYER_TAP(KC_PGUP, ADORE),
+  [12] = ACTION_TAP_DANCE_LAYER_TAP(KC_PGDN, NORMAN),
 };
 #endif
 
