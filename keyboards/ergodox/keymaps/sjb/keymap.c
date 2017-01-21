@@ -457,12 +457,12 @@ static void td_mod_tap_on_reset(qk_tap_dance_state_t *state, void *user_data) {
   }
 
   if (state->count == 1) {
-      unregister_code(pair->kc1);
-      unregister_mods(pair->kc2);
+    unregister_code(pair->kc1);
+    unregister_mods(pair->kc2);
   }
 
   if (state->count == TD_PRESSED_EVENT) {
-      unregister_mods(pair->kc2);
+    unregister_mods(pair->kc2);
   }
 }
 
@@ -493,13 +493,13 @@ static void td_tskswch_on_reset(qk_tap_dance_state_t *state, void *user_data) {
         unregister_code16(LALT(KC_F6));
         break;
       case 3:
-        unregister_code(KC_LALT);
+        unregister_mods(MOD_BIT(KC_LALT));
         break;
     }
 }
 
 #define ACTION_TAP_DANCE_LAYER_TAP(kc1, kc2) { \
-    .fn = { NULL, td_layer_toggle_on_finished, td_layer_toggle_on_reset },    \
+    .fn = { NULL, td_layer_toggle_on_finished, NULL },    \
     .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }), \
   }
 
@@ -507,7 +507,7 @@ void td_layer_toggle_on_finished (qk_tap_dance_state_t *state, void *user_data) 
   qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
 
   if (state->count == 1) {
-    register_code16 (pair->kc1);
+    TAP_KEY16(pair->kc1);
   } else if (state->count == 2) {
     if (IS_LAYER_ON(pair->kc2)) {
       layer_off(pair->kc2);
@@ -517,24 +517,32 @@ void td_layer_toggle_on_finished (qk_tap_dance_state_t *state, void *user_data) 
   }
 }
 
-void td_layer_toggle_on_reset (qk_tap_dance_state_t *state, void *user_data) {
+#define ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(kc1, kc2) { \
+    .fn = { NULL, td_pair_restore_mods_finished, NULL}, \
+    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }),  \
+  }
+
+void td_pair_restore_mods_finished(qk_tap_dance_state_t *state, void *user_data) {
   qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
 
+  uint8_t mods = get_mods();
   if (state->count == 1) {
-    unregister_code16 (pair->kc1);
-  } 
+    TAP_KEY16(pair->kc1);
+  } else if (state->count == 2) {
+    TAP_KEY16(pair->kc2);
+  }
+  set_mods(mods);
 }
 
-
-#define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE(kc, LSFT(kc))
+#define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(kc, LSFT(kc))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [0] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
-  [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
-  [2] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_UNDS),
-  [3] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
-  [4] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
-  [5] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
+  [0] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_LBRC, KC_LPRN),
+  [1] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_RBRC, KC_RPRN),
+  [2] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_BSLS, KC_UNDS),
+  [3] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_GRV, KC_MINS),
+  [4] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_RGHT, LSS(KC_RGHT)),
+  [5] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_LEFT, LSS(KC_LEFT)),
   [6] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
   [7] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
   [8] = ACTION_TAP_DANCE_MOD_TAP(KC_LGUI, MOD_LGUI | MOD_LSFT),
