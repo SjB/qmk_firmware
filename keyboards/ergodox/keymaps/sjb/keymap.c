@@ -81,9 +81,8 @@
 #define TD_TAB  KC_TAB
 #define TD_SCLN KC_SCLN
 #define TD_TSKSWCH M(TSKSWCH)
-#define TD_GUI KC_LGUI
+#define TD_LGUI KC_LGUI
 #define TD_ESC  KC_ESC
-#define TD_MYCM KC_MYCM
 #define TD_TERM F_TERM
 #define TD_PGUP KC_PGUP
 #define TD_PGDN KC_PGDN
@@ -184,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,
                                                                 KC_MPLY,        KC_MNXT,
                                                                                 KC_TRNS,
-                                                    KC_TRNS,    KC_DELT,         KC_TRNS,
+                                                    KC_TRNS,    KC_DELT,        KC_TRNS,
        // right hand
        KC_APP,    KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
        KC_NO,     KC_NO,     KC_NO,      KC_INS,    KC_NO,      KC_PSCR,    KC_F12,
