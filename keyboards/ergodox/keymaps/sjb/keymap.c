@@ -25,16 +25,34 @@
 #define F_LOCK LGUI(KC_L)
 #define F_MAX  LALT(KC_F10)  // Toggle maximazation state
 
-#define F_MOTION KC_FN0
-#define F_NUMPAD KC_FN1
-#define F_FNx KC_FN2
-#define F_LSFT KC_FN3
-#define F_RSFT KC_FN4
-#define F_LCTL KC_FN5
-#define F_LALT KC_FN6
-#define F_MEH KC_FN7
-#define F_HYPR KC_FN8
-#define LT_TAB KC_FN9
+#ifdef USING_QK_FUNCTION
+
+#define OSL_MOTION OSL(MOTION)
+#define OSL_NUMPAD OSL(NUMPAD)
+#define OSL_FNx OSL(FNx)
+#define OSM_LSFT OSM(MOD_LSFT)
+#define OSM_RSFT OSM(MOD_LSFT)
+#define OSM_LCTL OSM(MOD_LCTL)
+#define OSM_LALT OSM(MOD_LALT)
+#define OSM_MEH OSM(MOD_MEH)
+#define OSM_HYPR OSM(MOD_HYPR)
+#define MT_TAB MT(MOD_RALT, KC_TAB)
+
+#else
+
+#define OSL_MOTION KC_FN0
+#define OSL_NUMPAD KC_FN1
+#define OSL_FNx KC_FN2
+#define OSM_LSFT KC_FN3
+#define OSM_RSFT KC_FN3
+#define OSM_LCTL KC_FN5
+#define OSM_LALT KC_FN6
+#define OSM_MEH KC_FN7
+#define OSM_HYPR KC_FN8
+#define MT_TAB KC_FN9
+
+#endif
+
 #define F_BROWSER M(BROWSER)
 
 #ifdef TAP_DANCE_ENABLE
@@ -118,21 +136,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         KC_ESC,   KC_1,      KC_2,    KC_3,  KC_4,       KC_5,     TD_TERM,
-        LT_TAB,   KC_Q,      KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
-        F_LCTL,   KC_A,      KC_S,    KC_D,  KC_F,       KC_G,
-        F_LSFT,   KC_Z,      KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
-        F_FNx,    F_NUMPAD,  TD_LEFT, KC_UP, F_MOTION,
+        MT_TAB,   KC_Q,      KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
+        OSM_LCTL, KC_A,      KC_S,    KC_D,  KC_F,       KC_G,
+        OSM_LSFT, KC_Z,      KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
+        OSL_FNx,  OSL_NUMPAD,TD_LEFT, KC_UP, OSL_MOTION,
                                                          KC_HOME,  KC_END,
-                                                                   F_HYPR,
-                                             F_LCTL,     KC_BSPC,  TD_LGUI,
+                                                                   OSM_HYPR,
+                                             OSM_LCTL,   KC_BSPC,  TD_LGUI,
         // right hand
         KC_MYCM,  KC_6,      KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,      KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,      KC_J,     KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
-        TD_RBRC,  KC_N,      KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  F_RSFT,
-                             F_LALT,   KC_DOWN,   TD_RGHT,   F_FNx,    TD_TSKSWCH,
+        TD_RBRC,  KC_N,      KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  OSM_RSFT,
+                             OSM_LALT, KC_DOWN,   TD_RGHT,   OSL_FNx,  TD_TSKSWCH,
         TD_PGUP,  TD_PGDN,
-        F_MEH,
+        OSM_MEH,
         TD_ESC,   KC_ENT,    KC_SPC
     ),
 /* Keymap 1: Motion Layer
@@ -259,7 +277,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS,   KC_TRNS,  KC_TRNS
        ),
-/* Keymap ADORE: 
+/* Keymap ADORE:
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   ESC  |   9  |   7  |   5  |   3  |   1  | Term |           | MYCM |   0  |   2  |   4  |   6  |   8  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
@@ -291,7 +309,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                            KC_TRNS,  KC_TRNS,
                                                                      KC_TRNS,
                                                KC_TRNS,    KC_TRNS,  KC_TRNS,
- 
+
         // right hand
         KC_TRNS,  KC_0,      KC_2,     KC_4,      KC_6,      KC_8,     KC_MINS,
         KC_TRNS,  KC_M,      KC_G,     KC_L,      KC_P,      KC_SLSH,  KC_EQL,
@@ -347,6 +365,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+#ifndef USING_QK_FUNCTION
 const uint16_t PROGMEM fn_actions[] = {
   [0] = ACTION_LAYER_ONESHOT(MOTION),
   [1] = ACTION_LAYER_ONESHOT(NUMPAD),
@@ -359,6 +378,7 @@ const uint16_t PROGMEM fn_actions[] = {
   [8] = ACTION_MODS_ONESHOT(MOD_HYPR),
   [9] = ACTION_MODS_TAP_KEY(MOD_RALT, KC_TAB),
 };
+#endif
 
 #define TAP_CONSUMER_HID_CODE(code) \
   host_consumer_send(code); \
