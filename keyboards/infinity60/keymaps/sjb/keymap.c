@@ -297,6 +297,7 @@ void td_pair_restore_mods_finished(qk_tap_dance_state_t *state, void *user_data)
     TAP_KEY16(pair->kc2);
   }
   set_mods(mods);
+  send_keyboard_report();
 }
 
 #define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(kc, LSFT(kc))
