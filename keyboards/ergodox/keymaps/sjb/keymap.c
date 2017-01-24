@@ -238,13 +238,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: Symbol Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * | Version | KDBG |  DBG |      |      |      | FLSH |           | FLSH |      |      |      |      |      |        |
+ * | Version |      |      |      |      |      | FLSH |           | FLSH |      |      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * | Win Max |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |---------+------+------+------+------+------|   {  |           |   }  |------+------+------+------+------+--------|
- * |         |   1  |   2  |   3  |   4  |   5  |------|           |------|   6  |   7  |   8  |   9  |   0  |   F12  |
+ * |         |   !  |   @  |   #  |   $  |   %  |------|           |------|   ^  |   &  |   *  |   (  |  )   |   F12  |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |   !  |   @  |   #  |   $  |   %  |   [  |           |   ]  |   ^  |   &  |   *  |   (  |  )   |        |
+ * |         |   ~  |   `  |   |  |      |      |   [  |           |   ]  |   +  |   =  |   -  |   _  | DBG  |  KDBG  |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -258,19 +258,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [FNx] = KEYMAP(
        // left hand
-       M(VRSN),   M(KDBG),  DEBUG,       KC_NO,     KC_NO,      KC_NO,   M(FLSH),
+       M(VRSN),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, M(FLSH),
        F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,   KC_LCBR,
-       KC_TRNS,   KC_1,     KC_2,        KC_3,      KC_4,       KC_5,
-       KC_TRNS,   S(KC_1),  S(KC_2),     S(KC_3),   S(KC_4),    S(KC_5), KC_LBRC,
+       KC_TRNS,   S(KC_1),  S(KC_2),     S(KC_3),   S(KC_4),    S(KC_5),
+       KC_TRNS,   KC_TILD,  KC_GRV,      KC_PIPE,   KC_NO,      KC_NO,   KC_LBRC,
        KC_TRNS,   KC_TRNS,  KC_NO,       KC_TRNS,   KC_NO,
                                                                 KC_TRNS, KC_TRNS,
                                                                          KC_TRNS,
                                                     KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
-       M(FLSH),   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,   KC_NO,
+       M(FLSH),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, KC_TRNS,
        KC_RCBR,   KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
-                  KC_6,     KC_7,        KC_8,      KC_9,       KC_0,    KC_F12,
-       KC_RBRC,   S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_TRNS,
+                  S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_F12,
+                  KC_PLUS,  KC_EQUAL,    KC_MINS,   KC_UNDS,    DEBUG,   M(KDBG),
+       KC_RBRC,
                             KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, KC_NO,
        KC_TRNS,   KC_TRNS,
        KC_TRNS,
