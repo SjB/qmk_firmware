@@ -270,7 +270,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        M(FLSH),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, KC_TRNS,
        KC_RCBR,   KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
                   S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_F12,
-                  KC_PLUS,  KC_EQUAL,    KC_MINS,   KC_UNDS,    DEBUG,   M(KDBG),
+                  KC_PLUS,  KC_EQUAL,    KC_MINS,   KC_UNDS,    M(KDBG), KC_TRNS,
        KC_RBRC,
                             KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, KC_NO,
        KC_TRNS,   KC_TRNS,
