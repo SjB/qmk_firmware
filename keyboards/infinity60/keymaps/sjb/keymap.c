@@ -95,31 +95,31 @@ enum custom_keycodes {
   BROWSER,
   TSKSWCH,
   EDITOR,
+  BESC,
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = KEYMAP(
-      TD_ESC,    KC_1,     KC_2,     KC_3,    KC_4,     KC_5,     KC_6,     KC_7,    KC_8,     KC_9,     KC_0,      KC_MINS,   KC_EQL,    KC_BSPC,  KC_BSPC,  \
-      MT_TAB,    KC_Q,     KC_W,     KC_E,    KC_R,     KC_T,     KC_Y,     KC_U,    KC_I,     KC_O,     KC_P,      TD_LBRC,   TD_RBRC,   TD_BSLS,  \
-      OSM_LCTL,  KC_A,     KC_S,     KC_D,    KC_F,     KC_G,     KC_H,     KC_J,    KC_K,     KC_L,     TD_SCLN,   TD_QUOT,   KC_ENT,    \
-      OSM_LSFT,  KC_Z,     KC_X,    KC_C,     KC_V,     KC_B,     KC_N,     KC_M,    KC_COMM,  KC_DOT,   KC_SLSH,   OSM_LSFT,  KC_NO,     \
-      OSL_NAV,   OSM_MEH,  TD_LGUI,                     MT_SPC,                                          OSM_LALT,  OSM_HYPR,  OSL_FNx,   TD_TSKSWCH \
+      TD_ESC,    KC_1,     KC_2,     KC_3,    KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,      KC_MINS,   KC_EQL,    KC_BSPC,  KC_BSPC,  \
+      MT_TAB,    KC_Q,     KC_W,     KC_E,    KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,      TD_LBRC,   TD_RBRC,   TD_BSLS,  \
+      OSM_LCTL,  KC_A,     KC_S,     KC_D,    KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     TD_SCLN,   TD_QUOT,   KC_ENT,    \
+      OSM_LSFT,  KC_Z,     KC_X,    KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,   OSM_LSFT,  M(BESC),   \
+      OSL_NAV,   OSM_MEH,  TD_LGUI,                     MT_SPC,                                           OSM_LALT,  OSM_HYPR,  OSL_FNx,   TD_TSKSWCH \
                      ),
   [FNx] = KEYMAP(
-      M(FLSH),  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_MYCM,  F_TERM,  KC_CALC,  KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, KC_DELT,  \
-      F_MAX,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,   KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_PWR,  \
-      KC_TRNS,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,    KC_8,     KC_9,     KC_0,      KC_QUOT,   KC_TRNS,   \
-      KC_TRNS,  S(KC_1),  S(KC_2),  S(KC_3),  S(KC_4),  S(KC_5),  S(KC_6),  S(KC_7), S(KC_8),  S(KC_9),  S(KC_0),   KC_TRNS,   KC_TRNS,     \
-      KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_BSPC,                                         KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS \
-
+      M(FLSH),  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_MYCM,  F_TERM,   KC_CALC,  KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, KC_DELT,  \
+      F_MAX,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_PWR,  \
+      KC_TRNS,  S(KC_1),  S(KC_2),  S(KC_3),  S(KC_4),  S(KC_5),  S(KC_6),  S(KC_7),  S(KC_8),  S(KC_9),  S(KC_0),   KC_TRNS,   KC_TRNS,   \
+      KC_TRNS,  KC_TILD,  KC_GRV,   KC_PIPE,  KC_LCBR,  KC_RCBR,  KC_PLUS,  KC_EQUAL, KC_MINS,  KC_UNDS,  KC_NO,     KC_TRNS,   KC_TRNS,   \
+      KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_BSPC,                                          KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS \
                  ),
   [NAV] = KEYMAP(
-      M(VRSN),  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,   KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_TRNS, KC_TRNS,  \
-      KC_TRNS,  KC_BTN1,  KC_MS_U,  KC_BTN2,  KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_INS,   KC_NO,    KC_PSCR,   KC_NO,     KC_NO,     KC_TRNS, \
-      KC_TRNS,  KC_MS_L,  KC_MS_D,  KC_MS_R,  KC_NO,    KC_NO,    TD_LEFT,  KC_UP,   KC_DOWN,  TD_RGHT,  KC_HOME,   KC_PGUP,   KC_TRNS,   \
-      KC_TRNS,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,    KC_END,   KC_PGDN,   KC_TRNS,   KC_TRNS,   \
-      KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_SPC,                                          KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS \
+      M(VRSN),  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_TRNS, KC_TRNS,  \
+      KC_TRNS,  KC_BTN1,  KC_MS_U,  KC_BTN2,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_INS,   KC_NO,    KC_PSCR,   KC_NO,     KC_NO,     KC_TRNS, \
+      KC_TRNS,  KC_MS_L,  KC_MS_D,  KC_MS_R,  KC_NO,    KC_NO,    TD_LEFT,  KC_UP,    KC_DOWN,  TD_RGHT,  KC_HOME,   KC_PGUP,   KC_TRNS,   \
+      KC_TRNS,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_END,   KC_PGDN,   KC_TRNS,   KC_TRNS,   \
+      KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_SPC,                                           KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS \
 )
 };
 
@@ -178,6 +178,14 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         TAP_KEY(KC_LGUI);
         wait_ms(250);
         SEND_STRING(DEFAULT_EDITOR "\n");
+      }
+      break;
+    case BESC:
+      if (record->event.pressed) {
+        set_mods(0x00);
+        send_keyboard_report();
+        layer_clear();
+        layer_on(BASE);
       }
       break;
   }
