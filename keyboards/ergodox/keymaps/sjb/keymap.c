@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | FNx  | SWCH |
+ *   | FNx  |  L2  | LEFT |  UP  |  Alt |                                       |  L1  | DOWN | RGHT | FNx  | SWCH |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
@@ -138,16 +138,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MT_TAB,   KC_Q,      KC_W,    KC_E,  KC_R,       KC_T,     TD_BSLS,
         OSM_LCTL, KC_A,      KC_S,    KC_D,  KC_F,       KC_G,
         OSM_LSFT, KC_Z,      KC_X,    KC_C,  KC_V,       KC_B,     TD_LBRC,
-        OSL_FNx,  OSL_NUMPAD,TD_LEFT, KC_UP, OSL_MOTION,
+        OSL_FNx,  OSL_NUMPAD,TD_LEFT, KC_UP, OSM_LALT,
                                                          KC_HOME,  KC_END,
                                                                    OSM_HYPR,
                                              OSM_LCTL,   KC_BSPC,  TD_LGUI,
         // right hand
-        KC_MYCM,  KC_6,      KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
-        TD_GRV,   KC_Y,      KC_U,     KC_I,      KC_O,      KC_P,     KC_EQL,
-                  KC_H,      KC_J,     KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
-        TD_RBRC,  KC_N,      KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  OSM_RSFT,
-                             OSM_LALT, KC_DOWN,   TD_RGHT,   OSL_FNx,  TD_TSKSWCH,
+        KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
+        TD_GRV,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
+                  KC_H,      KC_J,       KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
+        TD_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    KC_SLSH,  OSM_RSFT,
+                             OSL_MOTION, KC_DOWN,   TD_RGHT,   OSL_FNx,  TD_TSKSWCH,
         TD_PGUP,  TD_PGDN,
         OSM_MEH,
         TD_ESC,   KC_ENT,    KC_SPC
@@ -528,7 +528,7 @@ void tp_register_code(uint16_t kc) {
     register_code(kc);
 }
 
-void tp_unregister_code(uint16_t kc) { 
+void tp_unregister_code(uint16_t kc) {
     uint8_t mods = tp_get_mods(kc);
     if (mods) {
       del_macro_mods(mods);
