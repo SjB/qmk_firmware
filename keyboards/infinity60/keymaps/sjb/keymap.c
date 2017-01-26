@@ -2,12 +2,16 @@
 // this is the style you want to emulate.
 
 #include "infinity60.h"
-#include "debug.h"
 #include "action_layer.h"
 #include "action_util.h"
 #include "backlight.h"
+#include "debug.h"
 #include "eeconfig.h"
 #include "version.h"
+
+#ifdef TAP_DANCE_ENABLE
+#include "tap_dance_extra.h"
+#endif
 
 #define DEFAULT_EDITOR "emacs"
 
@@ -194,113 +198,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 
 #ifdef TAP_DANCE_ENABLE
-
-#define TD_PRESSED_EVENT 10
-
-#define ACTION_TAP_DANCE_MOD_TAP(kc1, kc2) { \
-    .fn = { NULL, td_mod_tap_on_finished, td_mod_tap_on_reset },    \
-    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }), \
-  }
-
-static void td_mod_tap_on_finished(qk_tap_dance_state_t *state, void *user_data) {
-  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
-
-  if (state->pressed) {
-    register_mods(pair->kc2);
-    state->count = TD_PRESSED_EVENT; // magic number for reset
-  } else if (state->count == 1) {
-    register_code(pair->kc1);
-  } else if (state->count == ONESHOT_TAP_TOGGLE) {
-    register_mods(pair->kc2);
-  }
-}
-
-static void td_mod_tap_on_reset(qk_tap_dance_state_t *state, void *user_data) {
-  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
-  if (state->count == ONESHOT_TAP_TOGGLE) {
-    return;
-  }
-
-  if (state->count == 1) {
-    unregister_code(pair->kc1);
-    unregister_mods(pair->kc2);
-  }
-
-  if (state->count == TD_PRESSED_EVENT) {
-    unregister_mods(pair->kc2);
-  }
-}
-
-static void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data) {
-  if (state->pressed) {
-    TAP_KEY(KC_LGUI);
-    wait_ms(250);
-    register_code(KC_LALT);
-    state->count = 3;
-  } else {
-    switch (state->count) {
-      case 1:
-        register_code16(LGUI(KC_TAB));
-        break;
-      case 2:
-        register_code16(LALT(KC_F6));
-        break;
-    }
-  }
-}
-
-static void td_tskswch_on_reset(qk_tap_dance_state_t *state, void *user_data) {
-   switch (state->count) {
-      case 1:
-        unregister_code16(LGUI(KC_TAB));
-        break;
-      case 2:
-        unregister_code16(LALT(KC_F6));
-        break;
-      case 3:
-        unregister_mods(MOD_BIT(KC_LALT));
-        break;
-    }
-}
-
-#define ACTION_TAP_DANCE_LAYER_TAP(kc1, kc2) { \
-    .fn = { NULL, td_layer_toggle_on_finished, NULL },    \
-    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }), \
-  }
-
-void td_layer_toggle_on_finished (qk_tap_dance_state_t *state, void *user_data) {
-  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
-
-  if (state->count == 1) {
-    TAP_KEY16(pair->kc1);
-  } else if (state->count == 2) {
-    if (IS_LAYER_ON(pair->kc2)) {
-      layer_off(pair->kc2);
-    } else {
-      layer_on(pair->kc2);
-    }
-  }
-}
-
-#define ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(kc1, kc2) { \
-    .fn = { NULL, td_pair_restore_mods_finished, NULL}, \
-    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }),  \
-  }
-
-void td_pair_restore_mods_finished(qk_tap_dance_state_t *state, void *user_data) {
-  qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
-
-  uint8_t mods = get_mods();
-  if (state->count == 1) {
-    TAP_KEY16(pair->kc1);
-  } else if (state->count == 2) {
-    TAP_KEY16(pair->kc2);
-  }
-  set_mods(mods);
-  send_keyboard_report();
-}
-
-#define ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(kc) ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(kc, LSFT(kc))
 
 qk_tap_dance_action_t tap_dance_actions[] = {
   [0] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_LBRC, KC_LPRN),

@@ -36,7 +36,7 @@ void td_mod_tap_on_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data) {
     if (state->pressed) {
-        register_code(KC_LGUI);
+        register_code(KC_LGUI); 
         unregister_code(KC_LGUI);
         wait_ms(250);
         register_code(KC_LALT);
@@ -91,7 +91,7 @@ void td_layer_toggle_on_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 #define tp_get_mods(kc) ((uint8_t)(kc >> 8) & 0x1f)
 
-void tp_register_code(uint16_t kc) {
+void tp_register_code(uint16_t kc) { 
     uint8_t mods = tp_get_mods(kc);
     if (mods) {
         add_macro_mods(mods);
@@ -119,7 +119,7 @@ void td_pair_restore_mods_finished(qk_tap_dance_state_t *state, void *user_data)
 
 void td_pair_restore_mods_reset(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
-
+  
     if (state->count == 1) {
         tp_unregister_code(pair->kc1);
     } else if (state->count == 2) {
