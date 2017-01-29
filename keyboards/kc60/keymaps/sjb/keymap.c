@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       MT_TAB,    KC_Q,     KC_W,     KC_E,    KC_R,     KC_T,     KC_Y,     KC_U,    KC_I,  KC_O,     KC_P,     TD_LBRC,  TD_RBRC,  TD_BSLS,  \
       OSM_LCTL,  KC_A,     KC_S,     KC_D,    KC_F,     KC_G,     KC_H,     KC_J,    KC_K,  KC_L,     TD_SCLN,  TD_QUOT,  KC_NO,    KC_ENT,   \
       OSM_LSFT,  KC_NO,    KC_Z,     KC_X,    KC_C,     KC_V,     KC_B,     KC_N,    KC_M,  KC_COMM,  KC_DOT,   KC_SLSH,  KC_NO,    OSM_LSFT,  \
-      OSL_NAV,   OSM_MEH,  TD_LGUI,                     MT_SPC,                             KC_NO,    OSM_LALT, OSM_HYPR, OSL_FNx,  TD_TSKSWCH \
+      OSL_NAV,   OSM_MEH,  OSM_LALT,                    MT_SPC,                             KC_NO,    TD_LGUI,  OSM_HYPR, OSL_FNx,  TD_TSKSWCH \
                      ),
   [FNx] = KEYMAP(
       M(FLSH),  KC_MPLY,  KC_MNXT,  KC_MUTE, KC_VOLD,  KC_VOLU,  KC_MYCM,   F_TERM,    KC_CALC, KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, \
@@ -192,12 +192,12 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 #ifdef TAP_DANCE_ENABLE
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [0] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_LBRC, KC_LPRN),
-  [1] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_RBRC, KC_RPRN),
-  [2] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_BSLS, KC_TILD),
-  [3] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_QUOT, KC_GRV),
-  [4] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_RGHT, LSS(KC_RGHT)),
-  [5] = ACTION_TAP_DANCE_DOUBLE_RESTORE_MODS(KC_LEFT, LSS(KC_LEFT)),
+  [0] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
+  [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
+  [2] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_TILD),
+  [3] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_GRV),
+  [4] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
+  [5] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
   [6] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
   [7] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
   [8] = ACTION_TAP_DANCE_MOD_TAP(KC_LGUI, MOD_LGUI | MOD_LSFT),
