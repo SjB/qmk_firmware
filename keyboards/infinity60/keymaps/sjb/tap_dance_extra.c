@@ -94,7 +94,7 @@ void td_layer_toggle_on_reset(qk_tap_dance_state_t *state, void *user_data) {
 void tp_register_code(uint16_t kc) { 
     uint8_t mods = tp_get_mods(kc);
     if (mods) {
-        add_macro_mods(mods);
+        add_weak_mods(mods);
     }
     register_code(kc);
 }
@@ -102,7 +102,7 @@ void tp_register_code(uint16_t kc) {
 void tp_unregister_code(uint16_t kc) {
     uint8_t mods = tp_get_mods(kc);
     if (mods) {
-        del_macro_mods(mods);
+        del_weak_mods(mods);
     }
     unregister_code(kc);
 }
