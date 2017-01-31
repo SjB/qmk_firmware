@@ -5,34 +5,46 @@
 #include "tap_dance_extra.h"
 #include "wait.h"
 
-void td_mod_tap_on_finished(qk_tap_dance_state_t *state, void *user_data) {
+void td_mod_tap_lock_on_finished(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
 
     if (state->pressed) {
-        register_mods(pair->kc2);
-        state->count = TD_PRESSED_EVENT; // magic number for reset
-    } else if (state->count == 1) {
-        register_code(pair->kc1);
-    } else if (state->count == ONESHOT_TAP_TOGGLE) {
-        register_mods(pair->kc2);
+        register_mods(pair->kc1);
     }
+#ifndef NO_ACTION_ONESHOT
+    else if (state->count == 1) {
+        if (!(pair->kc1 & get_oneshot_locked_mods())) { // if match we need to clear the oneshot locked mods 1st
+            register_code16(pair->kc2);
+            unregister_code16(pair->kc2);
+            state->count = TD_PRESSED_EVENT; // magic count that skip reset
+        }
+    }
+#if defined(ONESHOT_TAP_TOGGLE) && ONESHOT_TAP_TOGGLE > 1
+    else if (state->count == ONESHOT_TAP_TOGGLE) {
+        set_oneshot_locked_mods(pair->kc1);
+        register_mods(pair->kc1);
+    }
+#endif
+#endif
 }
 
-void td_mod_tap_on_reset(qk_tap_dance_state_t *state, void *user_data) {
+void td_mod_tap_lock_on_reset(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
-    if (state->count == ONESHOT_TAP_TOGGLE) {
+
+#if defined(ONESHOT_TAP_TOGGLE) && ONESHOT_TAP_TOGGLE > 1
+    if (state->count == ONESHOT_TAP_TOGGLE) { // locking mods
         return;
     }
+#endif
 
-    if (state->count == 1) {
-        unregister_code(pair->kc1);
-        unregister_mods(pair->kc2);
-    }
-
-    if (state->count == TD_PRESSED_EVENT) {
-        unregister_mods(pair->kc2);
+    if (state->count >= 1) {
+        unregister_mods(pair->kc1);
+#ifndef NO_ACTION_ONESHOT
+        clear_oneshot_locked_mods();
+#endif
     }
 }
+
 
 void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data) {
     if (state->pressed) {
@@ -71,12 +83,12 @@ void td_layer_toggle_on_finished(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
 
     if (state->count == 1) {
-        register_code16(pair->kc1);
+        register_code16(pair->kc2);
     } else if (state->count == 2) {
-        if (IS_LAYER_ON(pair->kc2)) {
-            layer_off(pair->kc2);
+        if (IS_LAYER_ON(pair->kc1)) {
+            layer_off(pair->kc1);
         } else {
-            layer_on(pair->kc2);
+            layer_on(pair->kc1);
         }
     }
 }
@@ -85,7 +97,7 @@ void td_layer_toggle_on_reset(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
 
     if (state->count == 1) {
-        unregister_code16(pair->kc1);
+        unregister_code16(pair->kc2);
     }
 }
 

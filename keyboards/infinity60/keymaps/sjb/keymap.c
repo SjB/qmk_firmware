@@ -208,8 +208,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [5] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
   [6] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
   [7] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
-  [8] = ACTION_TAP_DANCE_MOD_TAP(KC_LGUI, MOD_LGUI | MOD_LSFT),
-  [9] = ACTION_TAP_DANCE_MOD_TAP(KC_ESC, F_LOCK),
+  [8] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
+  [9] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, F_LOCK),
 };
 #endif
 

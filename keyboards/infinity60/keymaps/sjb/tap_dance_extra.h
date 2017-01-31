@@ -3,11 +3,11 @@
 
 #include "process_keycode/process_tap_dance.h"
 
-#define TD_PRESSED_EVENT 10
+#define TD_PRESSED_EVENT 0xFF
 
-#define ACTION_TAP_DANCE_MOD_TAP(kc1, kc2) {                            \
-    .fn = { NULL, td_mod_tap_on_finished, td_mod_tap_on_reset },        \
-    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }),         \
+#define ACTION_TAP_DANCE_MOD_TAP_LOCK(kc1, kc2) {                          \
+    .fn = { NULL, td_mod_tap_lock_on_finished, td_mod_tap_lock_on_reset }, \
+    .user_data = (void *)&((qk_tap_dance_pair_t) { kc1, kc2 }),            \
   }
 
 #define ACTION_TAP_DANCE_TSKSWCH() {                                    \
@@ -31,6 +31,9 @@
 
 void td_mod_tap_on_finished(qk_tap_dance_state_t *state, void *user_data);
 void td_mod_tap_on_reset(qk_tap_dance_state_t *state, void *user_data);
+
+void td_mod_tap_lock_on_finished(qk_tap_dance_state_t *state, void *user_data);
+void td_mod_tap_lock_on_reset(qk_tap_dance_state_t *state, void *user_data);
 
 void td_tskswch_on_finished(qk_tap_dance_state_t *state, void *user_data);
 void td_tskswch_on_reset(qk_tap_dance_state_t *state, void *user_data);
