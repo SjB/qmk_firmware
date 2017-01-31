@@ -5,6 +5,27 @@
 #include "tap_dance_extra.h"
 #include "wait.h"
 
+void td_mod_tap_on_finished(qk_tap_dance_state_t *state, void *user_data) {
+    qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
+
+    if (state->pressed && state->count == 1) {
+        register_mods(pair->kc1);
+        state->count = TD_PRESSED_EVENT; // magic number for reset
+    } else if (state->count >= 1) {
+        register_code16(pair->kc2);
+    }
+}
+
+void td_mod_tap_on_reset(qk_tap_dance_state_t *state, void *user_data) {
+    qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
+
+    if (state->count == TD_PRESSED_EVENT) {
+        unregister_mods(pair->kc1);
+    } else if (state->count >= 1) {
+        unregister_code16(pair->kc2);
+    }
+}
+
 void td_mod_tap_lock_on_finished(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_dance_pair_t *pair = (qk_tap_dance_pair_t *)user_data;
 
