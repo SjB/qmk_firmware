@@ -67,13 +67,12 @@
 #define TD_GRV  TD(3)
 #define TD_RGHT TD(4)
 #define TD_LEFT TD(5)
-#define TD_SCLN TD(6)
-#define TD_TSKSWCH TD(7)
-#define TD_LGUI TD(8)
-#define TD_ESC  TD(9)
-#define TD_TERM TD(10)
-#define TD_PGUP TD(11)
-#define TD_PGDN TD(12)
+#define TD_TSKSWCH TD(6)
+#define TD_LGUI TD(7)
+#define TD_ESC  TD(8)
+#define TD_TERM TD(9)
+#define TD_PGUP TD(10)
+#define TD_PGDN TD(11)
 #else
 
 #define TD_LBRC KC_LBRC
@@ -83,7 +82,6 @@
 #define TD_RGHT KC_RGHT
 #define TD_LEFT KC_LEFT
 #define TD_TAB  KC_TAB
-#define TD_SCLN KC_SCLN
 #define TD_TSKSWCH M(TSKSWCH)
 #define TD_LGUI KC_LGUI
 #define TD_ESC  KC_ESC
@@ -149,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
         KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
-                  KC_H,      KC_J,       KC_K,      KC_L,      TD_SCLN,  KC_QUOT,
+                  KC_H,      KC_J,       KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
         TD_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    KC_SLSH,  OSM_RSFT,
                              OSL_MOTION, KC_DOWN,   TD_RGHT,   OSL_FNx,  TD_TSKSWCH,
         TD_PGUP,  TD_PGDN,
@@ -317,7 +315,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
         KC_TRNS,  KC_0,      KC_2,     KC_4,      KC_6,      KC_8,     KC_MINS,
         KC_TRNS,  KC_M,      KC_G,     KC_L,      KC_P,      KC_SLSH,  KC_EQL,
-                  KC_D,      KC_R,     KC_T,      KC_N,      KC_S,     TD_SCLN,
+                  KC_D,      KC_R,     KC_T,      KC_N,      KC_S,     KC_SCLN,
         KC_TRNS,  KC_B,      KC_K,     KC_V,      KC_Y,      KC_J,     KC_TRNS,
                              KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,  KC_TRNS,
         KC_TRNS,  KC_TRNS,
@@ -359,7 +357,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                KC_TRNS,    KC_TRNS,  KC_TRNS,
         // right hand
         KC_TRNS,  KC_6,      KC_7,     KC_8,      KC_9,      KC_0,     KC_MINS,
-        KC_TRNS,  KC_J,      KC_U,     KC_R,      KC_L,      TD_SCLN,  KC_EQL,
+        KC_TRNS,  KC_J,      KC_U,     KC_R,      KC_L,      KC_SCLN,  KC_EQL,
                   KC_Y,      KC_N,     KC_I,      KC_O,      KC_H,     KC_QUOT,
         KC_TRNS,  KC_P,      KC_M,     KC_COMM,   KC_DOT,    KC_SLSH,  KC_TRNS,
                              KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,  KC_TRNS,
@@ -442,13 +440,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [3] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
   [4] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
   [5] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
-  [6] = ACTION_TAP_DANCE_SHIFT_WITH_DOUBLE(KC_SCLN),
-  [7] = ACTION_TAP_DANCE_TSKSWCH(),  // switch application / switch windows (gnome)
-  [8] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
-  [9] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LCTL, KC_ESC),
-  [10] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
-  [11] = ACTION_TAP_DANCE_LAYER_TAP(ADORE, KC_PGUP),
-  [12] = ACTION_TAP_DANCE_LAYER_TAP(NORMAN, KC_PGDN),
+  [6] = ACTION_TAP_DANCE_TSKSWCH(),  // switch application / switch windows (gnome)
+  [7] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
+  [8] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LCTL, KC_ESC),
+  [9] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
+  [10] = ACTION_TAP_DANCE_LAYER_TAP(ADORE, KC_PGUP),
+  [11] = ACTION_TAP_DANCE_LAYER_TAP(NORMAN, KC_PGDN),
 };
 
 #endif
