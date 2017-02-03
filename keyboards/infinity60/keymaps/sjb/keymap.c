@@ -91,7 +91,6 @@ enum keymaps_layers {
 
 enum custom_keycodes {
   PLACE_HOLDER = 0, // can always be here
-  FLSH,
   VRSN,
   KDBG,
   BROWSER,
@@ -110,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       OSL_NAV,   OSM_MEH,  TD_LGUI,                     MT_SPC,                                           OSM_LALT,  OSM_HYPR,  OSL_FNx,   TD_TSKSWCH \
                      ),
   [FNx] = KEYMAP(
-      M(FLSH),  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_MYCM,  F_TERM,   KC_CALC,  KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, KC_DELT,  \
+      RESET,    KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_MYCM,  F_TERM,   KC_CALC,  KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, KC_DELT,  \
       F_MAX,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_PWR,  \
       KC_TRNS,  S(KC_1),  S(KC_2),  S(KC_3),  S(KC_4),  S(KC_5),  S(KC_6),  S(KC_7),  S(KC_8),  S(KC_9),  S(KC_0),   KC_TRNS,   KC_TRNS,   \
       KC_TRNS,  KC_TILD,  KC_GRV,   KC_PIPE,  KC_LCBR,  KC_RCBR,  KC_PLUS,  KC_EQUAL, KC_MINS,  KC_UNDS,  KC_NO,     KC_TRNS,   KC_TRNS,   \
@@ -158,11 +157,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case VRSN:
       if (record->event.pressed) {
         SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-      }
-      break;
-    case FLSH:
-      if (record->event.pressed) { // For resetting EEPROM
-        reset_keyboard();
       }
       break;
     case KDBG:

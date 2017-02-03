@@ -102,12 +102,12 @@ enum keymaps_layers {
 
 enum custom_keycodes {
   PLACE_HOLDER = 0, // can always be here
-  FLSH,
   VRSN,
   KDBG,
   BROWSER,
   TSKSWCH,
   EDITOR,
+  CMD,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -260,7 +260,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [FNx] = KEYMAP(
        // left hand
-       M(VRSN),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, M(FLSH),
+       M(VRSN),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, RESET,
        F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,   KC_LCBR,
        KC_TRNS,   S(KC_1),  S(KC_2),     S(KC_3),   S(KC_4),    S(KC_5),
        KC_TRNS,   KC_TILD,  KC_GRV,      KC_PIPE,   KC_NO,      KC_NO,   KC_LBRC,
@@ -269,12 +269,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                          KC_TRNS,
                                                     KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
-       M(FLSH),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, KC_TRNS,
+       RESET,     KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, M(CMD),
        KC_RCBR,   KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
                   S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_F12,
-                  KC_PLUS,  KC_EQUAL,    KC_MINS,   KC_UNDS,    M(KDBG), KC_TRNS,
-       KC_RBRC,
-                            KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, KC_NO,
+       KC_RBRC,   KC_PLUS,  KC_EQUAL,    KC_MINS,   KC_UNDS,    M(KDBG), KC_TRNS,
+                            KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, DEBUG,
        KC_TRNS,   KC_TRNS,
        KC_TRNS,
        KC_TRNS,   KC_TRNS,  KC_TRNS
@@ -404,14 +403,16 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
       }
       break;
-    case FLSH:
-      if (record->event.pressed) { // For resetting EEPROM
-        reset_keyboard();
-      }
-      break;
     case KDBG:
       if (record->event.pressed) { // For resetting EEPROM
         debug_keyboard = true;
+      }
+      break;
+    case CMD:
+      if (record->event.pressed) { // For resetting EEPROM
+          register_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT));
+      } else {
+          unregister_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT));
       }
       break;
     case BROWSER:

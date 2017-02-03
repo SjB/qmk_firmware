@@ -92,13 +92,12 @@ enum keymaps_layers {
 
 enum custom_keycodes {
   PLACE_HOLDER = 0, // can always be here
-  FLSH,
   VRSN,
   KDBG,
+  CMD,
   BROWSER,
   TSKSWCH,
   EDITOR,
-  ALTTAP,
 };
 
 
@@ -111,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       OSL_NAV,   OSM_MEH,  TD(10),                    MT_SPC,                             KC_NO,    TD_LGUI,  OSM_HYPR, OSL_FNx,  TD_TSKSWCH \
                      ),
   [FNx] = KEYMAP(
-      M(FLSH),  KC_MPLY,  KC_MNXT,  KC_MUTE, KC_VOLD,  KC_VOLU,  KC_MYCM,   F_TERM,    KC_CALC, KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, \
+      RESET,    KC_MPLY,  KC_MNXT,  KC_MUTE, KC_VOLD,  KC_VOLU,  KC_MYCM,   F_TERM,    KC_CALC, KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, \
       F_MAX,    KC_F1,    KC_F2,    KC_F3,   KC_F4,    KC_F5,    KC_F6,     KC_F7,     KC_F8,   KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_PWR,  \
       KC_TRNS,  S(KC_1),  S(KC_2),  S(KC_3), S(KC_4),  S(KC_5),  S(KC_6),   S(KC_7),   S(KC_8), S(KC_9),  S(KC_0),   KC_TRNS,   KC_NO,     KC_TRNS,   \
       KC_TRNS,  KC_NO,    KC_TILD,  KC_GRV,  KC_PIPE,  KC_LCBR,  KC_RCBR,   KC_PLUS,   KC_EQUAL,KC_MINS,  KC_UNDS,   KC_NO,     KC_NO,     KC_TRNS, \
@@ -120,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  ),
   [NAV] = KEYMAP(
       M(VRSN),  KC_F1,    KC_F2,    KC_F3,   KC_F4,    KC_F5,    KC_F6,    KC_F7,   KC_F8,   KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_TRNS, \
-      KC_TRNS,  KC_BTN1,  KC_MS_U,  KC_BTN2, KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_INS,  KC_NO,    KC_PSCR,   KC_NO,     KC_NO,     KC_TRNS, \
+      KC_TRNS,  KC_BTN1,  KC_MS_U,  KC_BTN2, KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_INS,  KC_NO,    KC_PSCR,   KC_NO,     KC_NO,     M(CMD), \
       KC_TRNS,  KC_MS_L,  KC_MS_D,  KC_MS_R, KC_NO,    KC_NO,    TD_LEFT,  KC_UP,   KC_DOWN, TD_RGHT,  KC_HOME,   KC_PGUP,   KC_NO,     KC_TRNS,   \
       KC_TRNS,  KC_NO,    KC_NO,    KC_NO,   KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,   KC_NO,    KC_END,    KC_PGDN,   KC_NO,     KC_TRNS, \
       KC_TRNS,  KC_TRNS,  KC_TRNS,                     KC_SPC,                               KC_NO,    KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS \
@@ -163,14 +162,16 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
       }
       break;
-    case FLSH:
-      if (record->event.pressed) { // For resetting EEPROM
-        reset_keyboard();
-      }
-      break;
     case KDBG:
       if (record->event.pressed) { // For resetting EEPROM
         debug_keyboard = true;
+      }
+      break;
+    case CMD:
+      if (record->event.pressed) { // For resetting EEPROM
+          register_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT));
+      } else {
+          unregister_mods(MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT));
       }
       break;
     case BROWSER:
