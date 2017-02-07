@@ -30,7 +30,7 @@
 
 #ifdef USING_QK_FUNCTION
 
-#define OSL_NAV OSL(Nav)
+#define OSL_NAV OSL(NAV)
 #define OSL_FNx OSL(FNx)
 #define OSM_LSFT OSM(MOD_LSFT)
 #define OSM_RSFT OSM(MOD_LSFT)
