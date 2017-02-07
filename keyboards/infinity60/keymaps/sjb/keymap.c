@@ -63,19 +63,15 @@
 #define TD_RBRC TD(1)
 #define TD_BSLS TD(2)
 #define TD_QUOT TD(3)
-#define TD_RGHT TD(4)
-#define TD_LEFT TD(5)
-#define TD_TSKSWCH TD(6)
-#define TD_LGUI TD(7)
-#define TD_ESC  TD(8)
+#define TD_TSKSWCH TD(4)
+#define TD_LGUI TD(5)
+#define TD_ESC  TD(6)
 #else
 
 #define TD_LBRC KC_LBRC
 #define TD_RBRC KC_RBRC
 #define TD_BSLS KC_BSLS
 #define TD_QUOT KC_QUOT
-#define TD_RGHT KC_RGHT
-#define TD_LEFT KC_LEFT
 #define TD_TAB  KC_TAB
 #define TD_TSKSWCH M(TSKSWCH)
 #define TD_LGUI KC_LGUI
@@ -118,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NAV] = KEYMAP(
       M(VRSN),  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,    KC_TRNS, KC_TRNS,  \
       KC_TRNS,  KC_BTN1,  KC_MS_U,  KC_BTN2,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_INS,   KC_NO,    KC_PSCR,   KC_NO,     KC_NO,     KC_TRNS, \
-      KC_TRNS,  KC_MS_L,  KC_MS_D,  KC_MS_R,  KC_NO,    KC_NO,    TD_LEFT,  KC_UP,    KC_DOWN,  TD_RGHT,  KC_HOME,   KC_PGUP,   KC_TRNS,   \
+      KC_TRNS,  KC_MS_L,  KC_MS_D,  KC_MS_R,  KC_NO,    KC_NO,    KC_LEFT,  KC_UP,    KC_DOWN,  KC_RGHT,  KC_HOME,   KC_PGUP,   KC_TRNS,   \
       KC_TRNS,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_END,   KC_PGDN,   KC_TRNS,   KC_TRNS,   \
       KC_TRNS,  KC_TRNS,  KC_TRNS,                      KC_SPC,                                           KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS \
 )
@@ -196,11 +192,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
   [2] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_TILD),
   [3] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_GRV),
-  [4] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
-  [5] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
-  [6] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
-  [7] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
-  [8] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, F_LOCK),
+  [4] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
+  [5] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
+  [6] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, F_LOCK),
 };
 #endif
 
