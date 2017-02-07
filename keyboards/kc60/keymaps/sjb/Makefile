@@ -19,9 +19,14 @@ UNICODE_ENABLE ?= no         # Unicode
 BLUETOOTH_ENABLE ?= no       # Enable Bluetooth with the Adafruit EZ-Key HID
 AUDIO_ENABLE ?= no           # Audio output on port C6
 TAP_DANCE_ENABLE = yes
+QK_FUNCTION_ENABLE = yes
 
 ifeq (${TAP_DANCE_ENABLE},yes)
 SRC += tap_dance_extra.c
+endif
+
+ifeq (${QK_FUNCTION_ENABLE},yes)
+OPT_DEFS += -DUSING_QK_FUNCTION
 endif
 
 KEYMAP_VERSION = $(shell \
