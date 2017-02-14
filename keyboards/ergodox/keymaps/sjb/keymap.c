@@ -31,7 +31,7 @@
 
 #ifdef USING_QK_FUNCTION
 
-#define OSL_MOTION OSL(MOTION)
+#define OSL_NAV OSL(NAV)
 #define OSL_NUMPAD OSL(NUMPAD)
 #define OSL_FNx OSL(FNx)
 #define OSM_LSFT OSM(MOD_LSFT)
@@ -44,7 +44,7 @@
 
 #else
 
-#define OSL_MOTION KC_FN0
+#define OSL_NAV KC_FN0
 #define OSL_NUMPAD KC_FN1
 #define OSL_FNx KC_FN2
 #define OSM_LSFT KC_FN3
@@ -73,6 +73,7 @@
 #define TD_TERM TD(9)
 #define TD_PGUP TD(10)
 #define TD_PGDN TD(11)
+
 #else
 
 #define TD_LBRC KC_LBRC
@@ -93,7 +94,7 @@
 
 enum keymaps_layers {
   BASE = 0, // default layer
-  MOTION,   // Mouse and keyboard motion keys
+  NAV,   // Mouse and keyboard motion keys
   NUMPAD,   // numpad
   FNx,
   ADORE,
@@ -143,13 +144,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         OSL_FNx,  OSL_NUMPAD,TD_LEFT, KC_UP, OSM_LALT,
                                                          KC_HOME,  KC_END,
                                                                    OSM_HYPR,
-                                             OSM_LCTL,   KC_BSPC,  TD_LGUI,
+                                             OSM_LCTL,   KC_BSPC,  TD_TSKSWCH,
         // right hand
         KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,      KC_J,       KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
         TD_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    KC_SLSH,  OSM_RSFT,
-                             OSL_MOTION, KC_DOWN,   TD_RGHT,   OSL_FNx,  TD_TSKSWCH,
+                             KC_LGUI,    KC_DOWN,   TD_RGHT,   OSL_FNx,  OSL_NAV,
         TD_PGUP,  TD_PGDN,
         OSM_MEH,
         TD_ESC,   KC_ENT,    KC_SPC
@@ -175,8 +176,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// Motion
-[MOTION] = KEYMAP(
+// Navigation
+[NAV] = KEYMAP(
        // left hand
        KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          KC_MUTE,
        KC_TRNS,   KC_BTN1,  KC_MS_U,     KC_BTN2,   KC_NO,      KC_NO,          KC_VOLU,
@@ -188,9 +189,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_TRNS,    KC_DELT,        KC_TRNS,
        // right hand
        KC_APP,    KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
-       KC_NO,     KC_NO,     KC_NO,      KC_INS,    KC_NO,      KC_PSCR,    KC_F12,
+       DEBUG,     KC_NO,     KC_NO,      KC_INS,    KC_NO,      KC_PSCR,    KC_F12,
                   KC_LEFT,   KC_UP,      KC_DOWN,   KC_RGHT,    KC_NO,      KC_NO,
-       KC_NO,     KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  M(EDITOR),  KC_TRNS,
+       M(KDBG),   KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  M(EDITOR),  KC_TRNS,
                              KC_TRNS,    KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_PWR,    KC_SLEP,
        KC_TRNS,
@@ -261,19 +262,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [FNx] = KEYMAP(
        // left hand
        M(VRSN),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, RESET,
-       F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,   KC_LCBR,
-       KC_TRNS,   S(KC_1),  S(KC_2),     S(KC_3),   S(KC_4),    S(KC_5),
-       KC_TRNS,   KC_TILD,  KC_GRV,      KC_PIPE,   KC_NO,      KC_NO,   KC_LBRC,
+       F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,   TD_BSLS,
+       KC_TRNS,   KC_1,     KC_2,        KC_3,      KC_4,       KC_5,    
+       KC_TRNS,   S(KC_1),  S(KC_2),     S(KC_3),   S(KC_4),    S(KC_5), KC_MINS,
        KC_TRNS,   KC_TRNS,  KC_NO,       KC_TRNS,   KC_NO,
                                                                 KC_TRNS, KC_TRNS,
                                                                          KC_TRNS,
                                                     KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
        RESET,     KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, M(CMD),
-       KC_RCBR,   KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
-                  S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_F12,
-       KC_RBRC,   KC_PLUS,  KC_EQUAL,    KC_MINS,   KC_UNDS,    M(KDBG), KC_TRNS,
-                            KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, DEBUG,
+       TD_GRV,    KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
+                  KC_6,     KC_7,        KC_8,      KC_9,       KC_0,    KC_F12,
+       KC_EQUAL,  S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_TRNS,
+                            KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, KC_TRNS,
        KC_TRNS,   KC_TRNS,
        KC_TRNS,
        KC_TRNS,   KC_TRNS,  KC_TRNS
@@ -368,7 +369,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifndef USING_QK_FUNCTION
 const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_ONESHOT(MOTION),
+  [0] = ACTION_LAYER_ONESHOT(NAV),
   [1] = ACTION_LAYER_ONESHOT(NUMPAD),
   [2] = ACTION_LAYER_ONESHOT(FNx),
   [3] = ACTION_MODS_ONESHOT(MOD_LSFT),
