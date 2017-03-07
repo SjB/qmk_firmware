@@ -15,7 +15,6 @@
 #ifdef RGBLIGHT_ENABLE
   #include "rgblight.h"
 #endif
-
 #include "action_layer.h"
 #include "eeconfig.h"
 #include <stddef.h>
@@ -55,6 +54,14 @@ extern uint32_t default_layer_state;
 
 #ifdef UNICODE_ENABLE
 	#include "process_unicode.h"
+#endif
+
+#ifdef UCIS_ENABLE
+	#include "process_ucis.h"
+#endif
+
+#ifdef UNICODEMAP_ENABLE
+	#include "process_unicodemap.h"
 #endif
 
 #include "process_tap_dance.h"
@@ -118,7 +125,7 @@ void send_dword(uint32_t number);
 void send_word(uint16_t number);
 void send_byte(uint8_t number);
 void send_nibble(uint8_t number);
-
+uint16_t hex_to_keycode(uint8_t hex);
 
 void led_set_user(uint8_t usb_led);
 void led_set_kb(uint8_t usb_led);
