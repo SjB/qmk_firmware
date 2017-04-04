@@ -123,14 +123,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | FNx  |  L2  | LEFT |  UP  |  Alt |                                       |  L1  | DOWN | RGHT | FNx  | SWCH |
+ *   | FNx  |  L2  | LEFT |  UP  |  Alt |                                       | LGUI | DOWN | RGHT | FNx  | NAV  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | HYPR |       | MEH  |        |      |
  *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
- *                                 |      |      | LGUI |       | Esc  |        |      |
+ *                                 |      |      | Esc  |       | SWCH |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
@@ -142,9 +142,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         OSM_LCTL, KC_A,      KC_S,    KC_D,    KC_F,       KC_G,
         OSM_LSFT, KC_Z,      KC_X,    KC_C,    KC_V,       KC_B,     TD_LBRC,
         OSL_FNx,  OSL_NUMPAD,TD_LEFT, KC_DOWN, OSM_LALT,
-                                                         KC_HOME,  KC_END,
-                                                                   OSM_HYPR,
-                                             OSM_LCTL,   KC_BSPC,  TD_TSKSWCH,
+                                                           KC_HOME,  KC_END,
+                                                                     OSM_HYPR,
+                                                OSM_LCTL,  KC_BSPC,  TD_ESC,
         // right hand
         KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_LGUI,    KC_UP,     TD_RGHT,   OSL_FNx,  OSL_NAV,
         TD_PGUP,  TD_PGDN,
         OSM_MEH,
-        TD_ESC,   KC_ENT,    KC_SPC
+        TD_TSKSWCH,   KC_ENT,    KC_SPC
     ),
 /* Keymap 1: Motion Layer
  *
