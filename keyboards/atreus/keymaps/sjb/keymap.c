@@ -36,6 +36,8 @@
 
 #define MT_Z MT(MOD_LSFT, KC_Z)
 #define MT_SLSH MT(MOD_LSFT, KC_SLSH)
+#define MT_LBRC MT(MOD_LSFT, KC_LBRC)
+#define MT_BSLS MT(MOD_LSFT, KC_BSLS)
 
 #define F_BROWSER M(BROWSER)
 
@@ -45,18 +47,16 @@
 #define TD_RBRC TD(1)
 #define TD_QUOT TD(2)
 #define TD_TSKSWCH TD(3)
-#define TD_F9 TD(4)
-#define TD_F10 TD(5)
-#define TD_Q TD(6)
+#define TD_Q TD(4)
+#define TD_TERM TD(5)
 #else
 
 #define TD_LBRC KC_LBRC
 #define TD_RBRC KC_RBRC
 #define TD_QUOT KC_QUOT
 #define TD_TSKSWCH M(TSKSWCH)
-#define TD_F9  KC_F9
-#define TD_F10 KC_F10
 #define TD_Q KC_Q
+#define TD_TERM F_TERM
 #endif
 
 enum keymaps_layers {
@@ -81,19 +81,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {TD_Q,     KC_W,    KC_E,       KC_R,     KC_T,     KC_TRNS,  KC_Y,      KC_U,      KC_I,      KC_O,    KC_P    },
   {KC_A,     KC_S,    KC_D,       KC_F,     KC_G,     KC_TRNS,  KC_H,      KC_J,      KC_K,      KC_L,    KC_SCLN },
   {MT_Z,     KC_X,    KC_C,       KC_V,     KC_B,     KC_BSPC,  KC_N,      KC_M,      KC_COMM,   KC_DOT,  MT_SLSH },
-  {OSL_FNx,  MT_TAB,  TD_LBRC,    MT_ESC,   OSM_LCTL, KC_ENT,   KC_SPC,    KC_LGUI,   TD_RBRC,   TD_QUOT, OSL_NAV}
+  {OSL_FNx,  MT_TAB,  TD_TSKSWCH, MT_ESC,   OSM_LCTL, KC_ENT,   KC_SPC,    KC_LGUI,   KC_MINS,   TD_QUOT, OSL_NAV}
 },
+/*
+ *  !       @     up      {    }        ||     pgup    7     8     9    *
+ *  #     left   down   right  $        ||     pgdn    4     5     6    +
+ *  [       ]      (      )    &        ||       `     1     2     3    \
+ * FNx     tab  tskswch  esc  ctrl bksp || ent space  gui    .     0    =
+ */
+
 [FNx] = { /* [> FNx <] */
-  {KC_F1,    KC_F2,   KC_F3,      KC_F4,    KC_F5,    KC_TRNS,  KC_F6,     KC_F7,     KC_F8,     TD_F9,    TD_F10 },
-  {KC_1,     KC_2,    KC_3,       KC_4,     KC_5,     KC_TRNS,  KC_6,      KC_7,      KC_8,      KC_9,     KC_0},
-  {S(KC_1),  S(KC_2), S(KC_3),    S(KC_4),  S(KC_5),  KC_TRNS,  S(KC_6),   S(KC_7),   S(KC_8),   S(KC_9),  S(KC_0)},
-  {KC_TRNS,  KC_MINS, KC_BSLS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_GRV,    KC_EQUAL, KC_TRNS}
+  {KC_EXLM, KC_AT,   KC_UP,   KC_LCBR, KC_RCBR, KC_TRNS, KC_PGUP, KC_7,    KC_8,   KC_9, KC_ASTR},
+  {KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,  KC_TRNS, KC_PGDN, KC_4,    KC_5,   KC_6, KC_PLUS},
+  {MT_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_AMPR, KC_TRNS, KC_GRV,  KC_1,    KC_2,   KC_3, MT_BSLS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_DOT, KC_0, KC_EQL}
 },
+/*
+ * F1  F2  F3      F4  mute       ||     home    pgdn    pgup    end       prtsc
+ * F5  F6  F7      F8  volup      ||     left    down    up      right     insert 
+ * F9  F10 F11     F12 voldn      ||     CALC    WSCH    MAIL    BROWSER   reset
+ * FNx tab tskswch esc ctrl  delt || ent space    gui    term    mycm      NAV
+ */
 [NAV] = { /* [> NAV <] */
-  {KC_BTN1,  KC_MS_U, KC_BTN2,    KC_MUTE,  KC_VOLU,  KC_TRNS,  KC_NO,     KC_NO,     KC_INS,    KC_NO,    KC_PSCR},
-  {KC_MS_L,  KC_MS_D, KC_MS_R,    KC_NO,    KC_VOLD,  KC_TRNS,  KC_LEFT,   KC_DOWN,   KC_UP,     KC_RGHT,  KC_NO},
-  {KC_MYCM,  F_TERM,  KC_CALC,    KC_WSCH,  KC_MAIL,  KC_DELT,  F_BROWSER, M(EDITOR), KC_HOME,   KC_PGUP,  RESET},
-  {KC_TRNS,  KC_TRNS, TD_TSKSWCH, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_END,    KC_PGDN,  KC_TRNS}
+{KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_MUTE, KC_TRNS, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_PSCR},
+{KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_VOLU, KC_TRNS, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_INS},
+{KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_VOLD, KC_TRNS, KC_CALC, KC_WSCH, KC_MAIL, F_BROWSER, RESET},
+{KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TD_TERM, KC_MYCM, OSL_NAV}
 }};
 
 
@@ -163,9 +176,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
   [2] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_MINS),
   [3] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
-  [4] = ACTION_TAP_DANCE_DOUBLE(KC_F9, KC_F11),
-  [5] = ACTION_TAP_DANCE_DOUBLE(KC_F10, KC_F12),
-  [6] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
+  [4] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
+  [5] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
 };
 #endif
 
