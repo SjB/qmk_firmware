@@ -29,6 +29,14 @@
 #define F_LOCK LGUI(KC_L)
 #define F_MAX  LALT(KC_F10)  // Toggle maximazation state
 
+#define MT_TAB MT(MOD_RALT, KC_TAB)
+#define MT_ESC MT(MOD_LALT, KC_ESC)
+
+#define MT_Z MT(MOD_LSFT, KC_Z)
+#define MT_SLSH MT(MOD_LSFT, KC_SLSH)
+#define MT_LBRC MT(MOD_LSFT, KC_LBRC)
+#define MT_BSLS MT(MOD_LSFT, KC_BSLS)
+
 #ifdef USING_QK_FUNCTION
 
 #define OSL_NAV OSL(NAV)
@@ -73,6 +81,8 @@
 #define TD_TERM TD(9)
 #define TD_PGUP TD(10)
 #define TD_PGDN TD(11)
+#define TD_Q TD(12)
+#define TD_QUOT TD(13)
 
 #else
 
@@ -85,10 +95,13 @@
 #define TD_TAB  KC_TAB
 #define TD_TSKSWCH M(TSKSWCH)
 #define TD_LGUI KC_LGUI
-#define TD_ESC  KC_ESC
+#define TD_Q KC_Q
 #define TD_TERM F_TERM
 #define TD_PGUP KC_PGUP
 #define TD_PGDN KC_PGDN
+#define TD_ESC  KC_ESC
+#define TD_QUOT KC_QUOT
+
 
 #endif
 
@@ -137,20 +150,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,   KC_1,      KC_2,    KC_3,    KC_4,       KC_5,     TD_TERM,
-        MT_TAB,   KC_Q,      KC_W,    KC_E,    KC_R,       KC_T,     TD_BSLS,
-        OSM_LCTL, KC_A,      KC_S,    KC_D,    KC_F,       KC_G,
-        OSM_LSFT, KC_Z,      KC_X,    KC_C,    KC_V,       KC_B,     TD_LBRC,
-        OSL_FNx,  OSL_NUMPAD,TD_LEFT, KC_DOWN, OSM_LALT,
-                                                           KC_HOME,  KC_END,
-                                                                     OSM_HYPR,
-                                                OSM_LCTL,  KC_BSPC,  TD_ESC,
+        KC_ESC,   KC_1,      KC_2,       KC_3,    KC_4,       KC_5,     TD_TERM,
+        MT_TAB,   TD_Q,      KC_W,       KC_E,    KC_R,       KC_T,     TD_BSLS,
+        OSM_LCTL, KC_A,      KC_S,       KC_D,    KC_F,       KC_G,
+        OSM_LSFT, MT_Z,      KC_X,       KC_C,    KC_V,       KC_B,     TD_LBRC,
+        OSL_FNx,  MT_TAB,    TD_TSKSWCH, MT_ESC, OSM_LALT,
+                                                              KC_HOME,  KC_END,
+                                                                        OSM_HYPR,
+                                                   OSM_LCTL,  KC_BSPC,  TD_ESC,
         // right hand
         KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,      KC_J,       KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
-        TD_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    KC_SLSH,  OSM_RSFT,
-                             KC_LGUI,    KC_UP,     TD_RGHT,   OSL_FNx,  OSL_NAV,
+        TD_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    MT_SLSH,  OSM_RSFT,
+                             KC_LGUI,    KC_MINS,   TD_QUOT,   OSL_NAV,  OSL_NUMPAD,
         TD_PGUP,  TD_PGDN,
         OSM_MEH,
         TD_TSKSWCH,   KC_ENT,    KC_SPC
@@ -180,18 +193,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NAV] = KEYMAP(
        // left hand
        KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          KC_MUTE,
-       KC_TRNS,   KC_BTN1,  KC_MS_U,     KC_BTN2,   KC_NO,      KC_NO,          KC_VOLU,
-       KC_CAPS,   KC_MS_L,  KC_MS_D,     KC_MS_R,   KC_NO,      KC_NO,
-       KC_TRNS,   KC_NO,    KC_NO,       KC_NO,     KC_NO,      KC_NO,          KC_VOLD,
+       KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        KC_VOLU,
+       KC_CAPS,   KC_F5,    KC_F6,       KC_F7,     KC_F8,      KC_VOLU,
+       KC_TRNS,   KC_F9,    KC_F10,      KC_F11,    KC_F12,     KC_VOLD,        KC_VOLD,
        KC_TRNS,   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,
                                                                 KC_MPLY,        KC_MNXT,
                                                                                 KC_TRNS,
                                                     KC_TRNS,    KC_DELT,        KC_TRNS,
        // right hand
        KC_APP,    KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
-       DEBUG,     KC_NO,     KC_NO,      KC_INS,    KC_NO,      KC_PSCR,    KC_F12,
-                  KC_LEFT,   KC_UP,      KC_DOWN,   KC_RGHT,    KC_NO,      KC_NO,
-       M(KDBG),   KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  M(EDITOR),  KC_TRNS,
+       DEBUG,     KC_HOME,   KC_PGDN,    KC_PGUP,   KC_END,     KC_PSCR,    KC_F12,
+                  KC_LEFT,   KC_DOWN,    KC_UP,     KC_RGHT,    KC_INS,     KC_NO,
+       M(KDBG),   KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  RESET,      KC_TRNS,
                              KC_TRNS,    KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_PWR,    KC_SLEP,
        KC_TRNS,
@@ -229,7 +242,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                              KC_TRNS,
                                            KC_TRNS, KC_TRNS, KC_TRNS,
        // right hand
-       KC_TRNS, KC_TRNS, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, KC_NO,
+       RESET,   KC_TRNS, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, KC_NO,
        KC_NO,   KC_BSLS, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_DQT,
                 KC_ASTR, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, KC_QUOT,
        KC_NO,   KC_AMPR, KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_TRNS,
@@ -262,19 +275,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [FNx] = KEYMAP(
        // left hand
        M(VRSN),   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, RESET,
-       F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,   TD_BSLS,
-       KC_TRNS,   KC_1,     KC_2,        KC_3,      KC_4,       KC_5,    
-       KC_TRNS,   S(KC_1),  S(KC_2),     S(KC_3),   S(KC_4),    S(KC_5), KC_MINS,
+       F_MAX,     KC_EXLM,  KC_AT,       KC_UP,     KC_LCBR,    KC_RCBR, TD_BSLS,
+       KC_TRNS,   KC_HASH,  KC_LEFT,     KC_DOWN,   KC_RGHT,    KC_DLR,
+       KC_TRNS,   KC_LBRC,  KC_RBRC,     KC_LPRN,   KC_RPRN,    KC_AMPR, KC_MINS,
        KC_TRNS,   KC_TRNS,  KC_NO,       KC_TRNS,   KC_NO,
                                                                 KC_TRNS, KC_TRNS,
                                                                          KC_TRNS,
                                                     KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
-       RESET,     KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, M(CMD),
-       TD_GRV,    KC_F6,    KC_F7,       KC_F8,     KC_F9,      KC_F10,  KC_F11,
-                  KC_6,     KC_7,        KC_8,      KC_9,       KC_0,    KC_F12,
-       KC_EQUAL,  S(KC_6),  S(KC_7),     S(KC_8),   S(KC_9),    S(KC_0), KC_TRNS,
-                            KC_NO,       KC_TRNS,   KC_NO,      KC_TRNS, KC_TRNS,
+       KC_TRNS,   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,    KC_TRNS, M(CMD),
+       TD_GRV,    KC_PGUP,  KC_7,        KC_8,      KC_9,       KC_ASTR, KC_TRNS,
+                  KC_PGDN,  KC_4,        KC_5,      KC_6,       KC_PLUS, KC_TRNS,
+       KC_EQUAL,  KC_GRV,   KC_1,        KC_2,      KC_3,       MT_BSLS, KC_TRNS,
+                            KC_TRNS,     KC_DOT,    KC_0,       KC_EQL,  KC_TRNS,
        KC_TRNS,   KC_TRNS,
        KC_TRNS,
        KC_TRNS,   KC_TRNS,  KC_TRNS
@@ -448,6 +461,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [9] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
   [10] = ACTION_TAP_DANCE_LAYER_TAP(ADORE, KC_PGUP),
   [11] = ACTION_TAP_DANCE_LAYER_TAP(NORMAN, KC_PGDN),
+  [12] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
+  [13] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_MINS),
 };
 
 #endif
