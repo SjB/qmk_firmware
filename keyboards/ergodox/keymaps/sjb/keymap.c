@@ -173,10 +173,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NAV] = KEYMAP(
        // left hand
        RESET,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          KC_MUTE,
-       KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        KC_VOLU,
+       F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        KC_VOLU,
        KC_CAPS,   KC_F5,    KC_F6,       KC_F7,     KC_F8,      KC_VOLU,
        KC_TRNS,   KC_F9,    KC_F10,      KC_F11,    KC_F12,     KC_VOLD,        KC_VOLD,
-       KC_TRNS,   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,
+       KC_TRNS,   F_MAX,   KC_TRNS,     KC_TRNS,   KC_TRNS,
                                                                 KC_MPLY,        KC_MNXT,
                                                                                 KC_TRNS,
                                                     KC_TRNS,    KC_DELT,        KC_TRNS,
