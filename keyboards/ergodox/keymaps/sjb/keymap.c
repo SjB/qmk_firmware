@@ -37,7 +37,6 @@
 #define MT_LBRC MT(MOD_LSFT, KC_LBRC)
 #define MT_BSLS MT(MOD_LSFT, KC_BSLS)
 
-#ifdef USING_QK_FUNCTION
 
 #define OSL_NAV OSL(NAV)
 #define OSL_NUM OSL(NUMPAD)
@@ -49,19 +48,6 @@
 #define OSM_HYPR OSM(MOD_HYPR)
 #define MT_TAB MT(MOD_RALT, KC_TAB)
 
-#else
-
-#define OSL_NAV KC_FN0
-#define OSL_NUMPAD KC_FN1
-#define OSM_LSFT KC_FN3
-#define OSM_RSFT KC_FN3
-#define OSM_LCTL KC_FN5
-#define OSM_LALT KC_FN6
-#define OSM_MEH KC_FN7
-#define OSM_HYPR KC_FN8
-#define MT_TAB KC_FN9
-
-#endif
 
 #define F_BROWSER M(BROWSER)
 
@@ -335,21 +321,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,  KC_TRNS,   KC_TRNS
     ),
 };
-
-#ifndef USING_QK_FUNCTION
-const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_ONESHOT(NAV),
-  [1] = ACTION_LAYER_ONESHOT(NUMPAD),
-  [2] = ACTION_LAYER_ONESHOT(FNx),
-  [3] = ACTION_MODS_ONESHOT(MOD_LSFT),
-  [4] = ACTION_MODS_ONESHOT(MOD_RSFT),
-  [5] = ACTION_MODS_ONESHOT(MOD_LCTL),
-  [6] = ACTION_MODS_ONESHOT(MOD_LALT),
-  [7] = ACTION_MODS_ONESHOT(MOD_MEH),
-  [8] = ACTION_MODS_ONESHOT(MOD_HYPR),
-  [9] = ACTION_MODS_TAP_KEY(MOD_RALT, KC_TAB),
-};
-#endif
 
 #define TAP_CONSUMER_HID_CODE(code) \
   host_consumer_send(code);         \
