@@ -47,7 +47,8 @@
 #define OSM_MEH OSM(MOD_MEH)
 #define OSM_HYPR OSM(MOD_HYPR)
 #define MT_TAB MT(MOD_RALT, KC_TAB)
-
+#define TG_ADORE TG(ADORE)
+#define TG_NORMAN TG(NORMAN)
 
 #define F_BROWSER M(BROWSER)
 
@@ -63,10 +64,8 @@
 #define TD_LGUI TD(7)
 #define TD_ESC  TD(8)
 #define TD_TERM TD(9)
-#define TD_PGUP TD(10)
-#define TD_PGDN TD(11)
-#define TD_Q TD(12)
-#define TD_QUOT TD(13)
+#define TD_Q TD(10)
+#define TD_QUOT TD(11)
 
 #else
 
@@ -81,8 +80,6 @@
 #define TD_LGUI KC_LGUI
 #define TD_Q KC_Q
 #define TD_TERM F_TERM
-#define TD_PGUP KC_PGUP
-#define TD_PGDN KC_PGDN
 #define TD_ESC  KC_ESC
 #define TD_QUOT KC_QUOT
 
@@ -119,12 +116,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | NAV  |  TAB | SWCH |  ESC |  Alt |                                       | LGUI |   -  |   '  |  FNx | NUM  |
+ *   | NAV  |  TAB | SWCH |  ESC |  Alt |                                       | LGUI |   -  |   '  |  MEH | NUM  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | HYPR |       | MEH  |        |      |
+ *                                 |      |      | NRMN |       | ADORE|        |      |
  *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
  *                                 |      |      | Esc  |       | SWCH |        |      |
  *                                 `--------------------'       `----------------------'
@@ -139,16 +136,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         OSM_LSFT, MT_Z,      KC_X,       KC_C,    KC_V,       KC_B,     TD_LBRC,
         OSL_NAV,  MT_TAB,    TD_TSKSWCH, MT_ESC, OSM_LALT,
                                                               KC_HOME,  KC_END,
-                                                                        OSM_HYPR,
+                                                                        TG_NORMAN,
                                                    OSM_LCTL,  KC_BSPC,  TD_ESC,
         // right hand
         KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
         TD_GRV,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,      KC_J,       KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
         TD_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    MT_SLSH,  OSM_RSFT,
-        TD_PGUP,  TD_PGDN,
-        OSM_MEH,
                              KC_LGUI,    KC_MINS,   TD_QUOT,   OSM_MEH,  OSL_NUM,
+        KC_PGUP,  KC_PGDN,
+        TG_ADORE,
         TD_TSKSWCH,   KC_ENT,    KC_SPC
     ),
 /* Keymap 1: Motion Layer
@@ -244,12 +241,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   Q  |   '  |   ,  |   .  |      |           |      |   B  |   K  |   V  |   Y  |   J  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | FNx  | SWCH |
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | HYPR |       | MEH  |        |      |
+ *                                 |      |      |      |       |      |        |      |
  *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
  *                                 |      |      | LGUI |       | Esc  |        |      |
  *                                 `--------------------'       `----------------------'
@@ -288,12 +285,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   P  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | FNx  | LALT | LEFT |  UP  |  ~L1 |                                       | ~L2  | DOWN | RGHT | FNx  | SWCH |
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | HOME | END  |       | PGUP | PGDN |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | HYPR |       | MEH  |        |      |
+ *                                 |      |      |      |       |      |        |      |
  *                                 | LCTRL| BKSP |------|       |------|  ENTER | [ ]  |
  *                                 |      |      | LGUI |       | Esc  |        |      |
  *                                 `--------------------'       `----------------------'
@@ -386,10 +383,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [7] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
   [8] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LCTL, KC_ESC),
   [9] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
-  [10] = ACTION_TAP_DANCE_LAYER_TAP(ADORE, KC_PGUP),
-  [11] = ACTION_TAP_DANCE_LAYER_TAP(NORMAN, KC_PGDN),
-  [12] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
-  [13] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_MINS),
+  [10] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
+  [11] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_MINS),
 };
 
 #endif
