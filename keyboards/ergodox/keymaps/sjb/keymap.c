@@ -164,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ,-------------.       ,-------------.
  *                                        | MPLY | MNXT |       | Pwr  | Slp  |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      | Del  |      |       |      |      |      |
+ *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
@@ -172,14 +172,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Navigation
 [NAV] = KEYMAP(
        // left hand
-       RESET,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          KC_MUTE,
-       F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        KC_VOLU,
+       RESET,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          KC_TRNS,
+       F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        KC_TRNS,
        KC_CAPS,   KC_F5,    KC_F6,       KC_F7,     KC_F8,      KC_VOLU,
-       KC_TRNS,   KC_F9,    KC_F10,      KC_F11,    KC_F12,     KC_VOLD,        KC_VOLD,
-       KC_TRNS,   F_MAX,   KC_TRNS,     KC_TRNS,   KC_TRNS,
+       KC_TRNS,   KC_F9,    KC_F10,      KC_F11,    KC_F12,     KC_VOLD,        KC_TRNS,
+       KC_TRNS,   KC_TRNS,   KC_TRNS,     KC_TRNS,   KC_TRNS,
                                                                 KC_MPLY,        KC_MNXT,
                                                                                 KC_TRNS,
-                                                    KC_TRNS,    KC_DELT,        KC_TRNS,
+                                                    KC_TRNS,    KC_TRNS,        KC_TRNS,
        // right hand
        KC_APP,    KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
        DEBUG,     KC_HOME,   KC_PGDN,    KC_PGUP,   KC_END,     KC_PSCR,    KC_F12,
@@ -213,14 +213,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // Symbol and Numpad
 [NUMPAD] = KEYMAP(
-       KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-       KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_NO,
+       KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_MUTE,
+       KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_VOLU,
        KC_CAPS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
-       KC_TRNS, KC_GRV,  KC_BSLS, KC_PIPE, KC_LBRC, KC_RBRC, KC_NO,
-                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_GRV,  KC_BSLS, KC_PIPE, KC_LBRC, KC_RBRC, KC_VOLD,
+                KC_TRNS, F_MAX,   KC_TRNS, KC_TRNS, KC_TRNS,
                                                     KC_TRNS, KC_TRNS,
                                                              KC_TRNS,
-                                           KC_TRNS, KC_TRNS, KC_TRNS,
+                                           KC_TRNS, KC_DELT, KC_TRNS,
        // right hand
        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RESET,
        KC_NO,   KC_TILD, KC_7,    KC_8,    KC_9,    KC_ASTR, KC_DQT,
