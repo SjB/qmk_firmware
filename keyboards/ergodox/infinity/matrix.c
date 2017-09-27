@@ -26,7 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "matrix.h"
 #include "serial_link/system/serial_link.h"
 
-
 /*
  * Infinity ErgoDox Pinusage:
  * Column pins are input with internal pull-down. Row pins are output and strobe with high.

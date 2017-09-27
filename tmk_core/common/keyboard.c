@@ -168,6 +168,11 @@ void keyboard_task(void)
     matrix_row_t matrix_change = 0;
 
     matrix_scan();
+
+#ifdef SERIAL_LINK_ENABLE
+	serial_link_update();
+#endif
+
     for (uint8_t r = 0; r < MATRIX_ROWS; r++) {
         matrix_row = matrix_get_row(r);
         matrix_change = matrix_row ^ matrix_prev[r];
@@ -222,10 +227,6 @@ MATRIX_LOOP_END:
 
 #ifdef ADB_MOUSE_ENABLE
     adb_mouse_task();
-#endif
-
-#ifdef SERIAL_LINK_ENABLE
-	serial_link_update();
 #endif
 
 #ifdef VISUALIZER_ENABLE
