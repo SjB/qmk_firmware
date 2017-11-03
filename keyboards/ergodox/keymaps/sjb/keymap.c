@@ -54,37 +54,11 @@
 #define F_BROWSER M(BROWSER)
 
 #ifdef TAP_DANCE_ENABLE
-
-#define TD_LBRC TD(0)
-#define TD_RBRC TD(1)
-#define TD_BSLS TD(2)
-#define TD_GRV  TD(3)
-#define TD_RGHT TD(4)
-#define TD_LEFT TD(5)
-#define TD_TSKSWCH TD(6)
-#define TD_LGUI TD(7)
-#define TD_ESC  TD(8)
-#define TD_TERM TD(9)
-#define TD_Q TD(10)
-#define TD_QUOT TD(11)
-
+#define TD_TSKSWCH TD(0)
+#define TD_TERM TD(1)
 #else
-
-#define TD_LBRC KC_LBRC
-#define TD_RBRC KC_RBRC
-#define TD_BSLS KC_BSLS
-#define TD_GRV  KC_GRV
-#define TD_RGHT KC_RGHT
-#define TD_LEFT KC_LEFT
-#define TD_TAB  KC_TAB
 #define TD_TSKSWCH M(TSKSWCH)
-#define TD_LGUI KC_LGUI
-#define TD_Q KC_Q
 #define TD_TERM F_TERM
-#define TD_ESC  KC_ESC
-#define TD_QUOT KC_QUOT
-
-
 #endif
 
 enum keymaps_layers {
@@ -133,22 +107,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         TG_NUM,   KC_1,      KC_2,       KC_3,    KC_4,       KC_5,     TD_TERM,
-        KC_BSLS,  TD_Q,      KC_W,       KC_E,    KC_R,       KC_T,     MT_TAB,
+        KC_BSLS,  KC_Q,      KC_W,       KC_E,    KC_R,       KC_T,     MT_TAB,
         KC_GRV,   KC_A,      KC_S,       KC_D,    KC_F,       KC_G,
         OSM_LSFT, MT_Z,      KC_X,       KC_C,    KC_V,       KC_B,     KC_LBRC,
         OSL_NAV,  OSL_NUM,   TD_TSKSWCH, MT_TAB,  OSM_LCTL,
                                                               KC_HOME,  KC_END,
                                                                         TG_NORMAN,
-                                                   OSM_LALT,  KC_BSPC,  TD_ESC,
+                                                   OSM_LALT,  KC_BSPC,  KC_ESC,
         // right hand
         KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
-        TD_ESC,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
+        KC_ESC,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,      KC_J,       KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
         KC_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    MT_SLSH,  OSM_RSFT,
-                             OSM_LCTL,   KC_MINS,   TD_QUOT,   OSL_NUM,  OSL_NAV,
+                             OSM_LCTL,   KC_MINS,   KC_QUOT,   OSL_NUM,  OSL_NAV,
         KC_PGUP,  KC_PGDN,
         TG_ADORE,
-        TD_LGUI,  KC_ENT,    KC_SPC
+        KC_LGUI,  KC_ENT,    KC_SPC
     ),
 /* Keymap 1: Motion Layer
  *
@@ -178,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        KC_TRNS,
        KC_CAPS,   KC_F5,    KC_F6,       KC_F7,     KC_F8,      KC_VOLU,
        KC_TRNS,   KC_F9,    KC_F10,      KC_F11,    KC_F12,     KC_VOLD,        KC_TRNS,
-       KC_TRNS,   KC_TRNS,   KC_TRNS,     KC_TRNS,   KC_TRNS,
+       KC_TRNS,   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,
                                                                 KC_MPLY,        KC_MNXT,
                                                                                 KC_TRNS,
                                                     KC_TRNS,    KC_TRNS,        KC_TRNS,
@@ -373,22 +347,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 
 #ifdef TAP_DANCE_ENABLE
-
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [0] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
-  [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
-  [2] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_UNDS),
-  [3] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_MINS),
-  [4] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, LSS(KC_RGHT)),
-  [5] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, LSS(KC_LEFT)),
-  [6] = ACTION_TAP_DANCE_TSKSWCH(),  // switch application / switch windows (gnome)
-  [7] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
-  [8] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LCTL, KC_ESC),
-  [9] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
-  [10] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
-  [11] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_MINS),
+  [0] = ACTION_TAP_DANCE_TSKSWCH(),  // switch application / switch windows (gnome)
+  [1] = ACTION_TAP_DANCE_DOUBLE(F_TERM, F_LOCK),        // TAB / switch windows (gnome)
 };
-
 #endif
 
 // Runs just one time when the keyboard initializes.
