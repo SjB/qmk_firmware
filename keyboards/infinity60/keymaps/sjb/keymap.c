@@ -58,25 +58,9 @@
 #define F_BROWSER M(BROWSER)
 
 #ifdef TAP_DANCE_ENABLE
-
-#define TD_LBRC TD(0)
-#define TD_RBRC TD(1)
-#define TD_BSLS TD(2)
-#define TD_QUOT TD(3)
-#define TD_TSKSWCH TD(4)
-#define TD_LGUI TD(5)
-#define TD_ESC  TD(6)
+#define TD_TSKSWCH TD(0)
 #else
-
-#define TD_LBRC KC_LBRC
-#define TD_RBRC KC_RBRC
-#define TD_BSLS KC_BSLS
-#define TD_QUOT KC_QUOT
-#define TD_TAB  KC_TAB
 #define TD_TSKSWCH M(TSKSWCH)
-#define TD_LGUI KC_LGUI
-#define TD_ESC  KC_ESC
-
 #endif
 
 enum keymaps_layers {
@@ -98,11 +82,11 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = KEYMAP(
-      TD_ESC,    KC_1,     KC_2,     KC_3,    KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,      KC_MINS,   KC_EQL,    KC_BSPC,  KC_BSPC,  \
-      MT_TAB,    KC_Q,     KC_W,     KC_E,    KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,      TD_LBRC,   TD_RBRC,   TD_BSLS,  \
-      OSM_LCTL,  KC_A,     KC_S,     KC_D,    KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,   TD_QUOT,   KC_ENT,    \
-      OSM_LSFT,  KC_Z,     KC_X,    KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,   OSM_LSFT,  M(BESC),   \
-      OSL_FNx,   OSL_NAV,  OSM_LALT,                    MT_SPC,                                           TD_LGUI,   OSM_HYPR,  OSM_MEH,   TD_TSKSWCH \
+      KC_GRV,    KC_1,     KC_2,     KC_3,    KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,      KC_MINS,   KC_EQL,    KC_BSPC,  KC_BSPC,  \
+      MT_TAB,    KC_Q,     KC_W,     KC_E,    KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,      KC_LBRC,   KC_RBRC,   KC_BSLS,  \
+      KC_ESC,    KC_A,     KC_S,     KC_D,    KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,   KC_QUOT,   KC_ENT,       \
+      OSM_LSFT,  KC_Z,     KC_X,     KC_C,    KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,   OSM_LSFT,  TD_TSKSWCH,   \
+      KC_LGUI,   OSM_LALT, OSM_LCTL,                    KC_SPC,                                           OSM_LCTL,  OSM_LALT,  OSL_FNx, OSL_NAV     \
                      ),
   [FNx] = KEYMAP(
       RESET,    KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_MYCM,  F_TERM,   KC_CALC,  KC_WSCH,  KC_MAIL,   F_BROWSER, M(EDITOR), KC_DELT, KC_DELT,  \
@@ -130,7 +114,6 @@ const uint16_t PROGMEM fn_actions[] = {
   [5] = ACTION_MODS_ONESHOT(MOD_MEH),
   [6] = ACTION_MODS_ONESHOT(MOD_HYPR),
   [7] = ACTION_MODS_TAP_KEY(MOD_RALT, KC_TAB),
-  [8] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_SPC),
 };
 #endif
 
@@ -188,13 +171,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 #ifdef TAP_DANCE_ENABLE
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [0] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_LPRN),
-  [1] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_RPRN),
-  [2] = ACTION_TAP_DANCE_DOUBLE(KC_BSLS, KC_TILD),
-  [3] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_GRV),
-  [4] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
-  [5] = ACTION_TAP_DANCE_MOD_TAP_LOCK(MOD_LGUI | MOD_LSFT, KC_LGUI),
-  [6] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, F_LOCK),
+  [0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_tskswch_on_finished, td_tskswch_on_reset),  // switch application / switch windows (gnome)
 };
 #endif
 
