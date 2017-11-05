@@ -106,10 +106,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // MT_TAB
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        TG_NUM,   KC_1,      KC_2,       KC_3,    KC_4,       KC_5,     TD_TERM,
+        KC_NO,   KC_1,      KC_2,       KC_3,    KC_4,       KC_5,     TD_TERM,
         KC_BSLS,  KC_Q,      KC_W,       KC_E,    KC_R,       KC_T,     MT_TAB,
         KC_GRV,   KC_A,      KC_S,       KC_D,    KC_F,       KC_G,
-        OSM_LSFT, MT_Z,      KC_X,       KC_C,    KC_V,       KC_B,     KC_LBRC,
+        KC_LSPO, MT_Z,      KC_X,       KC_C,    KC_V,       KC_B,     KC_LBRC,
         OSL_NAV,  OSL_NUM,   TD_TSKSWCH, MT_TAB,  OSM_LCTL,
                                                               KC_HOME,  KC_END,
                                                                         TG_NORMAN,
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MYCM,  KC_6,      KC_7,       KC_8,      KC_9,      KC_0,     KC_MINS,
         KC_ESC,   KC_Y,      KC_U,       KC_I,      KC_O,      KC_P,     KC_EQL,
                   KC_H,      KC_J,       KC_K,      KC_L,      KC_SCLN,  KC_QUOT,
-        KC_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    MT_SLSH,  OSM_RSFT,
+        KC_RBRC,  KC_N,      KC_M,       KC_COMM,   KC_DOT,    MT_SLSH,  KC_RSPC,
                              OSM_LCTL,   KC_MINS,   KC_QUOT,   OSL_NUM,  OSL_NAV,
         KC_PGUP,  KC_PGDN,
         TG_ADORE,
@@ -148,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Navigation
 [NAV] = KEYMAP(
        // left hand
-       KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          RESET,
+       TG_NUM,    KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          RESET,
        F_MAX,     KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        KC_TRNS,
        KC_CAPS,   KC_F5,    KC_F6,       KC_F7,     KC_F8,      KC_VOLU,
        KC_TRNS,   KC_F9,    KC_F10,      KC_F11,    KC_F12,     KC_VOLD,        KC_TRNS,
@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // Symbol and Numpad
 [NUMPAD] = KEYMAP(
-       KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_MUTE,
+       TG_NUM,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_MUTE,
        KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_VOLU,
        KC_CAPS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
        KC_TRNS, KC_GRV,  KC_BSLS, KC_PIPE, KC_LBRC, KC_RBRC, KC_VOLD,
