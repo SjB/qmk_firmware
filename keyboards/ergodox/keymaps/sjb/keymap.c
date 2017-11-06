@@ -150,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        RESET,     KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
        DEBUG,     KC_HOME,   KC_PGDN,    KC_PGUP,   KC_END,     KC_PSCR,    KC_F12,
                   KC_LEFT,   KC_DOWN,    KC_UP,     KC_RGHT,    KC_INS,     KC_NO,
-       M(KDBG),   KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  KC_APP,     KC_TRNS,
+       M(KDBG),   KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  TD_TSKSWCH, KC_TRNS,
                              KC_TRNS,    KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_PWR,    KC_SLEP,
        KC_TRNS,
