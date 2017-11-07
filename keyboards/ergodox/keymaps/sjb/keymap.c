@@ -139,19 +139,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Navigation
 [NAV] = KEYMAP(
        // left hand
-       TG_NUM,    KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_F5,          RESET,
-       KC_TRNS,   KC_F1,    KC_F2,       KC_F3,     KC_F4,      KC_MUTE,        F_MAX,
-       KC_CAPS,   KC_F5,    KC_F6,       KC_F7,     KC_F8,      KC_VOLU,
-       KC_TRNS,   KC_F9,    KC_F10,      KC_F11,    KC_F12,     KC_VOLD,        KC_TRNS,
-       KC_TRNS,   KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS,
-                                                                KC_MPLY,        KC_MNXT,
-                                                                                KC_TRNS,
-                                                    KC_TRNS,    KC_TRNS,        KC_TRNS,
+       TG_NUM,    KC_F1,         KC_F2,       KC_F3,          KC_F4,          KC_F5,          RESET,
+       KC_TRNS,   KC_MS_BTN1,    KC_MS_UP,    KC_MS_BTN2,     KC_MS_BTN3,     KC_NO,          F_MAX,
+       KC_CAPS,   KC_MS_LEFT,    KC_MS_DOWN,  KC_MS_RIGHT,    KC_MS_WH_LEFT,  KC_MS_WH_UP,
+       KC_TRNS,   KC_VOLD,       KC_VOLU,     KC_MUTE,        KC_MS_WH_RIGHT, KC_MS_WH_DOWN,  KC_NO,
+       KC_TRNS,   KC_TRNS,       KC_TRNS,     KC_TRNS,        KC_TRNS,
+                                                                              KC_MPLY,        KC_MNXT,
+                                                                                              KC_TRNS,
+                                                              KC_TRNS,        KC_TRNS,        KC_TRNS,
        // right hand
        RESET,     KC_F6,     KC_F7,      KC_F8,     KC_F9,      KC_F10,     KC_F11,
        DEBUG,     KC_HOME,   KC_PGDN,    KC_PGUP,   KC_END,     KC_PSCR,    KC_F12,
                   KC_LEFT,   KC_DOWN,    KC_UP,     KC_RGHT,    KC_INS,     KC_NO,
-       OSM_RALT,  KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  TD_TSKSWCH, KC_TRNS,
+       KC_TRNS,   KC_CALC,   KC_WSCH,    KC_MAIL,   F_BROWSER,  TD_TSKSWCH, KC_TRNS,
                              KC_TRNS,    KC_TRNS,   KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_PWR,    KC_SLEP,
        KC_TRNS,
