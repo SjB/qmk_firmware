@@ -14,12 +14,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "sjb.h"
 
-//#define USE_MATRIX_I2C
+#ifdef COMBO_ENABLE
 
-/* Select hand configuration */
+const uint16_t PROGMEM combo_seq1[] = {LT_LW(KC_BSPC), KC_ESC, COMBO_END};
+const uint16_t PROGMEM combo_seq2[] = {KC_TAB, LT_LW(KC_SPC), COMBO_END};
 
-#define EE_HANDS
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(combo_seq1, TG(_LOWER)),
+    COMBO(combo_seq2, KC_CAPS)
+};
 
-#define USE_SERIAL_PD2
+#endif

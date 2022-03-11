@@ -6,14 +6,3 @@ for more options.
 */
 
 #define EE_HANDS
-
-#ifdef TAPPING_TERM
-    #undef TAPPING_TERM
-    #define TAPPING_TERM 190
-#endif
-
-#define PERMISSIVE_HOLD
-#define RETRO_TAPPPING
-#define IGNORE_MOD_TAP_INTERRUPT
-
-#define ONESHOT_TAP_TOGGLE 2

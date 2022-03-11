@@ -14,12 +14,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "sjb.h"
 
-//#define USE_MATRIX_I2C
+#ifdef ENCODER_ENABLE
 
-/* Select hand configuration */
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (index == 0) {
+        if (clockwise) {
+            tap_code(KC_VOLU);
+        } else {
+            tap_code(KC_VOLD);
+        }
+    } else if (index == 1) {
+        if (clockwise) {
+            tap_code(KC_PGDOWN);
+        } else {
+            tap_code(KC_PGUP);
+        }
+    }
+    return true;
+}
 
-#define EE_HANDS
-
-#define USE_SERIAL_PD2
+#endif
