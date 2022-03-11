@@ -19,10 +19,10 @@
 #ifdef COMBO_ENABLE
 
 const uint16_t PROGMEM combo_seq1[] = {LT_LW(KC_BSPC), KC_ESC, COMBO_END};
-const uint16_t PROGMEM combo_seq2[] = {KC_TAB, LT_LW(KC_SPC), COMBO_END};
+const uint16_t PROGMEM combo_seq2[] = {KC_ENT, LT_LW(KC_SPC), COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo_seq1, TG(_LOWER)),
+    COMBO(combo_seq1, TG(_NUMPAD)),
     COMBO(combo_seq2, KC_CAPS)
 };
 
