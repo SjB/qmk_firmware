@@ -21,6 +21,7 @@
 
 #define PERMISSIVE_HOLD
 #define RETRO_TAPPPING
+
 #define IGNORE_MOD_TAP_INTERRUPT
 
 // Mouse Settings: Smoothing out mouse movement on keypress
