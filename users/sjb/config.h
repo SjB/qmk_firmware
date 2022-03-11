@@ -16,8 +16,9 @@
 
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
-    #define TAPPING_TERM 190
 #endif
+#define TAPPING_TERM 190
+
 #define PERMISSIVE_HOLD
 #define RETRO_TAPPPING
 #define IGNORE_MOD_TAP_INTERRUPT
