@@ -9,7 +9,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LBRC      , LEFT_QW_ROW_3 , KC_MUTE, KC_MPLY , RIGHT_QW_ROW_3 , KC_RBRC    ,
 
     MO(_LOWER) , OSM(MOD_LCTL) , LEFT_PRIMARY_THUMB_CLUSTER ,
-    RIGHT_PRIMARY_THUMB_CLUSTER , OSM(MOD_LALT) ,  MO(_RAISE)
+    RIGHT_PRIMARY_THUMB_CLUSTER , OSM(MOD_RALT) ,  MO(_RAISE)
   ),
   [_LOWER] = LAYOUT_wrapper(
     _______    , LEFT_FUNC_ROW                       , RIGHT_FUNC_ROW   , _______   ,
