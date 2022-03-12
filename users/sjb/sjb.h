@@ -55,7 +55,7 @@
 #define MOUSE_ROW_3 KC_MUTE , KC_MPLY    , KC_MS_DOWN , KC_MPRV     , KC_MNXT
 
 #define TRANS_ROW _______, _______, _______, _______, _______
-#define NAV_VI_ROW KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, KC_NO
+#define NAV_VI_ROW KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO
 #define BLANK_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 
 #define FUNCPAD_ROW_1 KC_F12 , KC_F7 , KC_F8 , KC_F9 , KC_HOME
