@@ -13,8 +13,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_LOWER] = LAYOUT_wrapper(
     _______    , LEFT_FUNC_ROW                       , RIGHT_FUNC_ROW   , _______   ,
-    KC_PGUP    , LEFT_SYMBOL_ROW                     , RIGHT_SYMBOL_ROW , KC_MINS   ,
-    KC_PGDN    , LEFT_NUM_ROW                        , RIGHT_NUM_ROW    , S(KC_EQL) ,
+    KC_BSLS    , LEFT_SYMBOL_ROW                     , RIGHT_SYMBOL_ROW , KC_MINS   ,
+    KC_GRV     , LEFT_NUM_ROW                        , RIGHT_NUM_ROW    , S(KC_EQL) ,
     TO(_RAISE) , LEFT_FUNC_ROW   , _______ , _______ , RIGHT_FUNC_ROW   , KC_EQL    ,
 
     _______ , _______ , LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
@@ -22,8 +22,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_RAISE] = LAYOUT_wrapper(
     _______    , LEFT_NUM_ROW                    , RIGHT_NUM_ROW , _______ ,
-    KC_PGUP    , MOUSE_ROW_1                     , BLANK_ROW     , KC_NO   ,
-    KC_PGDN    , MOUSE_ROW_2                     , NAV_VI_ROW    , KC_NO   ,
+    KC_WH_L    , MOUSE_ROW_1                     , BLANK_ROW     , KC_PGUP ,
+    KC_WH_R    , MOUSE_ROW_2                     , NAV_VI_ROW    , KC_PGDN   ,
     TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , BLANK_ROW     , KC_NO   ,
 
     _______, _______, LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY),

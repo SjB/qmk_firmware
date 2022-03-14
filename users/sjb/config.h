@@ -19,8 +19,8 @@
 #endif
 #define TAPPING_TERM 190
 
-#define PERMISSIVE_HOLD
-#define RETRO_TAPPPING
+//#define PERMISSIVE_HOLD
+//#define RETRO_TAPPPING
 
 #define IGNORE_MOD_TAP_INTERRUPT
 
@@ -36,9 +36,7 @@
 
 #ifdef COMBO_ENABLE
     #undef COMBO_COUNT
-    #undef COMBO_TERM
-    #define COMBO_COUNT 2
-    #define COMBO_TERM 60
+    #define COMBO_COUNT 3
 #endif
 
 #define ONESHOT_TAP_TOGGLE 2

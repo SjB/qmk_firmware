@@ -50,9 +50,9 @@
 #define NUMPAD_ROW_2 KC_PCMM, KC_4, KC_5, KC_6, KC_PMNS
 #define NUMPAD_ROW_3 KC_DOT, KC_1, KC_2, KC_3, KC_PPLS
 
-#define MOUSE_ROW_1 KC_VOLU , KC_MS_BTN1 , KC_MS_BTN3 , KC_MS_BTN2  , KC_MS_BTN7
-#define MOUSE_ROW_2 KC_VOLD , KC_MS_LEFT , KC_MS_UP   , KC_MS_RIGHT , KC_MS_BTN8
-#define MOUSE_ROW_3 KC_MUTE , KC_MPLY    , KC_MS_DOWN , KC_MPRV     , KC_MNXT
+#define MOUSE_ROW_1 KC_VOLU , KC_MS_BTN1 , KC_MS_U    , KC_MS_BTN2 , KC_MPRV
+#define MOUSE_ROW_2 KC_VOLD , KC_MS_L    , KC_MS_D    , KC_MS_R    , KC_MNXT
+#define MOUSE_ROW_3 KC_MUTE , KC_WH_D    , KC_MS_BTN3 , KC_WH_U    , KC_MPLY
 
 #define TRANS_ROW _______, _______, _______, _______, _______
 #define NAV_VI_ROW KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO

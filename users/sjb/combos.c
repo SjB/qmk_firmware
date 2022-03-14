@@ -20,10 +20,13 @@
 
 const uint16_t PROGMEM combo_seq1[] = {LT_LW(KC_BSPC), KC_ESC, COMBO_END};
 const uint16_t PROGMEM combo_seq2[] = {KC_ENT, LT_LW(KC_SPC), COMBO_END};
+const uint16_t PROGMEM combo_seq3[] = {LT_LW(KC_BSPC), LT_LW(KC_SPC), COMBO_END};
+
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_seq1, TG(_NUMPAD)),
-    COMBO(combo_seq2, KC_CAPS)
+    COMBO(combo_seq2, KC_CAPS),
+    COMBO(combo_seq3, TG(_RAISE))
 };
 
 #endif
