@@ -12,10 +12,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RIGHT_PRIMARY_THUMB_CLUSTER , OSM(MOD_RALT) ,  MO(_RAISE)
   ),
   [_LOWER] = LAYOUT_wrapper(
-    _______    , LEFT_FUNC_ROW                       , RIGHT_FUNC_ROW   , _______   ,
-    KC_BSLS    , LEFT_SYMBOL_ROW                     , RIGHT_SYMBOL_ROW , KC_MINS   ,
-    KC_GRV     , LEFT_NUM_ROW                        , RIGHT_NUM_ROW    , S(KC_EQL) ,
-    TO(_RAISE) , LEFT_FUNC_ROW   , _______ , _______ , RIGHT_FUNC_ROW   , KC_EQL    ,
+    _______    , LEFT_FUNC_ROW                         , RIGHT_FUNC_ROW      , _______   ,
+    KC_BSLS    , LEFT_SYMBOL_ROW_1                     , RIGHT_SYMBOL_ROW_1  , KC_MINS   ,
+    KC_GRV     , LEFT_NUM_ROW                          , RIGHT_NUM_ROW       , S(KC_EQL) ,
+    TO(_RAISE) , LEFT_SYMBOL_ROW_2 , _______ , _______ , RIGHT_SYMBOL_ROW_2  , KC_EQL    ,
 
     _______ , _______ , LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     RIGHT_TRANSPARENT_THUMB_CLUSTER , _______ , _______
