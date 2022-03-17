@@ -37,9 +37,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) , RIGHT_TRANSPARENT_THUMB_CLUSTER
   ),
   [_RAISE] = LAYOUT_wrapper(
-    KC_WH_L    , MOUSE_ROW_1                  , RGB_TOG , RGB_HUI , RGB_SAI , RGB_VAI , KC_NO , KC_PGUP ,
-    KC_WH_R    , MOUSE_ROW_2                  , NAV_VI_ROW                                    , KC_PGDN ,
-    TO(_LOWER) , MOUSE_ROW_3                  , RGB_MOD , RGB_HUD , RGB_SAD , RGB_VAD , KC_NO, KC_NO ,
+    KC_WH_L    , MOUSE_ROW_1                  , RGB_TOG , RGB_HUI , RGB_SAI , RGB_VAI , RGB_M_P , KC_PGUP ,
+    KC_WH_R    , MOUSE_ROW_2                  , NAV_VI_ROW                                      , KC_PGDN ,
+    TO(_LOWER) , MOUSE_ROW_3                  , RGB_MOD , RGB_HUD , RGB_SAD , RGB_VAD , RGB_M_G , KC_NO ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) , RIGHT_TRANSPARENT_THUMB_CLUSTER
   ),
