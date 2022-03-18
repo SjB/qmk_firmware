@@ -20,8 +20,8 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
-    KC_BSLS , LEFT_QW_ROW_1 , MO(_NUMPAD)   , LCAG(KC_B)  , RIGHT_QW_ROW_1 , KC_MINS ,
-    KC_GRV  , LEFT_QW_ROW_2 , MO(_LOWER)    , MO(_RAISE)  , RIGHT_QW_ROW_2 , KC_QUOT ,
+    KC_BSLS , LEFT_QW_ROW_1 , MO(_NUMPAD)   , LAG(KC_B)  , RIGHT_QW_ROW_1 , KC_MINS ,
+    KC_GRV  , LEFT_QW_ROW_2 , MO(_LOWER)    , MO(_RAISE) , RIGHT_QW_ROW_2 , KC_QUOT ,
     KC_LBRC , LEFT_QW_ROW_3 , OSM(MOD_LGUI) , LGUI(KC_T) , RIGHT_QW_ROW_3 , KC_RBRC ,
 
       OSM(MOD_LCTL) , LEFT_PRIMARY_THUMB_CLUSTER ,
@@ -36,17 +36,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       RIGHT_TRANSPARENT_THUMB_CLUSTER, _______
     ),
     [_RAISE] = LAYOUT_wrapper(
-      KC_WH_L    , MOUSE_ROW_1 , _______ , _______ , BLANK_ROW  , KC_PGUP ,
-      KC_WH_R    , MOUSE_ROW_2 , _______ , _______ , NAV_VI_ROW , KC_PGDN ,
-      TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , BLANK_ROW  , KC_NO ,
+      KC_NO      , MOUSE_ROW_1 , _______ , _______ , NAV_ROW_1 , KC_NO ,
+      KC_NO      , MOUSE_ROW_2 , _______ , _______ , NAV_ROW_2 , KC_NO ,
+      TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , NAV_ROW_3 , KC_NO ,
 
       _______, LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY),
       RIGHT_TRANSPARENT_THUMB_CLUSTER, _______
     ),
     [_NUMPAD] = LAYOUT_wrapper(
-      KC_PGUP    , FUNCPAD_ROW_1 , _______ , _______ , NUMPAD_ROW_1 , KC_DEL  ,
-      KC_PGDN    , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , KC_INS ,
-      S(KC_PSCR) , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , KC_PEQL ,
+      KC_SLEP , FUNCPAD_ROW_1 , _______ , _______ , NUMPAD_ROW_1 , KC_DEL  ,
+      KC_NO   , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , KC_INS  ,
+      KC_NO   , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , KC_PEQL ,
 
       _______, LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY),
       RIGHT_TRANSPARENT_THUMB_CLUSTER, _______

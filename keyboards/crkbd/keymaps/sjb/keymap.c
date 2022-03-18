@@ -37,16 +37,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) , RIGHT_TRANSPARENT_THUMB_CLUSTER
   ),
   [_RAISE] = LAYOUT_wrapper(
-    KC_WH_L    , MOUSE_ROW_1                  , RGB_TOG , RGB_HUI , RGB_SAI , RGB_VAI , RGB_M_P , KC_PGUP ,
-    KC_WH_R    , MOUSE_ROW_2                  , NAV_VI_ROW                                      , KC_PGDN ,
-    TO(_LOWER) , MOUSE_ROW_3                  , RGB_MOD , RGB_HUD , RGB_SAD , RGB_VAD , RGB_M_G , KC_NO ,
+    RGB_TOG    , MOUSE_ROW_1                , NAV_ROW_1 , RGB_HUI ,
+    RGB_MOD    , MOUSE_ROW_2                , NAV_ROW_2 , RGB_SAI ,
+    TO(_LOWER) , MOUSE_ROW_3                , NAV_ROW_3 , RGB_VAI ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) , RIGHT_TRANSPARENT_THUMB_CLUSTER
   ),
   [_NUMPAD] = LAYOUT_wrapper(
-    KC_PGUP    , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , KC_DEL  ,
-    KC_PGDN    , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_P0   ,
-    S(KC_PSCR) , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , KC_PEQL ,
+    KC_SLEP , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , KC_DEL  ,
+    KC_NO   , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_P0   ,
+    KC_NO   , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , KC_PEQL ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) , RIGHT_TRANSPARENT_THUMB_CLUSTER
   )

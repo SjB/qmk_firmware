@@ -22,18 +22,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_RAISE] = LAYOUT_wrapper(
     _______    , LEFT_NUM_ROW                    , RIGHT_NUM_ROW , _______ ,
-    KC_WH_L    , MOUSE_ROW_1                     , BLANK_ROW     , KC_PGUP ,
-    KC_WH_R    , MOUSE_ROW_2                     , NAV_VI_ROW    , KC_PGDN   ,
-    TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , BLANK_ROW     , KC_NO   ,
+    KC_NO      , MOUSE_ROW_1                     , NAV_ROW_1     , KC_NO   ,
+    KC_NO      , MOUSE_ROW_2                     , NAV_ROW_2     , KC_NO   ,
+    TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , NAV_ROW_3     , KC_NO   ,
 
     _______, _______, LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY),
     RIGHT_TRANSPARENT_THUMB_CLUSTER, _______, _______
   ),
   [_NUMPAD] = LAYOUT_wrapper(
-    _______    , BLANK_ROW                        , BLANK_ROW    , _______ ,
-    KC_PGUP    , FUNCPAD_ROW_1                    , NUMPAD_ROW_1 , KC_DEL  ,
-    KC_PGDN    , FUNCPAD_ROW_2                    , NUMPAD_ROW_2 , KC_INS  ,
-    S(KC_PSCR) , FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 , KC_PEQL ,
+    _______ , BLANK_ROW                        , BLANK_ROW    , _______ ,
+    KC_SLEP , FUNCPAD_ROW_1                    , NUMPAD_ROW_1 , KC_DEL  ,
+    KC_NO   , FUNCPAD_ROW_2                    , NUMPAD_ROW_2 , KC_INS  ,
+    KC_NO   , FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 , KC_PEQL ,
 
     _______ , _______ , LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     RIGHT_TRANSPARENT_THUMB_CLUSTER , _______ , _______
