@@ -22,7 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
  [_QWERTY] = LAYOUT_wrapper(
     KC_BSLS      , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , KC_MINS    ,
     KC_GRV       , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , KC_QUOT    ,
@@ -30,9 +29,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LEFT_PRIMARY_THUMB_CLUSTER              , RIGHT_PRIMARY_THUMB_CLUSTER
   ),
   [_LOWER] = LAYOUT_wrapper(
-    KC_BSLS    , LEFT_SYMBOL_ROW            , RIGHT_SYMBOL_ROW , KC_MINS   ,
-    KC_GRV     , LEFT_NUM_ROW               , RIGHT_NUM_ROW    , S(KC_EQL) ,
-    TO(_RAISE) , LEFT_FUNC_ROW              , RIGHT_FUNC_ROW   , KC_EQL    ,
+    KC_BSLS , LEFT_SYMBOL_ROW_1          , RIGHT_SYMBOL_ROW_1 , KC_MINS   ,
+    KC_GRV  , LEFT_NUM_ROW               , RIGHT_NUM_ROW      , S(KC_EQL) ,
+    KC_LBRC , LEFT_SYMBOL_ROW_2          , RIGHT_SYMBOL_ROW_2 , KC_RBRC   ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) , RIGHT_TRANSPARENT_THUMB_CLUSTER
   ),
@@ -60,14 +59,9 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-#define L_BASE 0
-#define L_LOWER 2
-#define L_RAISE 4
-#define L_ADJUST 8
-
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
-    switch (layer_state) {
+    switch (get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write_ln_P(PSTR("Qwerty"), false);
             break;
@@ -77,10 +71,16 @@ void oled_render_layer_state(void) {
         case _RAISE:
             oled_write_ln_P(PSTR("Raise"), false);
             break;
-    case _NUMPAD:
+        case _NUMPAD:
             oled_write_ln_P(PSTR("Numpad"), false);
             break;
     }
+
+    led_t led_state = host_keyboard_led_state();
+    oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
+    oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
+    oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
+    oled_write_ln_P(PSTR(""), false);
 }
 
 
