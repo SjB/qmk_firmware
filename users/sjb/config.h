@@ -37,7 +37,7 @@
 
 #ifdef COMBO_ENABLE
     #undef COMBO_COUNT
-    #define COMBO_COUNT 3
+    #define COMBO_COUNT 4
 #endif
 
 #define ONESHOT_TAP_TOGGLE 2
