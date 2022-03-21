@@ -74,6 +74,8 @@
 #define RIGHT_PRIMARY_THUMB_CLUSTER KC_ENT , LT_LW(KC_SPC)  , OSM(MOD_LSFT)
 
 #define LEFT_TRANSPARENT_THUMB_CLUSTER(LAYER) _______, _______, TO(LAYER)
-#define RIGHT_TRANSPARENT_THUMB_CLUSTER _______, _______, _______
+#define RIGHT_TRANSPARENT_THUMB_CLUSTER(LAYER) _______, _______, LAYER
+
+#define TRANSPARENT_THUMB_CLUSTER _______, _______, _______
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
