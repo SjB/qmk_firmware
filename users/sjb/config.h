@@ -35,9 +35,6 @@
 #define MOUSEKEY_MAX_SPEED 7
 #define MOUSEKEY_WHEEL_DELAY 0
 
-#ifdef COMBO_ENABLE
-    #undef COMBO_COUNT
-    #define COMBO_COUNT 4
-#endif
+#define COMBO_COUNT 4
 
 #define ONESHOT_TAP_TOGGLE 2

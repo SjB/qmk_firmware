@@ -5,5 +5,6 @@ COMBO_ENABLE = yes
 
 LTO_ENABLE = yes
 
-SRC += combos.c \
-		encoder.c
+SRC += sjb.c \
+	   combos.c \
+	   encoder.c
