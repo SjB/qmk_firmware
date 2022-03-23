@@ -23,16 +23,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT_wrapper(
-    KC_BSLS      , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , KC_MINS    ,
-    KC_GRV       , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , KC_QUOT    ,
-    KC_LBRC      , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , KC_RBRC    ,
+    KC_GRV  , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , KC_MINS    ,
+    KC_BSLS , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , KC_QUOT    ,
+    KC_LBRC , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , KC_RBRC    ,
+
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
   ),
   [_LOWER] = LAYOUT_wrapper(
-    KC_BSLS , LEFT_SYMBOL_ROW_1          , RIGHT_SYMBOL_ROW_1 , KC_MINS   ,
-    KC_GRV  , LEFT_NUM_ROW               , RIGHT_NUM_ROW      , S(KC_EQL) ,
-    KC_LBRC , LEFT_SYMBOL_ROW_2          , RIGHT_SYMBOL_ROW_2 , KC_RBRC   ,
+    S(KC_GRV)  , LEFT_SYMBOL_ROW_1          , RIGHT_SYMBOL_ROW_1 , KC_COMM    ,
+    S(KC_BSLS) , LEFT_NUM_ROW               , RIGHT_NUM_ROW      , KC_DOT     ,
+    S(KC_LBRC) , LEFT_SYMBOL_ROW_2          , RIGHT_SYMBOL_ROW_2 , S(KC_RBRC) ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT))
@@ -47,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NUMPAD] = LAYOUT_wrapper(
     KC_SLEP , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , KC_DEL  ,
-    KC_NO   , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_P0   ,
+    KC_NO   , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_INS  ,
     KC_NO   , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , KC_PEQL ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
