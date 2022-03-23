@@ -20,8 +20,8 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
-      KC_BSLS , LEFT_QW_ROW_1 , MO(_NUMPAD)   , LAG(KC_B)  , RIGHT_QW_ROW_1 , KC_MINS ,
-      KC_GRV  , LEFT_QW_ROW_2 , MO(_LOWER)    , MO(_RAISE) , RIGHT_QW_ROW_2 , KC_QUOT ,
+      KC_GRV  , LEFT_QW_ROW_1 , MO(_NUMPAD)   , LAG(KC_B)  , RIGHT_QW_ROW_1 , KC_MINS ,
+      KC_BSLS , LEFT_QW_ROW_2 , MO(_LOWER)    , MO(_RAISE) , RIGHT_QW_ROW_2 , KC_QUOT ,
       KC_LBRC , LEFT_QW_ROW_3 , OSM(MOD_LGUI) , LGUI(KC_T) , RIGHT_QW_ROW_3 , KC_RBRC ,
 
       OSM(MOD_LCTL) ,
@@ -30,8 +30,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       OSM(MOD_RALT)
     ),
     [_LOWER] = LAYOUT_wrapper(
-      KC_BSLS    , LEFT_SYMBOL_ROW_1 , _______ , _______ , RIGHT_SYMBOL_ROW_1 , KC_MINS    ,
-      KC_GRV     , LEFT_NUM_ROW      , _______ , _______ , RIGHT_NUM_ROW      , S(KC_EQL)  ,
+      S(KC_GRV)  , LEFT_SYMBOL_ROW_1 , _______ , _______ , RIGHT_SYMBOL_ROW_1 , KC_COMM    ,
+      S(KC_BSLS) , LEFT_NUM_ROW      , _______ , _______ , RIGHT_NUM_ROW      , KC_DOT     ,
       S(KC_LBRC) , LEFT_SYMBOL_ROW_2 , _______ , _______ , RIGHT_SYMBOL_ROW_2 , S(KC_RBRC) ,
 
       _______ ,
