@@ -40,9 +40,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______
     ),
     [_RAISE] = LAYOUT_wrapper(
-      KC_NO      , MOUSE_ROW_1 , _______ , _______ , NAV_ROW_1 , KC_NO ,
-      KC_NO      , MOUSE_ROW_2 , _______ , _______ , NAV_ROW_2 , KC_NO ,
-      TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , NAV_ROW_3 , KC_NO ,
+      RGB_TOG , MOUSE_ROW_1 , _______ , _______ , NAV_ROW_1 , RGB_HUI ,
+      RGB_MOD , MOUSE_ROW_2 , _______ , _______ , NAV_ROW_2 , RGB_SAI ,
+      TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , NAV_ROW_3 , RGB_VAI ,
 
       _______ ,
       LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
@@ -60,3 +60,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______
     )
 };
+
+#ifdef RGBLIGHT_LAYERS
+
+#define _NLAYERS 4
+const rgblight_segment_t PROGMEM ll_0[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_PURPLE} );
+const rgblight_segment_t PROGMEM ll_1[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_BLUE} );
+const rgblight_segment_t PROGMEM ll_2[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_CYAN} );
+const rgblight_segment_t PROGMEM ll_3[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_GREEN} );
+
+const rgblight_segment_t* const PROGMEM ll_layers[] = RGBLIGHT_LAYERS_LIST(
+    ll_0,ll_1,ll_2,ll_3
+);
+
+layer_state_t layer_state_set_keymap(layer_state_t state) {
+    for (uint8_t i=0 ; i < _NLAYERS; i++)
+        rgblight_set_layer_state(i, layer_state_cmp(state, i));
+
+    return state;
+}
+#endif
+
+void keyboard_post_init_user(void) {
+
+#ifdef RGBLIGHT_LAYERS
+    rgblight_layers = ll_layers;
+    rgblight_set_layer_state(0, 1);
+#endif
+
+}
