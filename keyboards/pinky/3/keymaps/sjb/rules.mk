@@ -8,5 +8,3 @@ RGBLIGHT_SUPPORTED = yes
 RGB_MATRIX_SUPPORTED = yes
 
 RGBLIGHT_ENABLE = yes    # Enable WS2812 RGB underlight.
-
-#LTO_ENABLE      = yes

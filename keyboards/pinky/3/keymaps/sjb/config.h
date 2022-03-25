@@ -29,6 +29,12 @@
 #    define RGBLED_NUM 4
 #    define RGBLED_SPLIT { 2, 2 }
 #    define RGBLIGHT_SPLIT
+#    define RGBLIGHT_LAYERS
+#    define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
+#    define RGBLIGHT_LIMIT_VAL 100 // LED Brightness, high power draw may exceed the USB limitations of 0.6A and cause a crash.
+#    define RGBLIGHT_SLEEP //Turn off LEDs when computer sleeping (+72)
+#    define RGBLIGHT_LAYER_BLINK
+
 //#    define RGBLIGHT_EFFECT_BREATHING
 #    define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -37,14 +43,8 @@
 //#    define RGBLIGHT_EFFECT_CHRISTMAS
 //#    define RGBLIGHT_EFFECT_STATIC_GRADIENT
 #    define RGBLIGHT_EFFECT_TWINKLE
-//#define RGBLIGHT_EFFECT_RGB_TEST
-//#define RGBLIGHT_LAYERS
-#    define RGBLIGHT_LIMIT_VAL 100 // LED Brightness, high power draw may exceed the USB limitations of 0.6A and cause a crash.
-#    define RGBLIGHT_HUE_STEP  10
-#    define RGBLIGHT_SAT_STEP  17
-#    define RGBLIGHT_VAL_STEP  17
-//#    define RGBLIGHT_LAYERS //Enable layer light indicators. Not required as updates are done in layer_state_set_user and led_update_user (+588).
-#    define RGBLIGHT_SLEEP //Turn off LEDs when computer sleeping (+72)
+//#    define RGBLIGHT_EFFECT_RGB_TEST
+
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
