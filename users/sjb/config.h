@@ -37,3 +37,5 @@
 #define COMBO_COUNT 4
 
 #define ONESHOT_TAP_TOGGLE 2
+
+#define FORCE_NKRO

@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NUMPAD] = LAYOUT_wrapper(
     KC_SLEP , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , KC_DEL  ,
-    KC_NO   , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_INS  ,
+    NK_TOGG , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_INS  ,
     KC_NO   , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , KC_PEQL ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
