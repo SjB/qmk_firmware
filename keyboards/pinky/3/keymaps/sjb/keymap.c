@@ -64,14 +64,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef RGBLIGHT_LAYERS
 
 #define _NLAYERS 4
-const rgblight_segment_t PROGMEM ll_0[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_PURPLE} );
-const rgblight_segment_t PROGMEM ll_1[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_BLUE} );
-const rgblight_segment_t PROGMEM ll_2[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_CYAN} );
-const rgblight_segment_t PROGMEM ll_3[] = RGBLIGHT_LAYER_SEGMENTS( {0,4,HSV_GREEN} );
+const rgblight_segment_t PROGMEM ll_0[] = RGBLIGHT_LAYER_SEGMENTS({0,1,HSV_PURPLE},
+                                                                  {2,1,HSV_PURPLE});
+const rgblight_segment_t PROGMEM ll_1[] = RGBLIGHT_LAYER_SEGMENTS( {0,1,HSV_BLUE},
+                                                                   {2,1,HSV_BLUE});
+const rgblight_segment_t PROGMEM ll_2[] = RGBLIGHT_LAYER_SEGMENTS( {0,1,HSV_CYAN},
+                                                                   {2,1,HSV_CYAN});
+const rgblight_segment_t PROGMEM ll_3[] = RGBLIGHT_LAYER_SEGMENTS( {0,1,HSV_GREEN},
+                                                                   {2,1,HSV_GREEN});
+const rgblight_segment_t PROGMEM ll_4[] = RGBLIGHT_LAYER_SEGMENTS({1, 1, HSV_RED},
+                                                                  {3, 1, HSV_RED});
+const rgblight_segment_t PROGMEM ll_5[] = RGBLIGHT_LAYER_SEGMENTS({1, 1, HSV_YELLOW},
+                                                                  {3, 1, HSV_YELLOW});
 
-const rgblight_segment_t* const PROGMEM ll_layers[] = RGBLIGHT_LAYERS_LIST(
-    ll_0,ll_1,ll_2,ll_3
-);
+const rgblight_segment_t* const PROGMEM ll_layers[] =
+    RGBLIGHT_LAYERS_LIST(ll_0,ll_1,ll_2,ll_3, ll_4, ll_5);
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
     for (uint8_t i=0 ; i < _NLAYERS; i++)
@@ -79,6 +86,17 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
 
     return state;
 }
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+    case NK_TOGG:
+    case NK_ON:
+    case NK_OFF:
+        rgblight_blink_layer_repeat(keymap_config.nkro ? 5 : 4, 500, 5);
+        break;
+    }
+}
+
 #endif
 
 void keyboard_post_init_user(void) {
