@@ -33,11 +33,11 @@
 #define RIGHT_NUM_ROW  KC_6 , KC_7, KC_8, KC_9, KC_0
 
 #define LEFT_QW_ROW_1  KC_Q , KC_W , KC_E , KC_R , KC_T
-#define LEFT_QW_ROW_2  GUI_T(KC_A) , ALT_T(KC_S) , SFT_T(KC_D) , CTL_T(KC_F) , LT_RS(KC_G)
+#define LEFT_QW_ROW_2  LGUI_T(KC_A) , LALT_T(KC_S) , LSFT_T(KC_D) , LCTL_T(KC_F) , LT_RS(KC_G)
 #define LEFT_QW_ROW_3  KC_Z , KC_X , KC_C , KC_V , KC_B
 
 #define RIGHT_QW_ROW_1 KC_Y , KC_U , KC_I , KC_O , KC_P
-#define RIGHT_QW_ROW_2 LT_RS(KC_H) , CTL_T(KC_J) , SFT_T(KC_K) , ALT_T(KC_L) , GUI_T(KC_SCLN)
+#define RIGHT_QW_ROW_2 LT_RS(KC_H) , CTL_T(KC_J) , RSFT_T(KC_K) , RALT_T(KC_L) , RGUI_T(KC_SCLN)
 #define RIGHT_QW_ROW_3 KC_N , KC_M , KC_COMM , KC_DOT , KC_SLSH
 
 #define LEFT_FUNC_ROW  KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5
