@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #define _NLAYERS 4
 #define INDICATOR_LEFT_LED 0
-#define INDICATOR_RIGHT_LED 7
+#define INDICATOR_RIGHT_LED 36
 
 const rgblight_segment_t PROGMEM ll_0[] = RGBLIGHT_LAYER_SEGMENTS({INDICATOR_LEFT_LED  , 1 , HSV_PURPLE},
                                                                   {INDICATOR_RIGHT_LED , 1 , HSV_PURPLE});
@@ -56,10 +56,10 @@ const rgblight_segment_t PROGMEM ll_2[] = RGBLIGHT_LAYER_SEGMENTS( {INDICATOR_LE
 const rgblight_segment_t PROGMEM ll_3[] = RGBLIGHT_LAYER_SEGMENTS( {INDICATOR_LEFT_LED  , 1 , HSV_GREEN},
                                                                    {INDICATOR_RIGHT_LED , 1 , HSV_GREEN});
 
-const rgblight_segment_t PROGMEM ll_4[] = RGBLIGHT_LAYER_SEGMENTS({1, 6, HSV_RED},
-                                                                  {8, 6, HSV_RED});
-const rgblight_segment_t PROGMEM ll_5[] = RGBLIGHT_LAYER_SEGMENTS({1, 6, HSV_YELLOW},
-                                                                  {8, 6, HSV_YELLOW});
+const rgblight_segment_t PROGMEM ll_4[] = RGBLIGHT_LAYER_SEGMENTS({INDICATOR_LEFT_LED + 1 , 6 , HSV_RED},
+                                                                  {INDICATOR_RIGHT_LED + 1 , 6, HSV_RED});
+const rgblight_segment_t PROGMEM ll_5[] = RGBLIGHT_LAYER_SEGMENTS({INDICATOR_LEFT_LED + 1, 6, HSV_YELLOW},
+                                                                  {INDICATOR_RIGHT_LED + 1 , 6, HSV_YELLOW});
 
 const rgblight_segment_t* const PROGMEM ll_layers[] =
     RGBLIGHT_LAYERS_LIST(ll_0,ll_1,ll_2,ll_3, ll_4, ll_5);

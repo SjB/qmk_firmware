@@ -9,8 +9,8 @@ for more options.
 
 #define RGB_DI_PIN D3
 #ifdef RGBLIGHT_ENABLE
-#    define RGBLED_NUM 14
-#    define RGBLED_SPLIT { 7, 7 }
+#    define RGBLED_NUM 72
+#    define RGBLED_SPLIT { 36, 36 }
 #    define RGBLIGHT_SPLIT
 #    define RGBLIGHT_LAYERS
 #    define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
