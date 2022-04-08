@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RGB_MOD    , MOUSE_ROW_2                , NAV_ROW_2 , RGB_SAI ,
     TO(_LOWER) , MOUSE_ROW_3                , NAV_ROW_3 , RGB_VAI ,
 
-    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER
   ),
   [_NUMPAD] = LAYOUT_wrapper(

@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MOUSE_ROW_3 , _______ , _______   , NAV_ROW_3 ,
 
     TO(_LOWER) , KC_NO , KC_NO ,
-    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER ,
     KC_NO , KC_NO , KC_NO
   ),

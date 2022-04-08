@@ -17,8 +17,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     S(KC_BSLS) , LEFT_NUM_ROW                          , RIGHT_NUM_ROW       , KC_DOT     ,
     S(KC_LBRC) , LEFT_SYMBOL_ROW_2 , _______ , _______ , RIGHT_SYMBOL_ROW_2  , S(KC_RBRC) ,
 
-    _______ , _______ , LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-    RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT)) , _______ , _______
+    _______ , _______ ,
+    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT)) ,
+    _______ , _______
   ),
   [_RAISE] = LAYOUT_wrapper(
     _______    , LEFT_NUM_ROW                    , RIGHT_NUM_ROW , _______ ,
@@ -27,8 +29,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RGB_MOD    , MOUSE_ROW_2                     , NAV_ROW_2     , RGB_SAI ,
     TO(_LOWER) , MOUSE_ROW_3 , _______ , _______ , NAV_ROW_3     , RGB_VAI,
 
-    _______, _______, LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY),
-    TRANSPARENT_THUMB_CLUSTER, _______, _______
+    _______, _______,
+    LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
+    TRANSPARENT_THUMB_CLUSTER ,
+    _______, _______
   ),
   [_NUMPAD] = LAYOUT_wrapper(
     _______ , BLANK_ROW                        , BLANK_ROW    , _______ ,
@@ -36,8 +40,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     NK_TOGG , FUNCPAD_ROW_2                    , NUMPAD_ROW_2 , KC_INS  ,
     KC_NO   , FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 , KC_PEQL ,
 
-    _______ , _______ , LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-    TRANSPARENT_THUMB_CLUSTER , _______ , _______
+    _______ , _______ ,
+    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    TRANSPARENT_THUMB_CLUSTER ,
+    _______ , _______
   )
 };
 
