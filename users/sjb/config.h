@@ -19,11 +19,11 @@
 #endif
 #define IGNORE_MOD_TAP_INTERRUPT
 #define TAPPING_TERM 240 // default 200
-#define RETRO_TAPPPING
-
+// #define RETRO_TAPPPING
 //#define PERMISSIVE_HOLD
 
 // Mouse Settings: Smoothing out mouse movement on keypress
+#define MK_COMBINED
 #ifndef MOUSEKEY_INTERVAL
     #undef MOUSEKEY_INTERVAL
     #define MOUSEKEY_INTERVAL 16

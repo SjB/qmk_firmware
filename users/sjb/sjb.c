@@ -24,12 +24,12 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
 
-    if (IS_LAYER_ON_STATE(state, _NUMPAD)
-        && IS_LAYER_OFF_STATE(state, _LOWER)
-        && IS_LAYER_OFF_STATE(state, _RAISE)) {
+    if (IS_LAYER_ON_STATE(state, _NAV)
+        && IS_LAYER_OFF_STATE(state, _RAISE)
+        && IS_LAYER_OFF_STATE(state, _NUMPAD)) {
         return state;
     }
 
-    state = update_tri_layer_state(state, _LOWER,  _RAISE, _NUMPAD);
+    state = update_tri_layer_state(state, _RAISE, _NUMPAD, _NAV);
     return layer_state_set_keymap(state);
 }

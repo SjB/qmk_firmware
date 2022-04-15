@@ -30,30 +30,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
   ),
-  [_LOWER] = LAYOUT_wrapper(
+  [_RAISE] = LAYOUT_wrapper(
     S(KC_GRV)  , LEFT_SYMBOL_ROW_1          , RIGHT_SYMBOL_ROW_1 , KC_COMM    ,
     S(KC_BSLS) , LEFT_NUM_ROW               , RIGHT_NUM_ROW      , KC_DOT     ,
     S(KC_LBRC) , LEFT_SYMBOL_ROW_2          , RIGHT_SYMBOL_ROW_2 , S(KC_RBRC) ,
 
-    LOWER_THUMB_CLUSTER(_QWERTY) ,
+    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT))
   ),
-  [_RAISE] = LAYOUT_wrapper(
-    RGB_TOG    , MOUSE_ROW_1                , NAV_ROW_1 , RGB_HUI ,
-    RGB_MOD    , MOUSE_ROW_2                , NAV_ROW_2 , RGB_SAI ,
-    TO(_LOWER) , MOUSE_ROW_3                , NAV_ROW_3 , RGB_VAI ,
-
-    LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
-    TRANSPARENT_THUMB_CLUSTER
-  ),
   [_NUMPAD] = LAYOUT_wrapper(
-    KC_SLEP , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , KC_DEL  ,
-    NK_TOGG , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_INS  ,
-    KC_NO   , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , KC_PEQL ,
+    KC_SLEP    , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , KC_DEL  ,
+    NK_TOGG    , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_INS  ,
+    TO(_RAISE) , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , KC_PEQL ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER
-  )
+  ),
+  [_NAV] = LAYOUT_wrapper(
+    RGB_TOG , TRANS_ROW , NAV_ROW_1 , RGB_HUI ,
+    RGB_MOD , TRANS_ROW , NAV_ROW_2 , RGB_SAI ,
+    KC_NO   , TRANS_ROW , NAV_ROW_3 , RGB_VAI ,
+
+    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    TRANSPARENT_THUMB_CLUSTER
+  ),
+  [_MOUSE] = LAYOUT_wrapper(
+    RGB_TOG , TRANS_ROW , MOUSE_ROW_1 , RGB_HUI ,
+    RGB_MOD , TRANS_ROW , MOUSE_ROW_2 , RGB_SAI ,
+    KC_NO   , TRANS_ROW , MOUSE_ROW_3 , RGB_VAI ,
+
+    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    MOUSE_THUMB_CLUSTER
+  ),
 };
 
 #ifdef OLED_ENABLE
@@ -70,14 +78,17 @@ void oled_render_layer_state(void) {
         case _QWERTY:
             oled_write_ln_P(PSTR("Qwerty"), false);
             break;
-        case _LOWER:
-            oled_write_ln_P(PSTR("Lower"), false);
-            break;
         case _RAISE:
             oled_write_ln_P(PSTR("Raise"), false);
             break;
         case _NUMPAD:
             oled_write_ln_P(PSTR("Numpad"), false);
+            break;
+        case _NAV:
+            oled_write_ln_P(PSTR("Nav"), false);
+            break;
+        case _MOUSE:
+            oled_write_ln_P(PSTR("Mouse"), false);
             break;
     }
 

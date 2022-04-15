@@ -24,20 +24,24 @@ enum combo_events {
     C_LAYER_NUMPAD,
     C_LAYER_LOWER,
     C_LAYER_RAISE,
+    C_LAYER_NAV,
+    C_LAYER_MOUSE,
     COMBO_LENGTH,
 };
 
 const uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t PROGMEM caplock_combo[]   = { KC_ENT, LT_LW(KC_SPC), COMBO_END };
-const uint16_t PROGMEM tg_numpad_combo[] = { KC_ESC, LT_LW(KC_BSPC), COMBO_END };
-const uint16_t PROGMEM tg_lower_combo[]  = { LT_LW(KC_BSPC), LT_LW(KC_SPC), COMBO_END };
-const uint16_t PROGMEM tg_raise_combo[]  = { LT_RS(KC_G), LT_RS(KC_H), COMBO_END };
+const uint16_t PROGMEM caplock_combo[]   = { LT_RS(KC_SPC), KC_ENT, COMBO_END };
+const uint16_t PROGMEM tg_raise_combo[]  = { LT_RS(KC_BSPC), LT_RS(KC_SPC), COMBO_END };
+const uint16_t PROGMEM tg_numpad_combo[] = { LT_NUM(KC_G), LT_NUM(KC_H), COMBO_END };
+const uint16_t PROGMEM tg_nav_combo[]    = { LT_RS(KC_BSPC), KC_ENT, COMBO_END };
+const uint16_t PROGMEM tg_mouse_combo[]  = { LT_RS(KC_BSPC), OSM(MOD_LSFT), COMBO_END };
 
 combo_t key_combos[] = {
     [C_CAPS]         = COMBO(caplock_combo, KC_CAPS),
-    [C_LAYER_NUMPAD] = COMBO(tg_numpad_combo, TG(_NUMPAD)),
-    [C_LAYER_LOWER]  = COMBO(tg_lower_combo, TG(_LOWER)),
     [C_LAYER_RAISE]  = COMBO(tg_raise_combo, TG(_RAISE)),
+    [C_LAYER_NUMPAD] = COMBO(tg_numpad_combo, TG(_NUMPAD)),
+    [C_LAYER_NAV]    = COMBO(tg_nav_combo, TG(_NAV)),
+    [C_LAYER_MOUSE]  = COMBO(tg_mouse_combo, TG(_MOUSE)),
 };
 #endif
