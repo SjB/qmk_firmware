@@ -8,7 +8,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    LEFT_QW_ROW_2                                , RIGHT_QW_ROW_2 ,
    LEFT_QW_ROW_3 , OSM(MOD_LCTL), OSM(MOD_RALT) , RIGHT_QW_ROW_3 ,
 
-   KC_LBRC , KC_GRV , KC_BSLS ,
+   KC_LBRC , KC_BSLS , KC_GRV ,
    LEFT_PRIMARY_THUMB_CLUSTER ,
    RIGHT_PRIMARY_THUMB_CLUSTER ,
    KC_MINS , KC_QUOT , KC_RBRC
@@ -18,8 +18,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      LEFT_NUM_ROW                          , RIGHT_NUM_ROW    ,
      LEFT_SYMBOL_ROW_2 , _______ , _______ , RIGHT_SYMBOL_ROW_2 ,
 
-     S(KC_LBRC) , S(KC_GRV) , S(KC_BSLS) ,
-     LOWER_THUMB_CLUSTER(_QWERTY) ,
+     S(KC_LBRC) , S(KC_BSLS) , S(KC_GRV) ,
+     RAISE_THUMB_CLUSTER(_QWERTY) ,
      RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT)),
      KC_COMM , KC_DOT , S(KC_RBRC)
   ),
@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FUNCPAD_ROW_2                    , NUMPAD_ROW_2 ,
     FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 ,
 
-    KC_SLEP , NK_TOGG , TO(_RAISE) ,
+     TO(_RAISE) , NK_TOGG , KC_SLEP ,
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER ,
     KC_DEL , KC_INS , KC_PEQL
