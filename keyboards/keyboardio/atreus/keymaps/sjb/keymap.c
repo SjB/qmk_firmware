@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FUNCPAD_ROW_2                    , NUMPAD_ROW_2 ,
     FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 ,
 
-     TO(_RAISE) , NK_TOGG , KC_SLEP ,
+    TO(_RAISE) , NK_TOGG , KC_SLEP ,
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER ,
     KC_DEL , KC_INS , KC_PEQL
