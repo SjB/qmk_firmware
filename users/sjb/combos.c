@@ -21,18 +21,10 @@
 
 enum combo_events {
     C_CAPS,
-    //    C_ALTGR,
     C_TG_RAISE,
     C_TG_NUMPAD,
-    C_OSM_RAISE,
-    C_OSM_NUMPAD,
     C_LSBR,
     C_RSBR,
-    //    C_LBRC,
-    //    C_RBRC,
-    //    C_LSSBR,
-    //    C_RSSBR,
-    C_UNLN,
     C_PLUS,
     C_EQUAL,
     C_LCTL,
@@ -46,23 +38,15 @@ enum combo_events {
 
 const uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t PROGMEM caplock_combo[]   = { TAB_ALT , OSM_GUI, COMBO_END };
-//const uint16_t PROGMEM os_altgr_combo[]  = { TAB_ALT , BSPC_RS, COMBO_END };
+const uint16_t PROGMEM caplock_combo[]   = { TAB_ALT , OSM_SFT, COMBO_END };
 
-const uint16_t PROGMEM osm_raise_combo[] =  { KC_Z    , KC_X   , COMBO_END };
-const uint16_t PROGMEM osm_numpad_combo[] = { A_GUI   , S_ALT  , COMBO_END };
 const uint16_t PROGMEM tg_raise_combo[]  =  { BSPC_RS , SPC_RS , COMBO_END };
 const uint16_t PROGMEM tg_numpad_combo[] =  { G_NUM   , H_NUM  , COMBO_END };
 
-const uint16_t PROGMEM lsbr_combo[] =  { KC_R   , KC_T     , COMBO_END };
-const uint16_t PROGMEM rsbr_combo[] =  { KC_Y   , KC_U     , COMBO_END };
-//const uint16_t PROGMEM lbrc_combo[] =  { F_CTL  , G_NUM    , COMBO_END };
-//const uint16_t PROGMEM rbrc_combo[] =  { H_NUM  , J_CTL    , COMBO_END };
-//const uint16_t PROGMEM lssbr_combo[] = { KC_V   , KC_B     , COMBO_END };
-//const uint16_t PROGMEM rssbr_combo[] = { KC_N   , KC_M     , COMBO_END };
+const uint16_t PROGMEM lsbr_combo[] =  { KC_R   , KC_E     , COMBO_END };
+const uint16_t PROGMEM rsbr_combo[] =  { KC_U   , KC_I     , COMBO_END };
 
-const uint16_t PROGMEM unln_combo[] =  { KC_O   , KC_P     , COMBO_END };
-const uint16_t PROGMEM plus_combo[] =  { L_ALT  , SCLN_GUI , COMBO_END };
+const uint16_t PROGMEM plus_combo[] =  { KC_O   , KC_P     , COMBO_END };
 const uint16_t PROGMEM equal_combo[] = { KC_DOT , KC_SLSH  , COMBO_END };
 
 const uint16_t PROGMEM lctl_combo[] =  { F_CTL , D_SFT , COMBO_END};
@@ -71,33 +55,23 @@ const uint16_t PROGMEM rctl_combo[] =  { J_CTL , K_SFT , COMBO_END};
 const uint16_t PROGMEM lalt_combo[] = { D_SFT , S_ALT , COMBO_END };
 const uint16_t PROGMEM ralt_combo[] = { K_SFT , L_ALT , COMBO_END };
 
-//const uint16_t PROGMEM lsft_combo[] =  { KC_LBRC , KC_Z    , COMBO_END };
-//const uint16_t PROGMEM rsft_combo[] =  { KC_SLSH , KC_RBRC ,  COMBO_END };
-
-const uint16_t PROGMEM lsft_combo[] =  { G_NUM , F_CTL , COMBO_END };
-const uint16_t PROGMEM rsft_combo[] =  { H_NUM , J_CTL ,  COMBO_END };
+const uint16_t PROGMEM lsft_combo[] =  { F_CTL , G_NUM , COMBO_END };
+const uint16_t PROGMEM rsft_combo[] =  { H_NUM , J_CTL , COMBO_END };
 
 combo_t key_combos[] = {
     [C_CAPS]       = COMBO(caplock_combo, KC_CAPS),
-    /* [C_ALTGR]      = COMBO(os_altgr_combo, OSM(MOD_RALT)), */
-    [C_TG_RAISE]   = COMBO(tg_raise_combo, TG(_RAISE)),
-    [C_TG_NUMPAD]  = COMBO(tg_numpad_combo, TG(_NUMPAD)),
-    [C_OSM_RAISE]  = COMBO(osm_raise_combo, OSL(_RAISE)),
-    [C_OSM_NUMPAD] = COMBO(osm_numpad_combo, OSL(_NUMPAD)),
+    [C_TG_RAISE]   = COMBO(tg_raise_combo, TO(_RAISE)),
+    [C_TG_NUMPAD]  = COMBO(tg_numpad_combo, TO(_NUMPAD)),
+
     [C_LSBR] = COMBO(lsbr_combo, S(KC_9)),
     [C_RSBR] = COMBO(rsbr_combo, S(KC_0)),
-    /* [C_LBRC] = COMBO(lbrc_combo, KC_LBRC), */
-    /* [C_RBRC] = COMBO(rbrc_combo, KC_RBRC), */
-    /* [C_LSSBR] = COMBO(lssbr_combo, S(KC_LBRC)), */
-    /* [C_RSSBR] = COMBO(rssbr_combo, S(KC_RBRC)), */
-    [C_UNLN] = COMBO(unln_combo, S(KC_MINS)),
     [C_PLUS] = COMBO(plus_combo, KC_PLUS),
     [C_EQUAL] = COMBO(equal_combo, KC_EQL),
     [C_LCTL] = COMBO(lctl_combo, OSM(MOD_LCTL)),
-    [C_RCTL] = COMBO(rctl_combo, OSM(MOD_LCTL)),
+    [C_RCTL] = COMBO(rctl_combo, OSM(MOD_RCTL)),
     [C_LALT] = COMBO(lalt_combo, OSM(MOD_LALT)),
     [C_RALT] = COMBO(ralt_combo, OSM(MOD_LALT)),
     [C_LSFT] = COMBO(lsft_combo, OSM(MOD_LSFT)),
-    [C_RSFT] = COMBO(rsft_combo, OSM(MOD_LSFT)),
+    [C_RSFT] = COMBO(rsft_combo, OSM(MOD_RSFT)),
 };
 #endif

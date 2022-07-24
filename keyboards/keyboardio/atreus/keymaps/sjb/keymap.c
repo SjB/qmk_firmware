@@ -1,4 +1,9 @@
-// Copyright (C) 2019, 2020  Keyboard.io, Inc // // this is the style you want to emulate. // This is the canonical layout file for the Quantum project. If you want to add another keyboard,
+// Copyright (C) 2019, 2020  Keyboard.io, Inc
+//
+// this is the style you want
+// to emulate.
+// This is the canonical layout file for the Quantum project. If you want to add another keyboard,
+
 #include QMK_KEYBOARD_H
 #include "sjb.h"
 
@@ -18,17 +23,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      LEFT_NUM_ROW                          , RIGHT_NUM_ROW    ,
      LEFT_SYMBOL_ROW_2 , _______ , _______ , RIGHT_SYMBOL_ROW_2 ,
 
-     S(KC_LBRC) , S(KC_BSLS) , S(KC_GRV) ,
+     S(KC_9) , OSM(MOD_LSFT) , OSM(MOD_LGUI) ,
      RAISE_THUMB_CLUSTER(_QWERTY) ,
      RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT)),
-     KC_COMM , KC_DOT , S(KC_RBRC)
+     OSM(MOD_RCTL) , OSM(MOD_LALT) , S(KC_0)
   ),
   [_NUMPAD] = LAYOUT_wrapper(
     FUNCPAD_ROW_1                    , NUMPAD_ROW_1 ,
     FUNCPAD_ROW_2                    , NUMPAD_ROW_2 ,
     FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 ,
 
-    TO(_RAISE) , NK_TOGG , KC_SLEP ,
+    OSM(MOD_LALT) , OSM(MOD_LSFT) , OSM(MOD_LGUI) ,
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER ,
     KC_DEL , KC_INS , KC_PEQL
@@ -38,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TRANS_ROW                       , NAV_ROW_2 ,
     TRANS_ROW , _______ , _______   , NAV_ROW_3 ,
 
-    KC_NO , KC_NO , KC_NO ,
+    KC_NO , KC_NO , KC_SLEP ,
     LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER ,
     KC_NO , KC_NO , KC_NO
@@ -48,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TRANS_ROW ,                     MOUSE_ROW_2 ,
     TRANS_ROW , _______ , _______ , MOUSE_ROW_3 ,
 
-    KC_NO , KC_NO , KC_NO ,
+    KC_SLEP , NK_TOGG , KC_NO ,
     LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER ,
     KC_NO , KC_NO , KC_NO
