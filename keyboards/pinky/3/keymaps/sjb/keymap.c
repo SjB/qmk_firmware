@@ -20,14 +20,14 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
-      KC_GRV  , LEFT_QW_ROW_1 , LGUI(KC_TAB)  , LAG_T(KC_B)  , RIGHT_QW_ROW_1 , KC_MINS ,
+      KC_GRV  , LEFT_QW_ROW_1 , TO(_MOUSE)    , TO(_NAV)    , RIGHT_QW_ROW_1 , KC_MINS ,
       KC_BSLS , LEFT_QW_ROW_2 , MO(_RAISE)    , MO(_NUMPAD) , RIGHT_QW_ROW_2 , KC_QUOT ,
-      KC_LBRC , LEFT_QW_ROW_3 , OSM(MOD_LGUI) , LGUI(KC_T) , RIGHT_QW_ROW_3 , KC_RBRC ,
+      KC_LBRC , LEFT_QW_ROW_3 , OSM(MOD_LGUI) , LGUI(KC_T)  , RIGHT_QW_ROW_3 , KC_RBRC ,
 
       OSM(MOD_LCTL) ,
       LEFT_PRIMARY_THUMB_CLUSTER  ,
       RIGHT_PRIMARY_THUMB_CLUSTER ,
-      OSM(MOD_RALT)
+      OSM(MOD_LALT)
     ),
     [_RAISE] = LAYOUT_wrapper(
       S(KC_GRV)  , LEFT_SYMBOL_ROW_1 , _______ , _______ , RIGHT_SYMBOL_ROW_1 , KC_COMM    ,

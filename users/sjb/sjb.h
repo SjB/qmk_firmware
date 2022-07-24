@@ -30,6 +30,39 @@
 #define LT_NUM(_key) LT(_NUMPAD, _key)
 #define LT_NAV(_key) LT(_NAV, _key)
 
+#if defined(ENABLE_HOME_ROW)
+#define A_GUI LGUI_T(KC_A)
+#define S_ALT ALT_T(KC_S)
+#define D_SFT LSFT_T(KC_D)
+#define F_CTL CTL_T(KC_F)
+#define J_CTL CTL_T(KC_J)
+#define K_SFT RSFT_T(KC_K)
+#define L_ALT ALT_T(KC_L)
+#define SCLN_GUI LGUI_T(KC_SCLN)
+#else
+#define A_GUI KC_A
+#define S_ALT KC_S
+#define D_SFT KC_D
+#define F_CTL KC_F
+#define J_CTL KC_J
+#define K_SFT KC_K
+#define L_ALT KC_L
+#define SCLN_GUI KC_SCLN
+#endif
+
+#define G_NUM LT_NUM(KC_G)
+#define H_NUM LT_NUM(KC_H)
+
+#define ENT_SFT LSFT_T(KC_ENT)
+#define ESC_CTL CTL_T(KC_ESC)
+
+#define TAB_ALT ALT_T(KC_TAB)
+#define BSPC_RS LT_RS(KC_BSPC)
+#define SPC_RS  LT_RS(KC_SPC)
+#define OSM_SFT OSM(MOD_LSFT)
+#define OSM_GUI OSM(MOD_LGUI)
+
+
 #define LEFT_NUM_ROW   KC_1 , KC_2, KC_3, KC_4, KC_5
 #define RIGHT_NUM_ROW  KC_6 , KC_7, KC_8, KC_9, KC_0
 
@@ -67,12 +100,12 @@
 #define NAV_ROW_2 KC_LEFT , KC_DOWN , KC_UP   , KC_RIGHT , KC_MNXT
 #define NAV_ROW_3 KC_END  , KC_PGDN , KC_MUTE , KC_VOLD  , KC_MPLY
 
-#define FUNCPAD_ROW_1 KC_F12 , KC_F7 , KC_F8 , KC_F9 , KC_NO
-#define FUNCPAD_ROW_2 KC_F11 , KC_F4 , KC_F5 , KC_F6 , KC_NO
+#define FUNCPAD_ROW_1 KC_F12 , KC_F7 , KC_F8 , KC_F9 , TO(_NAV)
+#define FUNCPAD_ROW_2 KC_F11 , KC_F4 , KC_F5 , KC_F6 , TG(_MOUSE)
 #define FUNCPAD_ROW_3 KC_F10 , KC_F1 , KC_F2 , KC_F3 , KC_PSCR
 
-#define LEFT_PRIMARY_THUMB_CLUSTER  ALGR_T(KC_TAB) , LT_RS(KC_BSPC) , KC_ESC
-#define RIGHT_PRIMARY_THUMB_CLUSTER KC_ENT , LT_RS(KC_SPC) , OSM(MOD_LSFT)
+#define LEFT_PRIMARY_THUMB_CLUSTER  TAB_ALT , BSPC_RS , ESC_CTL
+#define RIGHT_PRIMARY_THUMB_CLUSTER ENT_SFT , SPC_RS  , OSM_GUI
 
 #define LEFT_TRANSPARENT_THUMB_CLUSTER(LAYER) _______, _______, TO(LAYER)
 #define TRANSPARENT_THUMB_CLUSTER _______, _______, _______

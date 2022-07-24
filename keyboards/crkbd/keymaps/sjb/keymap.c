@@ -31,10 +31,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RIGHT_PRIMARY_THUMB_CLUSTER
   ),
   [_RAISE] = LAYOUT_wrapper(
-    S(KC_GRV)  , LEFT_SYMBOL_ROW_1          , RIGHT_SYMBOL_ROW_1 , KC_COMM    ,
-    S(KC_BSLS) , LEFT_NUM_ROW               , RIGHT_NUM_ROW      , KC_DOT     ,
-    S(KC_LBRC) , LEFT_SYMBOL_ROW_2          , RIGHT_SYMBOL_ROW_2 , S(KC_RBRC) ,
-
+    S(KC_GRV)  , LEFT_SYMBOL_ROW_1          , RIGHT_SYMBOL_ROW_1 , KC_COMM ,
+    S(KC_BSLS) , LEFT_NUM_ROW               , RIGHT_NUM_ROW      , KC_DOT  ,
+    S(KC_9)    , LEFT_SYMBOL_ROW_2          , RIGHT_SYMBOL_ROW_2 , S(KC_0) ,
     RAISE_THUMB_CLUSTER(_QWERTY) ,
     RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT))
   ),

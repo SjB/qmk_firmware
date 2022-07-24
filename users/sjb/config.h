@@ -17,8 +17,10 @@
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
 #endif
+
+//#define ENABLE_HOME_ROW 1
 #define IGNORE_MOD_TAP_INTERRUPT
-#define TAPPING_TERM 240 // default 200
+#define TAPPING_TERM 200 // default 200
 // #define RETRO_TAPPPING
 //#define PERMISSIVE_HOLD
 
@@ -32,6 +34,7 @@
 #define MOUSEKEY_TIME_TO_MAX 60
 #define MOUSEKEY_MAX_SPEED 7
 #define MOUSEKEY_WHEEL_DELAY 0
+
 
 #define ONESHOT_TAP_TOGGLE 2
 
