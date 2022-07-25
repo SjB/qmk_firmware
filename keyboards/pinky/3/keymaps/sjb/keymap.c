@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_RAISE] = LAYOUT_wrapper(
       OSM(MOD_LGUI) , LEFT_SYMBOL_ROW_1 , _______ , _______ , RIGHT_SYMBOL_ROW_1 , OSM(MOD_RCTL) ,
-      OSM(MOD_LSFT) , LEFT_NUM_ROW      , _______ , _______ , RIGHT_NUM_ROW      , OSM(MOD_RALT) ,
+      OSM(MOD_LSFT) , LEFT_NUM_ROW      , _______ , _______ , RIGHT_NUM_ROW      , OSM(MOD_LALT) ,
       S(KC_9)       , LEFT_SYMBOL_ROW_2 , _______ , _______ , RIGHT_SYMBOL_ROW_2 , S(KC_0)       ,
 
       _______ ,
