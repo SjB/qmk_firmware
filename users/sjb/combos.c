@@ -63,8 +63,8 @@ const uint16_t PROGMEM lsft_combo[] = {F_CTL, G_NUM, COMBO_END};
 const uint16_t PROGMEM rsft_combo[] = {H_NUM, J_CTL, COMBO_END};
 
 combo_t key_combos[] = {
-    [C_LBOOTLOADER] = COMBO(lbootloader_combo, QK_BOOTLOADER),
-    [C_RBOOTLOADER] = COMBO(rbootloader_combo, QK_BOOTLOADER),
+    [C_LBOOTLOADER] = COMBO(lbootloader_combo, RESET),
+    [C_RBOOTLOADER] = COMBO(rbootloader_combo, RESET),
     [C_CAPS]        = COMBO(caplock_combo, KC_CAPS),
     [C_TG_RAISE]    = COMBO(tg_raise_combo, TO(_RAISE)),
     [C_TG_NUMPAD]   = COMBO(tg_numpad_combo, TO(_NUMPAD)),
