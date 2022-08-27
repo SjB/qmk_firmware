@@ -3,44 +3,43 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_wrapper(
-    OSM(MOD_LGUI) , LEFT_NUM_ROW                     , RIGHT_NUM_ROW  , LGUI(KC_T) ,
-    KC_GRV        , LEFT_QW_ROW_1                    , RIGHT_QW_ROW_1 , KC_MINS    ,
-    KC_BSLS       , LEFT_QW_ROW_2                    , RIGHT_QW_ROW_2 , KC_QUOT    ,
-    KC_LBRC       , LEFT_QW_ROW_3 , KC_MUTE, KC_MPLY , RIGHT_QW_ROW_3 , KC_RBRC    ,
+    LGUI(KC_SPC) , LEFT_NUM_ROW                      , RIGHT_NUM_ROW  , LGUI(KC_T) ,
+    KC_GRV       , LEFT_QW_ROW_1                     , RIGHT_QW_ROW_1 , KC_MINS    ,
+    KC_BSLS      , LEFT_QW_ROW_2                     , RIGHT_QW_ROW_2 , KC_QUOT    ,
+    OSM_SFT      , LEFT_QW_ROW_3 , KC_MUTE , KC_MPLY , RIGHT_QW_ROW_3 , KC_EQL     ,
 
-    MO(_RAISE) , OSM(MOD_LCTL)  ,
+    OSL_NUM , OSL_RSE,
     LEFT_PRIMARY_THUMB_CLUSTER  ,
     RIGHT_PRIMARY_THUMB_CLUSTER ,
-    OSM(MOD_LALT) ,  MO(_NUMPAD)
+    OSM_CTL , OSM_ALT
   ),
   [_RAISE] = LAYOUT_wrapper(
-    _______    , LEFT_FUNC_ROW                         , RIGHT_FUNC_ROW      , _______    ,
-    S(KC_GRV)  , LEFT_SYMBOL_ROW_1                     , RIGHT_SYMBOL_ROW_1  , KC_COMM    ,
-    S(KC_BSLS) , LEFT_NUM_ROW                          , RIGHT_NUM_ROW       , KC_DOT     ,
-    S(KC_LBRC) , LEFT_SYMBOL_ROW_2 , _______ , _______ , RIGHT_SYMBOL_ROW_2  , S(KC_RBRC) ,
+    _______    , LEFT_FUNC_ROW                        , RIGHT_FUNC_ROW     , _______    ,
+    S(KC_9)    , LEFT_RAISE_ROW_1                     , RIGHT_RAISE_ROW_1  , S(KC_0)    ,
+    S(KC_LBRC) , LEFT_RAISE_ROW_2                     , RIGHT_RAISE_ROW_2  , S(KC_RBRC) ,
+    KC_LBRC    , LEFT_RAISE_ROW_3 , _______ , _______ , RIGHT_RAISE_ROW_3  , KC_RBRC    ,
 
     _______ , _______ ,
-    LOWER_THUMB_CLUSTER(_QWERTY) ,
-    RIGHT_TRANSPARENT_THUMB_CLUSTER(OSM(MOD_RALT)) ,
+    LEFT_RAISE_THUMB_CLUSTER(_QWERTY) ,
+    TRANSPARENT_THUMB_CLUSTER ,
     _______ , _______
   ),
   [_NUMPAD] = LAYOUT_wrapper(
-    _______    , TRANS_ROW                        , TRANS_ROW    , _______ ,
-    KC_SLEP    , FUNCPAD_ROW_1                    , NUMPAD_ROW_1 , KC_DEL  ,
-    NK_TOGG    , FUNCPAD_ROW_2                    , NUMPAD_ROW_2 , KC_INS  ,
-    TO(_RAISE) , FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 , KC_PEQL ,
+    _______ , TRANS_ROW                        , TRANS_ROW    , _______ ,
+    OSM_CTL , FUNCPAD_ROW_1                    , NUMPAD_ROW_1 , KC_DEL  ,
+    OSM_ALT , FUNCPAD_ROW_2                    , NUMPAD_ROW_2 , KC_INS  ,
+    OSM_SFT , FUNCPAD_ROW_3 , _______, _______ , NUMPAD_ROW_3 , KC_SPC  ,
 
     _______ , _______ ,
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-    TRANSPARENT_THUMB_CLUSTER ,
+    RIGHT_NUMPAD_THUMB_CLUSTER ,
     _______ , _______
   ),
   [_NAV] = LAYOUT_wrapper(
     _______ , TRANS_ROW                        , TRANS_ROW     , _______ ,
-
     RGB_TOG , TRANS_ROW                        , NAV_ROW_1     , RGB_HUI ,
     RGB_MOD , TRANS_ROW                        , NAV_ROW_2     , RGB_SAI ,
-    KC_NO   , TRANS_ROW    , _______ , _______ , NAV_ROW_3     , RGB_VAI ,
+    KC_SLEP , TRANS_ROW    , _______ , _______ , NAV_ROW_3     , RGB_VAI ,
 
     _______, _______ ,
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
@@ -48,15 +47,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______
   ),
   [_MOUSE] = LAYOUT_wrapper(
-    _______ , TRANS_ROW                     , TRANS_ROW   , _______ ,
-
-    RGB_TOG , TRANS_ROW                     , MOUSE_ROW_1 , RGB_HUI ,
-    RGB_MOD , TRANS_ROW                     , MOUSE_ROW_2 , RGB_SAI ,
-    KC_NO   , TRANS_ROW , _______ , _______ , MOUSE_ROW_3 , RGB_VAI ,
+    _______ , TRANS_ROW                            , TRANS_ROW         , _______ ,
+    NK_TOGG , LEFT_MOUSE_ROW_1                     , RIGHT_MOUSE_ROW_1 , KC_NO   ,
+    KC_NO   , LEFT_MOUSE_ROW_2                     , RIGHT_MOUSE_ROW_2 , KC_NO   ,
+    KC_NO   , LEFT_MOUSE_ROW_3 , _______ , _______ , RIGHT_MOUSE_ROW_3 , KC_NO   ,
 
     _______, _______,
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-    MOUSE_THUMB_CLUSTER ,
+    RIGHT_MOUSE_THUMB_CLUSTER ,
     _______, _______
   )
 };
