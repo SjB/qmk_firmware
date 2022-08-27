@@ -24,6 +24,8 @@
 // #define RETRO_TAPPPING
 //#define PERMISSIVE_HOLD
 
+#define COMBO_TERM 35
+
 // Mouse Settings: Smoothing out mouse movement on keypress
 #define MK_COMBINED
 #ifndef MOUSEKEY_INTERVAL
