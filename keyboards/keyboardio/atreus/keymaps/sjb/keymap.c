@@ -36,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     OSM_SFT , OSM_ALT , OSM_CTL ,
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     RIGHT_NUMPAD_THUMB_CLUSTER ,
-    KC_DEL , KC_INS , KC_SPC
+    KC_DEL , KC_INS , KC_EQL
   ),
   [_NAV] = LAYOUT_wrapper(
     TRANS_ROW                       , NAV_ROW_1 ,
