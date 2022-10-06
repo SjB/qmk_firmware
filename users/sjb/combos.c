@@ -24,18 +24,12 @@ enum combo_events {
     C_LBOOTLOADER,
     C_RBOOTLOADER,
     C_CAPS,
-    C_TG_RAISE,
-    C_TG_NUMPAD,
-    C_TO_MOUSE,
-    C_TO_NAV,
-    C_LSBR,
-    C_RSBR,
-    C_LBRC,
-    C_RBRC,
-    C_LSBRC,
-    C_RSBRC,
-    C_MINS,
-    C_EQUAL,
+    C_LEFT_RAISE,
+    C_RIGHT_RAISE,
+    C_LEFT_NUMPAD,
+    C_RIGHT_NUMPAD,
+    C_MOUSE,
+    C_NAV,
     C_LCTL,
     C_RCTL,
     C_LALT,
@@ -47,28 +41,22 @@ enum combo_events {
     COMBO_LENGTH,
 };
 
+
 const uint16_t COMBO_LEN = COMBO_LENGTH;
 
 const uint16_t PROGMEM lbootloader_combo[] = {KC_Q, KC_T, COMBO_END};
 const uint16_t PROGMEM rbootloader_combo[] = {KC_P, KC_Y, COMBO_END};
-const uint16_t PROGMEM caplock_combo[]     = {TAB_ALT, OSM_SFT, COMBO_END};
 
-const uint16_t PROGMEM tg_raise_combo[]    = {BSPC_RS, SPC_RS, COMBO_END};
-const uint16_t PROGMEM tg_numpad_combo[]   = {G_NUM, H_NUM, COMBO_END};
+const uint16_t PROGMEM caplock_combo[]     = {KC_Z, KC_X, COMBO_END};
 
-const uint16_t PROGMEM to_mouse_combo[] = {KC_V, KC_B, COMBO_END};
-const uint16_t PROGMEM to_nav_combo[] = {KC_N, KC_M, COMBO_END};
+const uint16_t PROGMEM left_raise_combo[]  = {BSPC_RS, KC_B, COMBO_END};
+const uint16_t PROGMEM right_raise_combo[] = {SPC_RS, KC_N, COMBO_END};
 
-const uint16_t PROGMEM lbrc_combo[] = {KC_T, KC_R, COMBO_END};
-const uint16_t PROGMEM lsbr_combo[] = {KC_R, KC_E, COMBO_END};
-const uint16_t PROGMEM lsbrc_combo[] = {KC_E, KC_W, COMBO_END};
+const uint16_t PROGMEM left_numpad_combo[]  = {BSPC_RS, KC_V, COMBO_END};
+const uint16_t PROGMEM right_numpad_combo[] = {SPC_RS, KC_M, COMBO_END};
 
-const uint16_t PROGMEM rbrc_combo[] = {KC_Y, KC_U, COMBO_END};
-const uint16_t PROGMEM rsbr_combo[] = {KC_U, KC_I, COMBO_END};
-const uint16_t PROGMEM rsbrc_combo[] = {KC_I, KC_O, COMBO_END};
-
-const uint16_t PROGMEM mins_combo[]  = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM equal_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM mouse_combo[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM nav_combo[] = {KC_C, KC_V, COMBO_END};
 
 const uint16_t PROGMEM lctl_combo[] = {KC_F, KC_D, COMBO_END};
 const uint16_t PROGMEM rctl_combo[] = {KC_J, KC_K, COMBO_END};
@@ -86,22 +74,14 @@ combo_t key_combos[] = {
     [C_LBOOTLOADER] = COMBO(lbootloader_combo, RESET),
     [C_RBOOTLOADER] = COMBO(rbootloader_combo, RESET),
     [C_CAPS]        = COMBO(caplock_combo, KC_CAPS),
-    [C_TG_RAISE]    = COMBO(tg_raise_combo, TO(_RAISE)),
-    [C_TG_NUMPAD]   = COMBO(tg_numpad_combo, TO(_NUMPAD)),
-    [C_TO_MOUSE]    = COMBO(to_mouse_combo, TO(_MOUSE)),
-    [C_TO_NAV]      = COMBO(to_nav_combo, TO(_NAV)),
 
-    [C_LSBR]  = COMBO(lsbr_combo, S(KC_9)),
-    [C_RSBR]  = COMBO(rsbr_combo, S(KC_0)),
+    [C_LEFT_RAISE]    = COMBO(left_raise_combo, OSL_RSE),
+    [C_RIGHT_RAISE]   = COMBO(right_raise_combo, OSL_RSE),
+    [C_LEFT_NUMPAD]   = COMBO(left_numpad_combo, OSL_NUM),
+    [C_RIGHT_NUMPAD]  = COMBO(right_numpad_combo, OSL_NUM),
 
-    [C_LBRC]  = COMBO(lbrc_combo, KC_LBRC),
-    [C_RBRC]  = COMBO(rbrc_combo, KC_RBRC),
-
-    [C_LSBRC] = COMBO(lsbrc_combo, S(KC_LBRC)),
-    [C_RSBRC] = COMBO(rsbrc_combo, S(KC_RBRC)),
-
-    [C_MINS]  = COMBO(mins_combo, KC_MINS),
-    [C_EQUAL] = COMBO(equal_combo, KC_EQL),
+    [C_MOUSE]    = COMBO(mouse_combo, TG(_MOUSE)),
+    [C_NAV]      = COMBO(nav_combo, OSL(_NAV)),
 
     [C_LCTL]  = COMBO(lctl_combo, OSM(MOD_LCTL)),
     [C_RCTL]  = COMBO(rctl_combo, OSM(MOD_RCTL)),
