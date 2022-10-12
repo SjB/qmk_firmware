@@ -18,78 +18,51 @@
 #include "sjb.h"
 
 #ifdef COMBO_ENABLE
-#    define COMBO_ONLY_FROM_LAYER _QWERTY
+#define COMBO_ONLY_FROM_LAYER _QWERTY
 
-enum combo_events {
-    C_LBOOTLOADER,
-    C_RBOOTLOADER,
-    C_CAPS,
-    C_LEFT_RAISE,
-    C_RIGHT_RAISE,
-    C_LEFT_NUMPAD,
-    C_RIGHT_NUMPAD,
-    C_MOUSE,
-    C_NAV,
-    C_LCTL,
-    C_RCTL,
-    C_LALT,
-    C_RALT,
-    C_LSFT,
-    C_RSFT,
-    C_LGUI,
-    C_RGUI,
-    COMBO_LENGTH,
-};
+#define DEFINE_TWO_KEY(a, b) const uint16_t PROGMEM combo_##a ##b[] = {a, b, COMBO_END}
+#define TWO_KEY_COMBO(a, b, action) COMBO(combo_##a ##b, action)
+#define ARRAYSIZE(arr) sizeof(arr) / sizeof(arr[0])
 
+DEFINE_TWO_KEY(KC_Q, KC_T);
+DEFINE_TWO_KEY(KC_P, KC_Y);
+DEFINE_TWO_KEY(KC_Z, KC_X);
 
-const uint16_t COMBO_LEN = COMBO_LENGTH;
+DEFINE_TWO_KEY(BSPC_RS, KC_B);
+DEFINE_TWO_KEY(SPC_RS, KC_N);
 
-const uint16_t PROGMEM lbootloader_combo[] = {KC_Q, KC_T, COMBO_END};
-const uint16_t PROGMEM rbootloader_combo[] = {KC_P, KC_Y, COMBO_END};
+DEFINE_TWO_KEY(BSPC_RS, KC_V);
+DEFINE_TWO_KEY(SPC_RS, KC_M);
 
-const uint16_t PROGMEM caplock_combo[]     = {KC_Z, KC_X, COMBO_END};
+DEFINE_TWO_KEY(KC_A, KC_S);
+DEFINE_TWO_KEY(KC_S, KC_D);
+DEFINE_TWO_KEY(KC_D, KC_F);
 
-const uint16_t PROGMEM left_raise_combo[]  = {BSPC_RS, KC_B, COMBO_END};
-const uint16_t PROGMEM right_raise_combo[] = {SPC_RS, KC_N, COMBO_END};
-
-const uint16_t PROGMEM left_numpad_combo[]  = {BSPC_RS, KC_V, COMBO_END};
-const uint16_t PROGMEM right_numpad_combo[] = {SPC_RS, KC_M, COMBO_END};
-
-const uint16_t PROGMEM mouse_combo[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM nav_combo[] = {KC_C, KC_V, COMBO_END};
-
-const uint16_t PROGMEM lctl_combo[] = {KC_F, KC_D, COMBO_END};
-const uint16_t PROGMEM rctl_combo[] = {KC_J, KC_K, COMBO_END};
-
-const uint16_t PROGMEM lalt_combo[] = {KC_D, KC_S, COMBO_END};
-const uint16_t PROGMEM ralt_combo[] = {KC_K, KC_L, COMBO_END};
-
-const uint16_t PROGMEM lsft_combo[] = {KC_F, G_NUM, COMBO_END};
-const uint16_t PROGMEM rsft_combo[] = {H_NUM, KC_J, COMBO_END};
-
-const uint16_t PROGMEM lgui_combo[] = {KC_L, KC_SCLN, COMBO_END};
-const uint16_t PROGMEM rgui_combo[] = {KC_S, KC_A, COMBO_END};
+DEFINE_TWO_KEY(KC_SCLN, KC_L);
+DEFINE_TWO_KEY(KC_L, KC_K);
+DEFINE_TWO_KEY(KC_K, KC_J);
 
 combo_t key_combos[] = {
-    [C_LBOOTLOADER] = COMBO(lbootloader_combo, RESET),
-    [C_RBOOTLOADER] = COMBO(rbootloader_combo, RESET),
-    [C_CAPS]        = COMBO(caplock_combo, KC_CAPS),
+    TWO_KEY_COMBO(KC_Q, KC_T, QK_BOOT),
+    TWO_KEY_COMBO(KC_P, KC_Y, QK_BOOT),
 
-    [C_LEFT_RAISE]    = COMBO(left_raise_combo, OSL_RSE),
-    [C_RIGHT_RAISE]   = COMBO(right_raise_combo, OSL_RSE),
-    [C_LEFT_NUMPAD]   = COMBO(left_numpad_combo, OSL_NUM),
-    [C_RIGHT_NUMPAD]  = COMBO(right_numpad_combo, OSL_NUM),
+    TWO_KEY_COMBO(KC_Z, KC_X, KC_CAPS),
 
-    [C_MOUSE]    = COMBO(mouse_combo, TG(_MOUSE)),
-    [C_NAV]      = COMBO(nav_combo, OSL(_NAV)),
+    TWO_KEY_COMBO(KC_A, KC_S, OSM(MOD_LGUI)),
+    TWO_KEY_COMBO(KC_S, KC_D, OSM(MOD_LALT)),
+    TWO_KEY_COMBO(KC_D, KC_F, OSM(MOD_LCTL)),
 
-    [C_LCTL]  = COMBO(lctl_combo, OSM(MOD_LCTL)),
-    [C_RCTL]  = COMBO(rctl_combo, OSM(MOD_RCTL)),
-    [C_LALT]  = COMBO(lalt_combo, OSM(MOD_LALT)),
-    [C_RALT]  = COMBO(ralt_combo, OSM(MOD_LALT)),
-    [C_LSFT]  = COMBO(lsft_combo, OSM(MOD_LSFT)),
-    [C_RSFT]  = COMBO(rsft_combo, OSM(MOD_RSFT)),
-    [C_LGUI]  = COMBO(lgui_combo, OSM(MOD_LGUI)),
-    [C_RGUI]  = COMBO(rgui_combo, OSM(MOD_RGUI)),
+    TWO_KEY_COMBO(KC_SCLN, KC_L, OSM(MOD_RGUI)),
+    TWO_KEY_COMBO(KC_L, KC_K, OSM(MOD_LALT)),
+    TWO_KEY_COMBO(KC_K, KC_J, OSM(MOD_RCTL)),
+
+    TWO_KEY_COMBO(BSPC_RS, KC_B, OSL_RSE),
+    TWO_KEY_COMBO(SPC_RS, KC_N, OSL_NAV),
+
+    TWO_KEY_COMBO(BSPC_RS, KC_V, OSL_NUM),
+    TWO_KEY_COMBO(SPC_RS, KC_M, TG(_MOUSE)),
 };
+
+const uint16_t COMBO_LEN = ARRAYSIZE(key_combos);
+
 #endif
