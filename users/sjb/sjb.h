@@ -28,6 +28,7 @@
 
 #define OSL_RSE OSL(_RAISE)
 #define OSL_NUM OSL(_NUMPAD)
+#define OSL_NAV OSL(_NAV)
 
 #define LT_RSE(_key) LT(_RAISE, _key)
 #define LT_NUM(_key) LT(_NUMPAD, _key)
