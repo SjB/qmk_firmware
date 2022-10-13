@@ -31,17 +31,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RIGHT_PRIMARY_THUMB_CLUSTER
   ),
   [_RAISE] = LAYOUT_wrapper(
-    S(KC_9)    , LEFT_RAISE_ROW_1          , RIGHT_RAISE_ROW_1 , S(KC_0) ,
-    S(KC_LBRC) , LEFT_RAISE_ROW_2          , RIGHT_RAISE_ROW_2 , S(KC_RBRC) ,
-    KC_LBRC    , LEFT_RAISE_ROW_3          , RIGHT_RAISE_ROW_3 , KC_RBRC ,
+    _______ , LEFT_RAISE_ROW_1          , RIGHT_RAISE_ROW_1 , _______ ,
+    _______ , LEFT_RAISE_ROW_2          , RIGHT_RAISE_ROW_2 , _______ ,
+    _______ , LEFT_RAISE_ROW_3          , RIGHT_RAISE_ROW_3 , _______ ,
 
     LEFT_RAISE_THUMB_CLUSTER(_QWERTY) ,
     TRANSPARENT_THUMB_CLUSTER
   ),
   [_NUMPAD] = LAYOUT_wrapper(
-    OSM_CTL , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , KC_DEL ,
-    OSM_ALT , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_INS ,
-    OSM_SFT , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , KC_EQL ,
+    OSM_CTL , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , _______ ,
+    OSM_ALT , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , _______ ,
+    OSM_SFT , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , _______ ,
 
     LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
     RIGHT_NUMPAD_THUMB_CLUSTER
