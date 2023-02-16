@@ -40,6 +40,7 @@
 #define ENT_SFT LSFT_T(KC_ENT)
 #define ENT_GUI LGUI_T(KC_ENT)
 #define ESC_CTL CTL_T(KC_ESC)
+#define EQL_SFT LSFT_T(KC_EQL)
 
 #define TAB_ALT ALT_T(KC_TAB)
 #define TAB_RALT RALT_T(KC_TAB)
