@@ -22,52 +22,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
       KC_GRV  , LEFT_QW_ROW_1 , LGUI(KC_SPC) , LGUI(KC_T)    , RIGHT_QW_ROW_1 , KC_MINS ,
       KC_BSLS , LEFT_QW_ROW_2 , OSL_NUM      , OSM_ALT       , RIGHT_QW_ROW_2 , KC_QUOT ,
-      OSM_SFT , LEFT_QW_ROW_3 , OSL_RSE      , OSM_CTL       , RIGHT_QW_ROW_3 , KC_EQL  ,
+      OSM_SFT , LEFT_QW_ROW_3 , OSL_RSE      , OSM_CTL       , RIGHT_QW_ROW_3 , EQL_SFT ,
 
-      OSM_GUI ,
       LEFT_PRIMARY_THUMB_CLUSTER  ,
-      RIGHT_PRIMARY_THUMB_CLUSTER ,
-      OSM_ALT
+      OSM_GUI ,
+      OSM_ALT ,
+      RIGHT_PRIMARY_THUMB_CLUSTER
     ),
     [_RAISE] = LAYOUT_wrapper(
-      S(KC_9)    , LEFT_RAISE_ROW_1 , _______ , _______ , RIGHT_RAISE_ROW_1 , S(KC_0) ,
-      S(KC_LBRC) , LEFT_RAISE_ROW_2 , _______ , _______ , RIGHT_RAISE_ROW_2 , S(KC_RBRC) ,
-      KC_LBRC    , LEFT_RAISE_ROW_3 , _______ , _______ , RIGHT_RAISE_ROW_3 , KC_RBRC ,
-      _______ ,
+      _______ , LEFT_RAISE_ROW_1 , _______ , _______ , RIGHT_RAISE_ROW_1 , _______ ,
+      _______ , LEFT_RAISE_ROW_2 , _______ , _______ , RIGHT_RAISE_ROW_2 , _______ ,
+      _______ , LEFT_RAISE_ROW_3 , _______ , _______ , RIGHT_RAISE_ROW_3 , _______ ,
+
       LEFT_RAISE_THUMB_CLUSTER(_QWERTY) ,
-      TRANSPARENT_THUMB_CLUSTER ,
-      _______
+      _______ ,
+      _______ ,
+      TRANSPARENT_THUMB_CLUSTER
     ),
 
     [_NUMPAD] = LAYOUT_wrapper(
-      OSM_CTL , FUNCPAD_ROW_1 , _______ , _______ , NUMPAD_ROW_1 , KC_DEL ,
-      OSM_ALT , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , KC_INS ,
-      OSM_SFT , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , KC_EQL ,
+      OSM_CTL , FUNCPAD_ROW_1 , _______ , _______ , NUMPAD_ROW_1 , _______ ,
+      OSM_ALT , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , _______ ,
+      OSM_SFT , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , _______ ,
 
-      _______ ,
       LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-      RIGHT_NUMPAD_THUMB_CLUSTER ,
-      _______
+      _______ ,
+      _______ ,
+      RIGHT_NUMPAD_THUMB_CLUSTER
     ),
     [_NAV] = LAYOUT_wrapper(
       RGB_TOG , TRANS_ROW , _______ , _______ , NAV_ROW_1 , RGB_HUI ,
       RGB_MOD , TRANS_ROW , _______ , _______ , NAV_ROW_2 , RGB_SAI ,
       KC_SLEP , TRANS_ROW , _______ , _______ , NAV_ROW_3 , RGB_VAI ,
 
-      _______ ,
       LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-      TRANSPARENT_THUMB_CLUSTER ,
-      _______
+      _______ ,
+      _______ ,
+      TRANSPARENT_THUMB_CLUSTER
     ),
     [_MOUSE] = LAYOUT_wrapper(
       NK_TOGG , LEFT_MOUSE_ROW_1 , _______ , _______ , RIGHT_MOUSE_ROW_1 , KC_NO ,
       KC_NO   , LEFT_MOUSE_ROW_2 , _______ , _______ , RIGHT_MOUSE_ROW_2 , KC_NO ,
       KC_NO   , LEFT_MOUSE_ROW_3 , _______ , _______ , RIGHT_MOUSE_ROW_3 , KC_NO ,
 
-      _______ ,
       LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
-      RIGHT_MOUSE_THUMB_CLUSTER ,
-      _______
+      _______ ,
+      _______ ,
+      RIGHT_MOUSE_THUMB_CLUSTER
     )
 };
 
