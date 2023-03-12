@@ -16,7 +16,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    OSM_SFT, KC_BSLS , KC_GRV ,
    LEFT_PRIMARY_THUMB_CLUSTER ,
    RIGHT_PRIMARY_THUMB_CLUSTER ,
-   KC_MINS , KC_QUOT , KC_EQL
+   KC_MINS , KC_QUOT , EQL_SFT
   ),
   [_RAISE] = LAYOUT_wrapper(
      LEFT_RAISE_ROW_1                     , RIGHT_RAISE_ROW_1 ,
