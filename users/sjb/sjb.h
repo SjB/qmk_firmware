@@ -25,6 +25,7 @@
 #define _NUMPAD 2
 #define _NAV 3
 #define _MOUSE 4
+#define _MODS 5
 
 #define OSL_RSE OSL(_RAISE)
 #define OSL_NUM OSL(_NUMPAD)
@@ -33,9 +34,13 @@
 #define LT_RSE(_key) LT(_RAISE, _key)
 #define LT_NUM(_key) LT(_NUMPAD, _key)
 #define LT_NAV(_key) LT(_NAV, _key)
+#define LT_MOD(_key) LT(_MODS, _key)
 
 #define G_NUM LT_NUM(KC_G)
 #define H_NUM LT_NUM(KC_H)
+
+#define J_MOD LT_MOD(KC_J)
+#define F_MOD LT_MOD(KC_F)
 
 #define ENT_SFT LSFT_T(KC_ENT)
 #define ENT_GUI LGUI_T(KC_ENT)
@@ -100,6 +105,9 @@
 #define FUNCPAD_ROW_1 KC_F1, KC_F2,  KC_F3,  KC_F4,  KC_PSCR
 #define FUNCPAD_ROW_2 KC_F5, KC_F6,  KC_F7,  KC_F8,  KC_INS
 #define FUNCPAD_ROW_3 KC_F9, KC_F10, KC_F11, KC_F12, KC_DEL
+
+#define LEFT_MOD_ROW OSM_ALT, OSM_GUI, OSM_CTL, _______, KC_NO
+#define RIGHT_MOD_ROW KC_NO, _______, OSM_CTL, OSM_GUI, OSM_ALT
 
 #define TRANSPARENT_THUMB_CLUSTER _______, _______, _______
 #define LEFT_TRANSPARENT_THUMB_CLUSTER(LAYER) _______, _______, TO(LAYER)
