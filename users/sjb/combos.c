@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "action_code.h"
 #include "quantum_keycodes.h"
+#include "action_code.h"
 #include "sjb.h"
 
 #ifdef COMBO_ENABLE
