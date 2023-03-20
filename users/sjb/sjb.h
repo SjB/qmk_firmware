@@ -22,8 +22,8 @@
 
 #define _QWERTY 0
 #define _RAISE 1
-#define _NUMPAD 2
-#define _NAV 3
+#define _NAV 2
+#define _NUMPAD 3
 #define _MOUSE 4
 #define _MODS 5
 
@@ -36,11 +36,14 @@
 #define LT_NAV(_key) LT(_NAV, _key)
 #define LT_MOD(_key) LT(_MODS, _key)
 
-#define G_NUM LT_NUM(KC_G)
-#define H_NUM LT_NUM(KC_H)
+#define LT_G LT_NAV(KC_G)
+#define LT_H LT_NAV(KC_H)
 
-#define J_MOD LT_MOD(KC_J)
-#define F_MOD LT_MOD(KC_F)
+#define LT_BSPC LT_RSE(KC_BSPC)
+#define LT_SPC  LT_RSE(KC_SPC)
+
+#define MOD_J LT_MOD(KC_J)
+#define MOD_F LT_MOD(KC_F)
 
 #define ENT_SFT LSFT_T(KC_ENT)
 #define ENT_GUI LGUI_T(KC_ENT)
@@ -49,8 +52,6 @@
 
 #define TAB_ALT ALT_T(KC_TAB)
 #define TAB_RALT RALT_T(KC_TAB)
-#define BSPC_RS LT_RSE(KC_BSPC)
-#define SPC_RS LT_RSE(KC_SPC)
 
 #define OSM_SFT OSM(MOD_LSFT)
 #define OSM_GUI OSM(MOD_LGUI)
@@ -64,19 +65,19 @@
 #define RIGHT_NUM_ROW KC_6, KC_7, KC_8, KC_9, KC_0
 
 #define LEFT_QW_ROW_1 KC_Q, KC_W, KC_E, KC_R, KC_T
-#define LEFT_QW_ROW_2 KC_A, KC_S, KC_D, KC_F, G_NUM
+#define LEFT_QW_ROW_2 KC_A, KC_S, KC_D, KC_F, LT_G
 #define LEFT_QW_ROW_3 KC_Z, KC_X, KC_C, KC_V, KC_B
 
 #define RIGHT_QW_ROW_1 KC_Y, KC_U, KC_I, KC_O, KC_P
-#define RIGHT_QW_ROW_2 H_NUM, KC_J, KC_K, KC_L, KC_SCLN
+#define RIGHT_QW_ROW_2 LT_H, KC_J, KC_K, KC_L, KC_SCLN
 #define RIGHT_QW_ROW_3 KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH
 
 #define LEFT_RAISE_ROW_1 S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5)
-#define LEFT_RAISE_ROW_2 KC_1, KC_2, KC_3, KC_4, LT_NUM(KC_5)
+#define LEFT_RAISE_ROW_2 KC_1, KC_2, KC_3, KC_4, LT_NAV(KC_5)
 #define LEFT_RAISE_ROW_3 KC_BSLS, KC_GRV, KC_LBRC, S(KC_LBRC), KC_QUOT
 
 #define RIGHT_RAISE_ROW_1 S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0)
-#define RIGHT_RAISE_ROW_2 LT_NUM(KC_6), KC_7, KC_8, KC_9, KC_0
+#define RIGHT_RAISE_ROW_2 LT_NAV(KC_6), KC_7, KC_8, KC_9, KC_0
 #define RIGHT_RAISE_ROW_3 S(KC_QUOT), S(KC_RBRC), KC_RBRC, KC_MINS, KC_EQL
 
 #define NUMPAD_ROW_1 KC_PSLS , KC_7, KC_8, KC_9, KC_PMNS
@@ -112,8 +113,8 @@
 #define TRANSPARENT_THUMB_CLUSTER _______, _______, _______
 #define LEFT_TRANSPARENT_THUMB_CLUSTER(LAYER) _______, _______, TO(LAYER)
 
-#define LEFT_PRIMARY_THUMB_CLUSTER  TAB_ALT, BSPC_RS, ESC_CTL
-#define RIGHT_PRIMARY_THUMB_CLUSTER ENT_GUI, SPC_RS,  OSM_SFT
+#define LEFT_PRIMARY_THUMB_CLUSTER  TAB_ALT, LT_BSPC, ESC_CTL
+#define RIGHT_PRIMARY_THUMB_CLUSTER ENT_GUI, LT_SPC,  OSM_SFT
 
 #define LEFT_RAISE_THUMB_CLUSTER(LAYER) TAB_RALT, LT_RSE(KC_DEL), TO(LAYER)
 #define LEFT_MOUSE_THUMB_CLUSTER(LAYER) KC_MS_BTN2, LT_RSE(KC_MS_BTN1), TO(LAYER)
