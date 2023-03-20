@@ -27,6 +27,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     if (IS_LAYER_ON_STATE(state, _NUMPAD)
         && IS_LAYER_OFF_STATE(state, _RAISE)
         && IS_LAYER_OFF_STATE(state, _NAV)) {
+        return layer_state_set_keymap(state);
     }
 
     state = update_tri_layer_state(state, _RAISE, _NAV, _NUMPAD);
