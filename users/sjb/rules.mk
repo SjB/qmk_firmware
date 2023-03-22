@@ -8,6 +8,7 @@ BOOTMAGIC_ENABLE = yes
 
 LTO_ENABLE = yes
 
-SRC += sjb.c \
+SRC += layer_lock.c \
+	   sjb.c \
 	   combos.c \
 	   encoder.c

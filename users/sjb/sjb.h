@@ -19,6 +19,9 @@
 #include "quantum.h"
 #include "version.h"
 #include "eeprom.h"
+enum custom_keycodes {
+  SJB_LLOCK = SAFE_RANGE,
+};
 
 #define _QWERTY 0
 #define _RAISE 1
@@ -35,6 +38,8 @@
 #define LT_NUM(_key) LT(_NUMPAD, _key)
 #define LT_NAV(_key) LT(_NAV, _key)
 #define LT_MOD(_key) LT(_MODS, _key)
+
+#define LK_LSFT LSFT_T(SJB_LLOCK);
 
 #define LT_G LT_NAV(KC_G)
 #define LT_H LT_NAV(KC_H)

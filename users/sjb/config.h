@@ -39,6 +39,7 @@
 #define MOUSEKEY_MAX_SPEED 7
 #define MOUSEKEY_WHEEL_DELAY 0
 
+ #define LAYER_LOCK_IDLE_TIMEOUT 60000  // Turn off after 60 seconds.
 
 #define ONESHOT_TAP_TOGGLE 2
 #define ONESHOT_TIMEOUT 1000

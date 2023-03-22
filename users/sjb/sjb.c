@@ -16,6 +16,8 @@
 
 #include "quantum.h"
 #include "sjb.h"
+#include "layer_lock.h"
+
 
 __attribute__ ((weak))
 layer_state_t layer_state_set_keymap(layer_state_t state) {
@@ -32,4 +34,26 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
     state = update_tri_layer_state(state, _RAISE, _NAV, _NUMPAD);
     return layer_state_set_keymap(state);
+}
+
+__attribute__ ((weak))
+void matrix_scan_sjb(void) {
+    return;
+}
+
+void matrix_scan_user(void) {
+    layer_lock_task();
+    matrix_scan_sjb();
+}
+
+
+__attribute__  ((weak))
+bool process_record_sjb(uint16_t keycode, keyrecord_t* record) {
+    return true;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  if (!process_layer_lock(keycode, record, SJB_LLOCK)) { return false; }
+
+  return process_record_sjb(keycode, record);
 }
