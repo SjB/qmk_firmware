@@ -28,16 +28,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      TRANSPARENT_THUMB_CLUSTER ,
      _______ , _______ , _______
   ),
-  [_NAV] = LAYOUT_wrapper(
-    TRANS_ROW                       , NAV_ROW_1 ,
-    TRANS_ROW                       , NAV_ROW_2 ,
-    TRANS_ROW , _______ , _______   , NAV_ROW_3 ,
-
-    KC_NO , KC_NO , KC_SLEP ,
-    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-    TRANSPARENT_THUMB_CLUSTER ,
-    KC_NO , KC_NO , KC_NO
-  ),
   [_NUMPAD] = LAYOUT_wrapper(
     FUNCPAD_ROW_1                     , NUMPAD_ROW_1 ,
     FUNCPAD_ROW_2                     , NUMPAD_ROW_2 ,
@@ -48,13 +38,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RIGHT_NUMPAD_THUMB_CLUSTER ,
     _______ , _______ , _______
   ),
+  [_NAV] = LAYOUT_wrapper(
+    LEFT_SYS_ROW_1                       , NAV_ROW_1 ,
+    LEFT_SYS_ROW_2                       , NAV_ROW_2 ,
+    LEFT_SYS_ROW_3 , _______ , _______   , NAV_ROW_3 ,
+
+    KC_NO , KC_NO , KC_NO ,
+    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    TRANSPARENT_THUMB_CLUSTER ,
+    KC_NO , KC_NO , KC_NO
+  ),
   [_MOUSE] = LAYOUT_wrapper(
     LEFT_MOUSE_ROW_1 ,                     RIGHT_MOUSE_ROW_1 ,
     LEFT_MOUSE_ROW_2 ,                     RIGHT_MOUSE_ROW_2 ,
     LEFT_MOUSE_ROW_3 , _______ , _______ , RIGHT_MOUSE_ROW_3 ,
 
-    KC_SLEP , NK_TOGG , KC_NO ,
-    LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
+    KC_NO , KC_NO, NK_TOGG ,
     RIGHT_MOUSE_THUMB_CLUSTER ,
     KC_NO , KC_NO , KC_NO
   ),

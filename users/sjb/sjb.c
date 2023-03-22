@@ -52,8 +52,23 @@ bool process_record_sjb(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
+bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
+    if (record->event.pressed){
+        switch (keycode) {
+        case SJB_UPDIR:
+            SEND_STRING("../");
+            return false;
+        case SJB_TCM:
+            SEND_STRING(SS_LCTL("a") SS_TAP(X_LBRC));
+            return false;
+        }
+    }
+    return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_layer_lock(keycode, record, SJB_LLOCK)) { return false; }
+  if (!process_special_keys(keycode, record)) { return false; }
 
   return process_record_sjb(keycode, record);
 }

@@ -7,6 +7,7 @@ COMMAND_ENABLE = no
 BOOTMAGIC_ENABLE = yes
 
 LTO_ENABLE = yes
+SEND_STRING_ENABLE = yes
 
 SRC += layer_lock.c \
 	   sjb.c \

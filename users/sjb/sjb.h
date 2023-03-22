@@ -17,10 +17,11 @@
 #pragma once
 
 #include "quantum.h"
-#include "version.h"
-#include "eeprom.h"
+
 enum custom_keycodes {
   SJB_LLOCK = SAFE_RANGE,
+  SJB_UPDIR,
+  SJB_TCM,
 };
 
 #define _QWERTY 0
@@ -100,6 +101,10 @@ enum custom_keycodes {
 #define LEFT_MOUSE_ROW_1 KC_BTN7, KC_BTN4, KC_MS_U, KC_BTN5, KC_BTN6
 #define LEFT_MOUSE_ROW_2 KC_ACL0, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U
 #define LEFT_MOUSE_ROW_3 KC_ACL1, KC_WH_L, KC_BTN3, KC_WH_R, KC_WH_D
+
+#define LEFT_SYS_ROW_1 KC_PWR , KC_PLUS, KC_LPRN , KC_RPRN , G(KC_SPC)
+#define LEFT_SYS_ROW_2 KC_SLEP, KC_UNDS, KC_LCBR , KC_RCBR , SJB_TCM
+#define LEFT_SYS_ROW_3 KC_PIPE, KC_TILD, KC_LBRC , KC_RBRC , KC_DEL
 
 #define TRANS_ROW _______, _______, _______, _______, _______
 #define BLANK_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
