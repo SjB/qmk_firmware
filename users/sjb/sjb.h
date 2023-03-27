@@ -22,6 +22,11 @@ enum custom_keycodes {
   SJB_LLOCK = SAFE_RANGE,
   SJB_RSTL,
   SJB_TCM,
+  OS_CTL,
+  OS_ALT,
+  OS_GUI,
+  OS_RALT,
+  OS_MEH
 };
 
 #define _QWERTY 0
@@ -29,7 +34,6 @@ enum custom_keycodes {
 #define _NAV 2
 #define _NUMPAD 3
 #define _MOUSE 4
-#define _MODS 5
 
 #define OSL_RSE OSL(_RAISE)
 #define OSL_NUM OSL(_NUMPAD)
@@ -38,7 +42,6 @@ enum custom_keycodes {
 #define LT_RSE(_key) LT(_RAISE, _key)
 #define LT_NUM(_key) LT(_NUMPAD, _key)
 #define LT_NAV(_key) LT(_NAV, _key)
-#define LT_MOD(_key) LT(_MODS, _key)
 
 #define LK_LSFT LSFT_T(SJB_LLOCK);
 
@@ -102,9 +105,9 @@ enum custom_keycodes {
 #define LEFT_MOUSE_ROW_2 KC_ACL0, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U
 #define LEFT_MOUSE_ROW_3 KC_ACL1, KC_WH_L, KC_BTN3, KC_WH_R, KC_WH_D
 
-#define LEFT_SYS_ROW_1 KC_PWR , OSM(MOD_RALT), KC_LPRN , KC_RPRN , G(C(KC_SPC))
-#define LEFT_SYS_ROW_2 KC_SLEP, SJB_TCM      , KC_LCBR , KC_RCBR , G(KC_SPC)
-#define LEFT_SYS_ROW_3 KC_CAPS, SJB_UPDIR    , KC_LBRC , KC_RBRC , KC_DEL
+#define LEFT_SYS_ROW_1 OS_RALT, SJB_TCM , G(KC_SPC), KC_LBRC, KC_RBRC
+#define LEFT_SYS_ROW_2 OS_ALT , OS_GUI  , OS_CTL ,   KC_LPRN, KC_RPRN
+#define LEFT_SYS_ROW_3 OS_MEH , KC_DEL  , KC_NO ,    KC_LCBR, KC_RCBR
 
 #define TRANS_ROW _______, _______, _______, _______, _______
 #define BLANK_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO

@@ -11,5 +11,6 @@ SEND_STRING_ENABLE = yes
 
 SRC += layer_lock.c \
 	   sjb.c \
+	   oneshot.c \
 	   combos.c \
 	   encoder.c

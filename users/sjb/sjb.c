@@ -17,6 +17,7 @@
 #include "quantum.h"
 #include "sjb.h"
 #include "layer_lock.h"
+#include "oneshot.h"
 
 
 __attribute__ ((weak))
@@ -67,9 +68,66 @@ bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
+bool is_oneshot_cancel_key(uint16_t keycode) {
+    switch (keycode) {
+    case ESC_CTL:
+    case SJB_RSTL:
+        return true;
+    default:
+        return false;
+    }
+}
+
+bool is_oneshot_ignored_key(uint16_t keycode) {
+    switch (keycode) {
+    case RSE(KC_BSPC):
+    case NAV(KC_SPC):
+    case KC_LSFT:
+    case OS_CTL:
+    case OS_ALT:
+    case OS_GUI:
+    case OS_RALT:
+    case OS_MEH:
+        return true;
+    default:
+        return false;
+    }
+}
+
+oneshot_state os_ctrl_state = os_up_unqueued;
+oneshot_state os_alt_state = os_up_unqueued;
+oneshot_state os_cmd_state = os_up_unqueued;
+oneshot_state os_ralt_state = os_up_unqueued;
+oneshot_state os_meh_state = os_up_unqueued;
+
+bool process_callum_onshot(uint16_t keycode, keyrecord_t* record) {
+    update_oneshot(
+        &os_ralt_state, KC_RALT, OS_RALT,
+        keycode, record
+    );
+    update_oneshot(
+        &os_meh_state, KC_MEH, OS_MEH,
+        keycode, record
+    );
+    update_oneshot(
+        &os_ctrl_state, KC_LCTL, OS_CTL,
+        keycode, record
+    );
+    update_oneshot(
+        &os_alt_state, KC_LALT, OS_ALT,
+        keycode, record
+    );
+    update_oneshot(
+        &os_cmd_state, KC_LGUI, OS_GUI,
+        keycode, record
+    );
+    return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_layer_lock(keycode, record, SJB_LLOCK)) { return false; }
   if (!process_special_keys(keycode, record)) { return false; }
+  if (!process_callum_onshot(keycode, record)) { return false; }
 
   return process_record_sjb(keycode, record);
 }
