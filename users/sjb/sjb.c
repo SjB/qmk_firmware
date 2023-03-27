@@ -53,13 +53,14 @@ bool process_record_sjb(uint16_t keycode, keyrecord_t* record) {
 }
 
 bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
+
     if (record->event.pressed){
         switch (keycode) {
-        case SJB_UPDIR:
-            SEND_STRING("../");
-            return false;
         case SJB_TCM:
             SEND_STRING(SS_LCTL("a") SS_TAP(X_LBRC));
+            return false;
+        case SJB_RSTL:
+            layer_clear();
             return false;
         }
     }

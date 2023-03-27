@@ -20,7 +20,7 @@
 
 enum custom_keycodes {
   SJB_LLOCK = SAFE_RANGE,
-  SJB_UPDIR,
+  SJB_RSTL,
   SJB_TCM,
 };
 
