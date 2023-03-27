@@ -20,24 +20,34 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
-      KC_GRV  , LEFT_QW_ROW_1 , LGUI(KC_SPC) , LGUI(KC_T)    , RIGHT_QW_ROW_1 , KC_MINS ,
-      KC_BSLS , LEFT_QW_ROW_2 , OSL_NUM      , OSM_ALT       , RIGHT_QW_ROW_2 , KC_QUOT ,
-      OSM_SFT , LEFT_QW_ROW_3 , OSL_RSE      , OSM_CTL       , RIGHT_QW_ROW_3 , EQL_SFT ,
+      OSM_CTL , LEFT_QW_ROW_1 , LGUI(KC_SPC) , LGUI(KC_T)    , RIGHT_QW_ROW_1 , OSM_MEH ,
+      KC_TAB  , LEFT_QW_ROW_2 , OSL_NUM      , OSL_RSE       , RIGHT_QW_ROW_2 , OSM_HYPR,
+      OSM_SFT , LEFT_QW_ROW_3 , OSM_ALT      , OSM_GUI       , RIGHT_QW_ROW_3 , OSM_SFT ,
 
+      OSM_MEH,
       LEFT_PRIMARY_THUMB_CLUSTER  ,
-      OSM_GUI ,
-      OSM_ALT ,
-      RIGHT_PRIMARY_THUMB_CLUSTER
+      RIGHT_PRIMARY_THUMB_CLUSTER ,
+      OSM_CTL
+    ),
+    [_APTV3] = LAYOUT_wrapper(
+      OSM_CTL , LEFT_APTV3_ROW_1 , LGUI(KC_SPC) , LGUI(KC_T) , RIGHT_APTV3_ROW_1 , OSM_MEH ,
+      KC_TAB  , LEFT_APTV3_ROW_2 , OSL_NUM      , OSL_RSE    , RIGHT_APTV3_ROW_2 , OSM_HYPR,
+      OSM_SFT , LEFT_APTV3_ROW_3 , OSM_ALT      , OSM_GUI    , RIGHT_APTV3_ROW_3 , OSM_SFT ,
+
+      OSM_MEH,
+      LEFT_PRIMARY_THUMB_CLUSTER ,
+      RIGHT_PRIMARY_THUMB_CLUSTER ,
+      OSM_CTL
     ),
     [_RAISE] = LAYOUT_wrapper(
       _______ , LEFT_RAISE_ROW_1 , _______ , _______ , RIGHT_RAISE_ROW_1 , _______ ,
       _______ , LEFT_RAISE_ROW_2 , _______ , _______ , RIGHT_RAISE_ROW_2 , _______ ,
       _______ , LEFT_RAISE_ROW_3 , _______ , _______ , RIGHT_RAISE_ROW_3 , _______ ,
 
-      LEFT_RAISE_THUMB_CLUSTER(_QWERTY) ,
       _______ ,
-      _______ ,
-      TRANSPARENT_THUMB_CLUSTER
+      LEFT_RAISE_THUMB_CLUSTER ,
+      RIGHT_RAISE_THUMB_CLUSTER ,
+      _______
     ),
 
     [_NUMPAD] = LAYOUT_wrapper(
@@ -45,48 +55,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       OSM_ALT , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , _______ ,
       OSM_SFT , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , _______ ,
 
-      LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
       _______ ,
-      _______ ,
-      RIGHT_NUMPAD_THUMB_CLUSTER
+      LEFT_NUMPAD_THUMB_CLUSTER ,
+      RIGHT_NUMPAD_THUMB_CLUSTER ,
+      _______
     ),
     [_NAV] = LAYOUT_wrapper(
-      RGB_TOG , TRANS_ROW , _______ , _______ , NAV_ROW_1 , RGB_HUI ,
-      RGB_MOD , TRANS_ROW , _______ , _______ , NAV_ROW_2 , RGB_SAI ,
-      KC_SLEP , TRANS_ROW , _______ , _______ , NAV_ROW_3 , RGB_VAI ,
+      RGB_TOG , LEFT_SYS_ROW_1 , _______ , _______ , NAV_ROW_1 , RGB_HUI ,
+      RGB_MOD , LEFT_SYS_ROW_2 , _______ , _______ , NAV_ROW_2 , RGB_SAI ,
+      NK_TOGG , LEFT_SYS_ROW_3 , _______ , _______ , NAV_ROW_3 , RGB_VAI ,
 
-      LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
       _______ ,
-      _______ ,
-      TRANSPARENT_THUMB_CLUSTER
+      LEFT_NAV_THUMB_CLUSTER ,
+      RIGHT_NAV_THUMB_CLUSTER ,
+      _______
     ),
     [_MOUSE] = LAYOUT_wrapper(
-      NK_TOGG , LEFT_MOUSE_ROW_1 , _______ , _______ , RIGHT_MOUSE_ROW_1 , KC_NO ,
-      KC_NO   , LEFT_MOUSE_ROW_2 , _______ , _______ , RIGHT_MOUSE_ROW_2 , KC_NO ,
-      KC_NO   , LEFT_MOUSE_ROW_3 , _______ , _______ , RIGHT_MOUSE_ROW_3 , KC_NO ,
+      _______ , LEFT_MOUSE_ROW_1 , _______ , _______ , RIGHT_MOUSE_ROW_1 , _______ ,
+      _______ , LEFT_MOUSE_ROW_2 , _______ , _______ , RIGHT_MOUSE_ROW_2 , _______ ,
+      _______ , LEFT_MOUSE_ROW_3 , _______ , _______ , RIGHT_MOUSE_ROW_3 , _______ ,
 
-      LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
       _______ ,
-      _______ ,
-      RIGHT_MOUSE_THUMB_CLUSTER
+      LEFT_MOUSE_THUMB_CLUSTER ,
+      RIGHT_MOUSE_THUMB_CLUSTER ,
+      _______
     )
 };
 
 #ifdef RGBLIGHT_LAYERS
 
-#define _NLAYERS 4
-const rgblight_segment_t PROGMEM ll_0[] = RGBLIGHT_LAYER_SEGMENTS({0,1,HSV_PURPLE},
-                                                                  {2,1,HSV_PURPLE});
+#define _NLAYERS 6
+const rgblight_segment_t PROGMEM ll_0[] = RGBLIGHT_LAYER_SEGMENTS({0,1,HSV_OFF},
+                                                                  {2,1,HSV_OFF});
 const rgblight_segment_t PROGMEM ll_1[] = RGBLIGHT_LAYER_SEGMENTS( {0,1,HSV_BLUE},
                                                                    {2,1,HSV_BLUE});
-const rgblight_segment_t PROGMEM ll_2[] = RGBLIGHT_LAYER_SEGMENTS( {0,1,HSV_CYAN},
-                                                                   {2,1,HSV_CYAN});
+const rgblight_segment_t PROGMEM ll_2[] = RGBLIGHT_LAYER_SEGMENTS( {0,1,HSV_PURPLE},
+                                                                   {2,1,HSV_PURPLE});
 const rgblight_segment_t PROGMEM ll_3[] = RGBLIGHT_LAYER_SEGMENTS( {0,1,HSV_GREEN},
                                                                    {2,1,HSV_GREEN});
-const rgblight_segment_t PROGMEM ll_4[] = RGBLIGHT_LAYER_SEGMENTS({1, 1, HSV_RED},
-                                                                  {3, 1, HSV_RED});
-const rgblight_segment_t PROGMEM ll_5[] = RGBLIGHT_LAYER_SEGMENTS({1, 1, HSV_YELLOW},
-                                                                  {3, 1, HSV_YELLOW});
+const rgblight_segment_t PROGMEM ll_4[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, HSV_YELLOW},
+                                                                  {2, 1, HSV_YELLOW});
+const rgblight_segment_t PROGMEM ll_5[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, HSV_WHITE},
+                                                                  {2, 1, HSV_WHITE});
 
 const rgblight_segment_t* const PROGMEM ll_layers[] =
     RGBLIGHT_LAYERS_LIST(ll_0,ll_1,ll_2,ll_3, ll_4, ll_5);

@@ -23,9 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT_wrapper(
-    KC_GRV  , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , KC_MINS ,
-    KC_BSLS , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , KC_QUOT ,
-    OSM_SFT , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , EQL_SFT  ,
+    OSM_CTL , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_MEH  ,
+    KC_TAB  , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_HYPR ,
+    OSM_SFT , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_SFT  ,
 
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
@@ -35,31 +35,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , LEFT_RAISE_ROW_2          , RIGHT_RAISE_ROW_2 , _______ ,
     _______ , LEFT_RAISE_ROW_3          , RIGHT_RAISE_ROW_3 , _______ ,
 
-    LEFT_RAISE_THUMB_CLUSTER(_QWERTY) ,
-    TRANSPARENT_THUMB_CLUSTER
+    LEFT_RAISE_THUMB_CLUSTER ,
+    RIGHT_RAISE_THUMB_CLUSTER
   ),
   [_NUMPAD] = LAYOUT_wrapper(
-    OSM_CTL , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , _______ ,
-    OSM_ALT , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , _______ ,
-    OSM_SFT , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , _______ ,
+    _______ , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , _______ ,
+    _______ , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , _______ ,
+    _______ , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , _______ ,
 
-    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
+    LEFT_NUMPAD_THUMB_CLUSTER ,
     RIGHT_NUMPAD_THUMB_CLUSTER
   ),
   [_NAV] = LAYOUT_wrapper(
     RGB_TOG , LEFT_SYS_ROW_1 , NAV_ROW_1 , RGB_HUI ,
     RGB_MOD , LEFT_SYS_ROW_2 , NAV_ROW_2 , RGB_SAI ,
-    KC_NO   , LEFT_SYS_ROW_3 , NAV_ROW_3 , RGB_VAI ,
+    NK_TOGG , LEFT_SYS_ROW_3 , NAV_ROW_3 , RGB_VAI ,
 
-    LEFT_TRANSPARENT_THUMB_CLUSTER(_QWERTY) ,
-    TRANSPARENT_THUMB_CLUSTER
+    LEFT_NAV_THUMB_CLUSTER,
+    RIGHT_NAV_THUMB_CLUSTER
   ),
   [_MOUSE] = LAYOUT_wrapper(
-    NK_TOGG , LEFT_MOUSE_ROW_1 , RIGHT_MOUSE_ROW_1 , KC_NO ,
-    KC_NO   , LEFT_MOUSE_ROW_2 , RIGHT_MOUSE_ROW_2 , KC_NO ,
-    KC_NO   , LEFT_MOUSE_ROW_3 , RIGHT_MOUSE_ROW_3 , KC_NO ,
+    _______ , LEFT_MOUSE_ROW_1 , RIGHT_MOUSE_ROW_1 , _______ ,
+    _______ , LEFT_MOUSE_ROW_2 , RIGHT_MOUSE_ROW_2 , _______ ,
+    _______ , LEFT_MOUSE_ROW_3 , RIGHT_MOUSE_ROW_3 , _______ ,
 
-    LEFT_MOUSE_THUMB_CLUSTER(_QWERTY) ,
+    LEFT_MOUSE_THUMB_CLUSTER ,
     RIGHT_MOUSE_THUMB_CLUSTER
   ),
 };
@@ -102,7 +102,7 @@ void oled_render_logo(void) {
         0x80, 0x81, 0x82, 0x83, 0x84,
         0xa0, 0xa1, 0xa2, 0xa3, 0xa4,
         0xc0, 0xc1, 0xc2, 0xc3, 0xc4, '\n',
-        'c', 'o', 'r', 'n', 'e', 0,
+        'S', 't', 'e', 'v', 'e', 0,
     };
     oled_write_ln_P(corne_logo, false);
 }
@@ -110,20 +110,19 @@ void oled_render_logo(void) {
 const char *oled_layer_state_text(void) {
     switch (get_highest_layer(layer_state)) {
         case _RAISE:
-            return PSTR("R");
+            return PSTR("RAI");
         case _NUMPAD:
-            return PSTR("NU");
+            return PSTR("NUM");
         case _NAV:
-            return PSTR("NA");
+            return PSTR("NAV");
         case _MOUSE:
-            return PSTR("M");
+            return PSTR("MOU");
         default:
-            return PSTR("QW");
+            return PSTR("DEF");
     }
 }
 
 void oled_render_layer_state(void) {
-
     led_t led_state = host_keyboard_led_state();
     oled_write_P(led_state.caps_lock ? PSTR("C ") :  PSTR("  "), false);
 
