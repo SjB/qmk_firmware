@@ -26,7 +26,8 @@ enum custom_keycodes {
   OS_ALT,
   OS_GUI,
   OS_RALT,
-  OS_MEH
+  OS_MEH,
+  NEW_SAFE_RANGE
 };
 
 #define _QWERTY 0
