@@ -18,6 +18,8 @@
 
 #include "quantum.h"
 
+#define ARRAYSIZE(arr) sizeof(arr) / sizeof(arr[0])
+
 enum custom_keycodes {
   SJB_LLOCK = SAFE_RANGE,
   SJB_RSTL,

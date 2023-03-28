@@ -23,7 +23,6 @@
 #define SJB_DEFINE_KEY(name, args...) const uint16_t PROGMEM combo_##name[] = {args, COMBO_END}
 #define SJB_COMBO(name, action) COMBO(combo_##name, action)
 
-#define ARRAYSIZE(arr) sizeof(arr) / sizeof(arr[0])
 
 SJB_DEFINE_KEY(CK_LBOOT,  KC_Q, KC_T);
 SJB_DEFINE_KEY(CK_RBOOT,  KC_P, KC_Y);
