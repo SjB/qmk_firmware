@@ -131,7 +131,7 @@ enum custom_keycodes {
 #define LEFT_PRIMARY_THUMB_CLUSTER  OSM_ALT, RSE(KC_BSPC), ESC_CTL
 #define RIGHT_PRIMARY_THUMB_CLUSTER ENT_SFT, NAV(KC_SPC),  OSM_GUI
 
-#define LEFT_RAISE_THUMB_CLUSTER  _______, RSE(KC_DEL), SJB_RSTL
+#define LEFT_RAISE_THUMB_CLUSTER  _______, _______, SJB_RSTL
 #define RIGHT_RAISE_THUMB_CLUSTER _______, _______, _______
 
 #define LEFT_NAV_THUMB_CLUSTER  _______, _______, SJB_RSTL
