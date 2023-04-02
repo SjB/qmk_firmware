@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include "sjb.h"
 
+#include "version.h"
 #include <stdio.h>
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -69,42 +70,28 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return OLED_ROTATION_270;  // flips the display 180 degrees if offhand
 }
 
-char keylog_str[16] = {};
+/*
+void set_keylog(uint16_t keycode, keyrecord_t *record);
 
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
-void set_keylog(uint16_t keycode, keyrecord_t *record) {
-  char name = ' ';
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
-        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
-    if (keycode < 60) {
-        name = code_to_name[keycode];
-    }
-
-    // update keylog
-    snprintf(keylog_str, sizeof(keylog_str), "\n\n%dx%d\n\nk%2d %c\n",
-             record->event.key.row, record->event.key.col,
-             keycode, name);
+bool process_record_sjb(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    set_keylog(keycode, record);
+  }
+  return true;
 }
+*/
 
-void oled_render_keylog(void) {
-    oled_write(keylog_str, false);
-}
-
-void oled_render_logo(void) {
-    static const char PROGMEM corne_logo[] = {
+const char *read_logo(void) {
+    static const char PROGMEM logo[] = {
         0x80, 0x81, 0x82, 0x83, 0x84,
         0xa0, 0xa1, 0xa2, 0xa3, 0xa4,
         0xc0, 0xc1, 0xc2, 0xc3, 0xc4, '\n',
-        'S', 't', 'e', 'v', 'e', 0,
+        0,
     };
-    oled_write_ln_P(corne_logo, false);
+    return logo;
+}
+const char *build_information(void) {
+    return PSTR(QMK_VERSION);
 }
 
 const char *oled_layer_state_text(void) {
@@ -122,26 +109,16 @@ const char *oled_layer_state_text(void) {
     }
 }
 
-void oled_render_layer_state(void) {
-    led_t led_state = host_keyboard_led_state();
-    oled_write_P(led_state.caps_lock ? PSTR("C ") :  PSTR("  "), false);
-
-    oled_write_ln_P(oled_layer_state_text(), false);
-}
-
 bool oled_task_user(void) {
-    oled_render_logo();
+    oled_write_ln_P(read_logo(), false);
     if (is_keyboard_master()) {
-        oled_render_layer_state();
-        oled_render_keylog();
+        oled_write_ln_P(oled_layer_state_text(), false);
+        oled_advance_page(true);
+        oled_advance_page(true);
+        oled_advance_page(true);
+        oled_write_ln_P(build_information(), false);
+//        oled_render_keylog();
     }
     return false;
-}
-
-bool process_record_sjb(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    set_keylog(keycode, record);
-  }
-  return true;
 }
 #endif // OLED_ENABLE
