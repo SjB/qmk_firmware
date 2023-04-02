@@ -21,9 +21,9 @@
 #define ARRAYSIZE(arr) sizeof(arr) / sizeof(arr[0])
 
 enum custom_keycodes {
-  SJB_LLOCK = SAFE_RANGE,
-  SJB_RSTL,
-  SJB_TCM,
+  SB_LLOCK = SAFE_RANGE,
+  SB_RSTL,
+  SB_TCM,
   OS_CTL,
   OS_ALT,
   OS_GUI,
@@ -46,7 +46,7 @@ enum custom_keycodes {
 #define LT_NUM(_key) LT(_NUMPAD, _key)
 #define LT_NAV(_key) LT(_NAV, _key)
 
-#define LK_LSFT LSFT_T(SJB_LLOCK);
+#define LK_LSFT LSFT_T(SB_LLOCK)
 
 #define NAV(_key) LT(_NAV, _key)
 #define RSE(_key) LT(_RAISE, _key)
@@ -72,6 +72,16 @@ enum custom_keycodes {
 #define OSM_MEH OSM(MOD_MEH)
 #define OSM_HYPR OSM(MOD_HYPR)
 
+#define SB_RSE RSE(KC_SPC)
+#define SB_NAV NAV(KC_BSPC)
+#define SB_BSPC SB_NAV
+#define SB_TAB ESC_CTL
+#define SB_GUI ENT_SFT
+#define SB_ESC ESC_CTL
+
+#define TRANS_ROW _______, _______, _______, _______, _______
+#define BLANK_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+
 #define LEFT_FUNC_ROW KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
 #define RIGHT_FUNC_ROW KC_F6, KC_F7, KC_F8, KC_F9, KC_F10
 
@@ -87,11 +97,11 @@ enum custom_keycodes {
 #define RIGHT_QW_ROW_3 KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH
 
 #define LEFT_RAISE_ROW_1 S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5)
-#define LEFT_RAISE_ROW_2 KC_1,    KC_2,    KC_3,    KC_4,    KC_5
+#define LEFT_RAISE_ROW_2 KC_1   , KC_2   , KC_3   , KC_4   , KC_5
 #define LEFT_RAISE_ROW_3 KC_BSLS, KC_PIPE, KC_GRV,  KC_TILD, KC_QUOT
 
 #define RIGHT_RAISE_ROW_1 S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0)
-#define RIGHT_RAISE_ROW_2 KC_6,    KC_7,    KC_8,    KC_9,    KC_0
+#define RIGHT_RAISE_ROW_2 KC_6   , KC_7   , KC_8   , KC_9   , KC_0
 #define RIGHT_RAISE_ROW_3 KC_DQUO, KC_UNDS, KC_MINS, KC_PLUS, KC_EQL
 
 #define NUMPAD_ROW_1 KC_PSLS , KC_7, KC_8, KC_9, KC_PMNS
@@ -110,40 +120,37 @@ enum custom_keycodes {
 #define LEFT_MOUSE_ROW_2 KC_ACL0, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U
 #define LEFT_MOUSE_ROW_3 KC_ACL1, KC_WH_L, KC_BTN3, KC_WH_R, KC_WH_D
 
-#define LEFT_SYS_ROW_1 OS_RALT, SJB_TCM , G(KC_SPC), KC_LBRC, KC_RBRC
-#define LEFT_SYS_ROW_2 OS_ALT , OS_GUI  , OS_CTL ,   KC_LPRN, KC_RPRN
-#define LEFT_SYS_ROW_3 OS_MEH , KC_DEL  , KC_NO ,    KC_LCBR, KC_RCBR
+#define LEFT_SYS_ROW_1 OS_RALT, SB_TCM , G(KC_SPC), KC_LBRC, KC_RBRC
+#define LEFT_SYS_ROW_2 OS_ALT , OS_GUI , OS_CTL   , KC_LPRN, KC_RPRN
+#define LEFT_SYS_ROW_3 OS_MEH , C(KC_A), KC_TAB   , KC_LCBR, KC_RCBR
 
-#define TRANS_ROW _______, _______, _______, _______, _______
-#define BLANK_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+#define NAV_ROW_1 KC_HOME , KC_PGUP, KC_UP  , KC_VOLU , KC_MPRV
+#define NAV_ROW_2 CW_TOGG , KC_LEFT, KC_DOWN, KC_RIGHT, KC_MNXT
+#define NAV_ROW_3 KC_END  , KC_PGDN, KC_MUTE, KC_VOLD , KC_MPLY
 
-#define NAV_ROW_1 KC_HOME, KC_PGUP, KC_UP,   KC_VOLU,  KC_MPRV
-#define NAV_ROW_2 KC_TAB, KC_LEFT, KC_DOWN,   KC_RIGHT, KC_MNXT
-#define NAV_ROW_3 KC_END,  KC_PGDN, KC_MUTE, KC_VOLD,  KC_MPLY
-
-#define FUNCPAD_ROW_1 KC_F1, KC_F2,  KC_F3,  KC_F4,  KC_PSCR
-#define FUNCPAD_ROW_2 KC_F5, KC_F6,  KC_F7,  KC_F8,  KC_INS
+#define FUNCPAD_ROW_1 KC_F1, KC_F2 , KC_F3 , KC_F4 , KC_PSCR
+#define FUNCPAD_ROW_2 KC_F5, KC_F6 , KC_F7 , KC_F8 , KC_INS
 #define FUNCPAD_ROW_3 KC_F9, KC_F10, KC_F11, KC_F12, KC_DEL
 
 #define TRANSPARENT_THUMB_CLUSTER _______, _______, _______
 #define RIGHT_TRANSPARENT_THUMB_CLUSTER(_key) _______, _______, _key
 
-#define LEFT_RSTL_THUMB_CLUSTER  _______,  _______, SJB_RSTL
+#define LEFT_RSTL_THUMB_CLUSTER  _______,  _______, SB_RSTL
 #define RIGHT_RSTL_THUMB_CLUSTER RSTL_SFT, _______, _______
 
-#define LEFT_PRIMARY_THUMB_CLUSTER  OSM_ALT, RSE(KC_BSPC), ESC_CTL
-#define RIGHT_PRIMARY_THUMB_CLUSTER ENT_SFT, NAV(KC_SPC),  OSM_GUI
+#define LEFT_PRIMARY_THUMB_CLUSTER  OSM_ALT, NAV(KC_BSPC), ESC_CTL
+#define RIGHT_PRIMARY_THUMB_CLUSTER ENT_SFT, RSE(KC_SPC),  OSM_GUI
 
-#define LEFT_RAISE_THUMB_CLUSTER  _______, _______, SJB_RSTL
+#define LEFT_RAISE_THUMB_CLUSTER  _______, _______, SB_RSTL
 #define RIGHT_RAISE_THUMB_CLUSTER _______, _______, _______
 
-#define LEFT_NAV_THUMB_CLUSTER  _______, _______, SJB_RSTL
+#define LEFT_NAV_THUMB_CLUSTER  _______, _______, SB_RSTL
 #define RIGHT_NAV_THUMB_CLUSTER _______, _______, _______
 
-#define LEFT_NUMPAD_THUMB_CLUSTER  _______,  _______, SJB_RSTL
+#define LEFT_NUMPAD_THUMB_CLUSTER  _______,  _______, SB_RSTL
 #define RIGHT_NUMPAD_THUMB_CLUSTER _______, _______ , KC_EQL
 
-#define LEFT_MOUSE_THUMB_CLUSTER  KC_MS_BTN2, NAV(KC_MS_BTN1), SJB_RSTL
+#define LEFT_MOUSE_THUMB_CLUSTER  KC_MS_BTN2, NAV(KC_MS_BTN1), SB_RSTL
 #define RIGHT_MOUSE_THUMB_CLUSTER _______,    KC_MS_BTN1,      KC_MS_BTN2
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)

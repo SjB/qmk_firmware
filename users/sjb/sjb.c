@@ -54,13 +54,12 @@ bool process_record_sjb(uint16_t keycode, keyrecord_t* record) {
 }
 
 bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
-
     if (record->event.pressed){
         switch (keycode) {
-        case SJB_TCM:
+        case SB_TCM:
             SEND_STRING(SS_LCTL("a") SS_TAP(X_LBRC));
             return false;
-        case SJB_RSTL:
+        case SB_RSTL:
             layer_clear();
             return false;
         }
@@ -70,8 +69,8 @@ bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-    case ESC_CTL:
-    case SJB_RSTL:
+    case SB_ESC:
+    case SB_RSTL:
         return true;
     default:
         return false;
@@ -80,8 +79,8 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
-    case RSE(KC_BSPC):
-    case NAV(KC_SPC):
+    case SB_RSE:
+    case SB_NAV:
     case KC_LSFT:
     case OS_CTL:
     case OS_ALT:
@@ -125,7 +124,7 @@ bool process_callum_onshot(uint16_t keycode, keyrecord_t* record) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-  if (!process_layer_lock(keycode, record, SJB_LLOCK)) { return false; }
+  if (!process_layer_lock(keycode, record, SB_LLOCK)) { return false; }
   if (!process_special_keys(keycode, record)) { return false; }
   if (!process_callum_onshot(keycode, record)) { return false; }
 
