@@ -18,16 +18,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    RIGHT_PRIMARY_THUMB_CLUSTER ,
    OSM_MEH, OSM_HYPR, OSM_SFT
   ),
-  [_APTV3] = LAYOUT_wrapper(
-    LEFT_APTV3_ROW_1                     , RIGHT_APTV3_ROW_1 ,
-    LEFT_APTV3_ROW_2                     , RIGHT_APTV3_ROW_2 ,
-    LEFT_APTV3_ROW_3 , _______ , _______ , RIGHT_APTV3_ROW_3 ,
-
-    OSM_SFT, KC_TAB, OSM_CTL ,
-    LEFT_PRIMARY_THUMB_CLUSTER ,
-    RIGHT_PRIMARY_THUMB_CLUSTER ,
-    OSM_MEH, OSM_HYPR, OSM_SFT
-  ),
   [_RAISE] = LAYOUT_wrapper(
      LEFT_RAISE_ROW_1                     , RIGHT_RAISE_ROW_1 ,
      LEFT_RAISE_ROW_2                     , RIGHT_RAISE_ROW_2 ,
