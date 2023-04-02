@@ -15,16 +15,25 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #pragma once
 
-#ifdef KEYBOARD_crkbd_rev1
-#    include "rev1.h"
-#endif
-#ifdef KEYBOARD_crkbd_r2g
-#    include "r2g.h"
-#endif
-#ifdef KEYBOARD_crkbd_elitec
-#    include "elitec.h"
+/* ws2812 RGB LED */
+#define RGB_DI_PIN      D3
+
+#ifdef RGBLIGHT_ENABLE
+#    define RGBLED_NUM 54 // Number of LEDs
+#    define RGBLED_SPLIT \
+        { 27, 27 }
+#    define RGBLIGHT_SPLIT
 #endif
 
-#include "quantum.h"
+#ifdef RGB_MATRIX_ENABLE
+#    define RGBLED_NUM       54 // Number of LEDs
+#    define RGB_MATRIX_LED_COUNT RGBLED_NUM
+#    define RGB_MATRIX_SPLIT \
+        { 27, 27 }
+#    define SPLIT_TRANSPORT_MIRROR
+#endif
+
+#define DIODE_DIRECTION COL2ROW
