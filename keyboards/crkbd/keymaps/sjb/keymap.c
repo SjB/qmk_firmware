@@ -24,9 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT_wrapper(
-    OSM_CTL , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_MEH  ,
-    KC_TAB  , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_HYPR ,
-    OSM_SFT , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_SFT  ,
+    KC_TAB , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_MEH  ,
+    OSM_SFT , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_SFT ,
+    OSM_CTL , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_HYPR ,
 
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
@@ -113,6 +113,7 @@ bool oled_task_user(void) {
     oled_write_ln_P(read_logo(), false);
     if (is_keyboard_master()) {
         oled_write_ln_P(oled_layer_state_text(), false);
+
         oled_advance_page(true);
         oled_advance_page(true);
         oled_advance_page(true);
