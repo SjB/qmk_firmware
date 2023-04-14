@@ -43,6 +43,6 @@
  #define LAYER_LOCK_IDLE_TIMEOUT 60000  // Turn off after 60 seconds.
 
 #define ONESHOT_TAP_TOGGLE 2
-#define ONESHOT_TIMEOUT 1000
+#define ONESHOT_TIMEOUT 5000
 
 #define FORCE_NKRO

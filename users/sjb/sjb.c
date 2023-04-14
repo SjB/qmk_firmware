@@ -157,6 +157,8 @@ bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
             return false;
         case SB_RSTL:
             layer_clear();
+            clear_oneshot_locked_mods();
+            clear_oneshot_mods();
             return false;
         }
     }
@@ -223,7 +225,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     if (!(
           process_layer_lock(keycode, record, SB_LLOCK) &&
           process_special_keys(keycode, record) &&
-          process_callum_oneshot(keycode, record) &&
+//        process_callum_oneshot(keycode, record) &&
           process_shifted_backspace(keycode, record) &&
 //        process_thumb_super(keycode, record) &&
 //        process_thumb_tab(keycode, record) &&
