@@ -153,7 +153,7 @@ bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
     if (record->event.pressed){
         switch (keycode) {
         case SB_TCM:
-            SEND_STRING(SS_LCTL("a") SS_TAP(X_LBRC));
+            SEND_STRING(SS_LCTL("b") SS_TAP(X_LBRC));
             return false;
         case SB_RSTL:
             layer_clear();
