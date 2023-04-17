@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_STATIC_GRADIENT
-//    #define RGBLIGHT_EFFECT_BREATHING
+    #define RGBLIGHT_EFFECT_BREATHING
     #define RGBLIGHT_EFFECT_RAINBOW_MOOD
     #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 //    #define RGBLIGHT_EFFECT_TWINKLE
