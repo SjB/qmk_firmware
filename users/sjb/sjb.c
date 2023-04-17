@@ -27,14 +27,21 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
+    if (IS_LAYER_ON_STATE(state, _NUMPAD)
+        && IS_LAYER_OFF_STATE(state, _RAISE)
+        && IS_LAYER_OFF_STATE(state, _NAV)) {
+        return layer_state_set_keymap(state);
+    }
+
     state = update_tri_layer_state(state, _RAISE, _NAV, _NUMPAD);
     return layer_state_set_keymap(state);
 }
 
 static uint8_t mod_state;
+#ifdef SB_SHIFTED_BACKSPACE
 bool process_shifted_backspace(uint16_t keycode, keyrecord_t *record) {
+    mod_state = get_mods();
     if (keycode == SB_BSPC) {
-        mod_state = get_mods();
         static bool delkey_registered;
         if (record->event.pressed) {
             if (mod_state & MOD_MASK_SHIFT) {
@@ -54,7 +61,9 @@ bool process_shifted_backspace(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 };
+#endif
 
+#ifdef SB_THUMB_TAB
 bool process_thumb_tab(uint16_t keycode, keyrecord_t *record) {
     if (keycode == SB_TAB) {
         mod_state = get_mods();
@@ -77,7 +86,9 @@ bool process_thumb_tab(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+#endif
 
+#ifdef SB_THUMB_SUPER
 bool process_thumb_super(uint16_t keycode, keyrecord_t *record) {
     if (keycode == SB_GUI) {
         mod_state = get_mods();
@@ -101,37 +112,6 @@ bool process_thumb_super(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
-
-bool process_shifted_bracket(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        uint8_t mstate = get_mods();
-        if (mstate & MOD_MASK_SHIFT) {
-            switch (keycode) {
-                case KC_LBRC:
-                    del_mods(MOD_MASK_SHIFT);
-                    tap_code16(KC_RBRC);
-                    set_mods(mstate);
-                    return false;
-                case KC_LPRN:
-                    tap_code16(KC_RPRN);
-                    return false;
-                case KC_LCBR:
-                    tap_code16(KC_RCBR);
-                    return false;
-            }
-        }
-    }
-    return true;
-}
-
-#ifdef KEY_OVERRIDE_ENABLE
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
-
-// This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
-    &delete_key_override,
-    NULL // Null terminate the array of overrides!
-};
 #endif
 
 __attribute__ ((weak))
@@ -149,6 +129,7 @@ bool process_record_sjb(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
+#ifdef SB_SPECIAL_KEY
 bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
     if (record->event.pressed){
         switch (keycode) {
@@ -164,7 +145,9 @@ bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
     }
     return true;
 }
+#endif
 
+#ifdef CALLUM_ONESHOT
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
     case SB_ESC:
@@ -220,16 +203,31 @@ bool process_callum_oneshot(uint16_t keycode, keyrecord_t* record) {
     );
     return true;
 }
+#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     if (!(
           process_layer_lock(keycode, record, SB_LLOCK) &&
+
+#ifdef CALLUM_ONESHOT
+          process_callum_oneshot(keycode, record) &&
+#endif
+
+#ifdef SB_SPECIAL_KEY
           process_special_keys(keycode, record) &&
-//        process_callum_oneshot(keycode, record) &&
+#endif
+
+#ifdef SB_THUMB_SUPER
+          process_thumb_super(keycode, record) &&
+#endif
+
+#ifdef SB_THUMB_TAB
+          process_thumb_tab(keycode, record) &&
+#endif
+
+#ifdef SB_SHIFTED_BACKSPACE
           process_shifted_backspace(keycode, record) &&
-//        process_thumb_super(keycode, record) &&
-//        process_thumb_tab(keycode, record) &&
-          process_shifted_bracket(keycode, record) &&
+#endif
           process_record_sjb(keycode, record) &&
           true)) {
         return false;

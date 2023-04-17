@@ -46,3 +46,6 @@
 #define ONESHOT_TIMEOUT 5000
 
 #define FORCE_NKRO
+
+#define SB_SHIFTED_BACKSPACE
+#define SB_SPECIAL_KEY

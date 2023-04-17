@@ -24,11 +24,13 @@ enum custom_keycodes {
   SB_LLOCK = SAFE_RANGE,
   SB_RSTL,
   SB_TCM,
+#ifdef CALLUM_ONESHOT
   OS_CTL,
   OS_ALT,
   OS_GUI,
   OS_RALT,
   OS_MEH,
+#endif
   NEW_SAFE_RANGE
 };
 
