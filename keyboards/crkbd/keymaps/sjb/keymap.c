@@ -24,9 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT_wrapper(
-    KC_TAB , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_MEH  ,
-    OSM_SFT , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_SFT ,
-    OSM_CTL , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_HYPR ,
+    OSM_ALT , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_HYPR ,
+    KC_TAB  , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_SFT  ,
+    OSM_CTL , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_MEH  ,
 
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
