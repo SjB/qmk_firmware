@@ -49,3 +49,4 @@
 
 #define SB_SHIFTED_BACKSPACE
 #define SB_SPECIAL_KEY
+#define SB_HRL

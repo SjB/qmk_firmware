@@ -7,9 +7,9 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_wrapper(
-    OSM_ALT , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_HYPR ,
+    OSM_CTL , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_HYPR ,
     KC_TAB  , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_SFT  ,
-    OSM_CTL , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_MEH  ,
+    OSM_GUI , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_MEH  ,
 
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
@@ -46,6 +46,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LEFT_MOUSE_THUMB_CLUSTER ,
     RIGHT_MOUSE_THUMB_CLUSTER
   ),
+  [_RHR] = LAYOUT_wrapper(
+    _______, TRANS_ROW, TRANS_ROW, _______,
+    _______, LEFT_HOME_ROW, RIGHT_HOME_ROW_A, _______,
+    _______, TRANS_ROW, TRANS_ROW, _______,
+    LEFT_HOME_ROW_THUMB_CLUSTER,
+    RIGHT_HOME_ROW_THUMB_CLUSTER
+  ),
+  [_LHR] = LAYOUT_wrapper(
+    _______, TRANS_ROW, TRANS_ROW, _______,
+    _______, RIGHT_HOME_ROW_A, RIGHT_HOME_ROW, _______,
+    _______, TRANS_ROW, TRANS_ROW, _______,
+    LEFT_HOME_ROW_THUMB_CLUSTER,
+    RIGHT_HOME_ROW_THUMB_CLUSTER
+  ),
 };
 
 #ifdef RGBLIGHT_LAYERS
@@ -56,9 +70,11 @@ const rgblight_segment_t PROGMEM ll_1[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_BLU
 const rgblight_segment_t PROGMEM ll_2[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_PURPLE});
 const rgblight_segment_t PROGMEM ll_3[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_GREEN});
 const rgblight_segment_t PROGMEM ll_4[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_YELLOW});
+const rgblight_segment_t PROGMEM ll_5[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_RED});
+const rgblight_segment_t PROGMEM ll_6[] = RGBLIGHT_LAYER_SEGMENTS({0, 2, HSV_RED});
 
 const rgblight_segment_t* const PROGMEM ll_layers[] =
-    RGBLIGHT_LAYERS_LIST(ll_0,ll_1,ll_2,ll_3, ll_4);
+    RGBLIGHT_LAYERS_LIST(ll_0,ll_1,ll_2,ll_3, ll_4, ll_5, ll_6);
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
     for (uint8_t i=0 ; i < _NLAYERS; i++)

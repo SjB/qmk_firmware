@@ -20,22 +20,12 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
-      OSM_CTL , LEFT_QW_ROW_1 , LGUI(KC_SPC) , LGUI(KC_T)    , RIGHT_QW_ROW_1 , OSM_MEH ,
-      KC_TAB  , LEFT_QW_ROW_2 , OSL_NUM      , OSL_RSE       , RIGHT_QW_ROW_2 , OSM_HYPR,
-      OSM_SFT , LEFT_QW_ROW_3 , OSM_ALT      , OSM_GUI       , RIGHT_QW_ROW_3 , OSM_SFT ,
+      OSM_CTL , LEFT_QW_ROW_1 , G(KC_SPC)   , CW_TOGG    , RIGHT_QW_ROW_1 , OSM_HYPR,
+      KC_TAB  , LEFT_QW_ROW_2 , TG(_NUMPAD) , TG(_MOUSE) , RIGHT_QW_ROW_2 , OSM_SFT ,
+      OSM_GUI , LEFT_QW_ROW_3 , QK_LOCK     , SB_LLOCK   , RIGHT_QW_ROW_3 , OSM_MEH ,
 
       OSM_MEH,
       LEFT_PRIMARY_THUMB_CLUSTER  ,
-      RIGHT_PRIMARY_THUMB_CLUSTER ,
-      OSM_CTL
-    ),
-    [_APTV3] = LAYOUT_wrapper(
-      OSM_CTL , LEFT_APTV3_ROW_1 , LGUI(KC_SPC) , LGUI(KC_T) , RIGHT_APTV3_ROW_1 , OSM_MEH ,
-      KC_TAB  , LEFT_APTV3_ROW_2 , OSL_NUM      , OSL_RSE    , RIGHT_APTV3_ROW_2 , OSM_HYPR,
-      OSM_SFT , LEFT_APTV3_ROW_3 , OSM_ALT      , OSM_GUI    , RIGHT_APTV3_ROW_3 , OSM_SFT ,
-
-      OSM_MEH,
-      LEFT_PRIMARY_THUMB_CLUSTER ,
       RIGHT_PRIMARY_THUMB_CLUSTER ,
       OSM_CTL
     ),
@@ -61,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______
     ),
     [_NAV] = LAYOUT_wrapper(
-      RGB_TOG , LEFT_SYS_ROW_1 , _______ , _______ , NAV_ROW_1 , RGB_HUI ,
-      RGB_MOD , LEFT_SYS_ROW_2 , _______ , _______ , NAV_ROW_2 , RGB_SAI ,
-      NK_TOGG , LEFT_SYS_ROW_3 , _______ , _______ , NAV_ROW_3 , RGB_VAI ,
+      RGB_TOG , LEFT_NAV_ROW_1 , _______ , _______ , RIGHT_SYS_ROW_1 , RGB_HUI ,
+      RGB_MOD , LEFT_NAV_ROW_2 , _______ , _______ , RIGHT_SYS_ROW_2 , RGB_SAI ,
+      NK_TOGG , LEFT_NAV_ROW_3 , _______ , _______ , RIGHT_SYS_ROW_3 , RGB_VAI ,
 
       _______ ,
       LEFT_NAV_THUMB_CLUSTER ,
@@ -79,7 +69,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       LEFT_MOUSE_THUMB_CLUSTER ,
       RIGHT_MOUSE_THUMB_CLUSTER ,
       _______
-    )
+    ),
+    [_RHR] = LAYOUT_wrapper(
+      _______, TRANS_ROW,     _______ , _______ , TRANS_ROW,        _______,
+      _______, LEFT_HOME_ROW, _______ , _______ , RIGHT_HOME_ROW_A, _______,
+      _______, TRANS_ROW,     _______ , _______ , TRANS_ROW,        _______,
+      _______ ,
+      LEFT_HOME_ROW_THUMB_CLUSTER,
+      RIGHT_HOME_ROW_THUMB_CLUSTER,
+      _______
+    ),
+    [_LHR] = LAYOUT_wrapper(
+      _______, TRANS_ROW,        _______ , _______ , TRANS_ROW,      _______,
+      _______, RIGHT_HOME_ROW_A, _______ , _______ , RIGHT_HOME_ROW, _______,
+      _______, TRANS_ROW,        _______ , _______ , TRANS_ROW,      _______,
+      _______ ,
+      LEFT_HOME_ROW_THUMB_CLUSTER,
+      RIGHT_HOME_ROW_THUMB_CLUSTER,
+      _______
+    ),
+
 };
 
 #ifdef RGBLIGHT_LAYERS
