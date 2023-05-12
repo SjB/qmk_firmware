@@ -64,16 +64,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RIGHT_MOUSE_THUMB_CLUSTER
   ),
   [_RHR] = LAYOUT_wrapper(
-    _______, TRANS_ROW, TRANS_ROW, _______,
-    _______, LEFT_HOME_ROW, RIGHT_HOME_ROW_A, _______,
-    _______, TRANS_ROW, TRANS_ROW, _______,
+    _______ , TRANS_ROW     , TRANS_ROW        , _______ ,
+    _______ , LEFT_HOME_ROW , RIGHT_HOME_ROW_A , _______ ,
+    _______ , TRANS_ROW     , TRANS_ROW        , _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
     RIGHT_HOME_ROW_THUMB_CLUSTER
   ),
   [_LHR] = LAYOUT_wrapper(
-    _______, TRANS_ROW, TRANS_ROW, _______,
-    _______, RIGHT_HOME_ROW_A, RIGHT_HOME_ROW, _______,
-    _______, TRANS_ROW, TRANS_ROW, _______,
+    _______ , TRANS_ROW        , TRANS_ROW      , _______ ,
+    _______ , RIGHT_HOME_ROW_A , RIGHT_HOME_ROW , _______ ,
+    _______ , TRANS_ROW        , TRANS_ROW      , _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
     RIGHT_HOME_ROW_THUMB_CLUSTER
   ),
