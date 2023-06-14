@@ -14,11 +14,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "action_util.h"
-#include "quantum.h"
+#include QMK_KEYBOARD_H
+
 #include "sjb.h"
+
+#ifdef LAYER_LOCK_ENABLE
 #include "layer_lock.h"
+#endif
+
+#ifdef CALLUM_ONESHOT
 #include "oneshot.h"
+#endif
 
 
 __attribute__ ((weak))
@@ -120,7 +126,9 @@ void matrix_scan_sjb(void) {
 }
 
 void matrix_scan_user(void) {
+#ifdef LAYER_LOCK_ENABLE
     layer_lock_task();
+#endif
     matrix_scan_sjb();
 }
 
@@ -208,8 +216,11 @@ bool process_callum_oneshot(uint16_t keycode, keyrecord_t* record) {
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!(
+    if (!(process_record_sjb(keycode, record) &&
+
+#ifdef LAYER_LOCK_ENABLE
           process_layer_lock(keycode, record, SB_LLOCK) &&
+#endif
 
 #ifdef CALLUM_ONESHOT
           process_callum_oneshot(keycode, record) &&
@@ -230,9 +241,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 #ifdef SB_SHIFTED_BACKSPACE
           process_shifted_backspace(keycode, record) &&
 #endif
-          process_record_sjb(keycode, record) &&
           true)) {
-        return false;
+    return false;
     }
     return true;
 }

@@ -14,11 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "quantum_keycodes.h"
-#include "action_code.h"
-#include "sjb.h"
-
 #ifdef COMBO_ENABLE
+#        include QMK_KEYBOARD_H
+
+#include "sjb.h"
 
 #define SJB_DEFINE_KEY(name, args...) const uint16_t PROGMEM combo_##name[] = {args, COMBO_END}
 #define SJB_COMBO(name, action) COMBO(combo_##name, action)
@@ -30,7 +29,7 @@ SJB_DEFINE_KEY(CK_RBOOT,  KC_P, KC_Y);
 SJB_DEFINE_KEY(CK_POWER,  KC_Q, KC_Z);
 
 SJB_DEFINE_KEY(CK_LAYER_LOCK, KC_M, KC_COMM);
-SJB_DEFINE_KEY(CK_KEY_LOCK, KC_V, KC_C);
+SJB_DEFINE_KEY(CK_KEY_LOCK,   KC_V, KC_C);
 
 //SJB_DEFINE_KEY(CK_LSFT,  KC_C, KC_X);
 //SJB_DEFINE_KEY(CK_RSFT,  KC_COMM, KC_DOT);
@@ -67,7 +66,7 @@ combo_t key_combos[] = {
     SJB_COMBO(CK_POWER, KC_PWR),
 
     SJB_COMBO(CK_LAYER_LOCK, SB_LLOCK),
-    SJB_COMBO(CK_KEY_LOCK, QK_LOCK),
+    SJB_COMBO(CK_KEY_LOCK,   QK_LOCK),
 
     SJB_COMBO(CK_LALT, OSM(MOD_LALT)),
     SJB_COMBO(CK_LGUI, OSM(MOD_LGUI)),
@@ -97,7 +96,5 @@ combo_t key_combos[] = {
     SJB_COMBO(CK_TG_NUM, TG(_NUMPAD)),
     SJB_COMBO(CK_TG_MOUSE, TG(_MOUSE)),
 };
-
-const uint16_t COMBO_LEN = ARRAYSIZE(key_combos);
 
 #endif

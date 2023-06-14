@@ -19,7 +19,6 @@
 #endif
 
 //#define ENABLE_HOME_ROW 1
-#define IGNORE_MOD_TAP_INTERRUPT
 #define TAPPING_TERM 200 // default 200
 // #define RETRO_TAPPPING
 //#define PERMISSIVE_HOLD
