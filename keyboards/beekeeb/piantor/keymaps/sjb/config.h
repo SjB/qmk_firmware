@@ -4,6 +4,9 @@
 #undef USB_VBUS_PIN
 //#define USB_VBUS_PIN GP2K
 
+#undef WS2812_DI_PIN
+#define WS2812_DI_PIN GP23
+
 /* Handedness. */
 //#define SPLIT_HAND_PIN GP28
 //#define SPLIT_HAND_PIN_LOW_IS_LEFT // High -> right, Low -> left.
