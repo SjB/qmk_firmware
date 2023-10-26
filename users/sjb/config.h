@@ -21,7 +21,9 @@
 //#define ENABLE_HOME_ROW 1
 #define TAPPING_TERM 200 // default 200
 // #define RETRO_TAPPPING
-//#define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD
+//#define HOLD_ON_OTHER_KEY_PRESS
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 #define COMBO_TERM 60
 #define COMBO_ONLY_FROM_LAYER 0

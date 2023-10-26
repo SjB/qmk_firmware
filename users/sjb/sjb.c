@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "action.h"
+#include "action_tapping.h"
 #include QMK_KEYBOARD_H
 
 #include "sjb.h"
@@ -245,4 +247,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return false;
     }
     return true;
+}
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case RSE(KC_SPC):
+        return true;
+    }
+    return false;
 }
