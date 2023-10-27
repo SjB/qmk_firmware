@@ -18,12 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#ifdef RGBLIGHT_ENABLE
-#    define RGBLED_NUM 54 // Number of LEDs
-#    define RGBLED_SPLIT \
-        { 27, 27 }
-#    define RGBLIGHT_SPLIT
-#endif
+#define CRKDB_ELITEC 1
 
 #ifdef RGB_MATRIX_ENABLE
 #    define RGBLED_NUM       54 // Number of LEDs
