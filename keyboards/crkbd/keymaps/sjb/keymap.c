@@ -24,9 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT_wrapper(
-    OSM_CTL , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_HYPR ,
-    KC_TAB  , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_SFT  ,
-    OSM_GUI , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_MEH  ,
+    OSM_ALT , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_MEH  ,
+    OSM_SFT , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_SFT  ,
+    KC_TAB  , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_HYPR ,
 
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
@@ -48,9 +48,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RIGHT_NUMPAD_THUMB_CLUSTER
   ),
   [_NAV] = LAYOUT_wrapper(
-    RGB_TOG , LEFT_NAV_ROW_1 ,  RIGHT_SYS_ROW_1 , RGB_HUI ,
-    RGB_MOD , LEFT_NAV_ROW_2 ,  RIGHT_SYS_ROW_2 , RGB_SAI ,
-    NK_TOGG , LEFT_NAV_ROW_3 ,  RIGHT_SYS_ROW_3 , RGB_VAI ,
+    RGB_TOG , LEFT_SYS_ROW_1 , RIGHT_NAV_ROW_1 , RGB_HUI ,
+    RGB_MOD , LEFT_SYS_ROW_2 , RIGHT_NAV_ROW_2 , RGB_SAI ,
+    NK_TOGG , LEFT_SYS_ROW_3 , RIGHT_NAV_ROW_3 , RGB_VAI ,
 
     LEFT_NAV_THUMB_CLUSTER,
     RIGHT_NAV_THUMB_CLUSTER
@@ -64,16 +64,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RIGHT_MOUSE_THUMB_CLUSTER
   ),
   [_RHR] = LAYOUT_wrapper(
-    _______ , TRANS_ROW     , TRANS_ROW        , _______ ,
-    _______ , LEFT_HOME_ROW , RIGHT_HOME_ROW_A , _______ ,
-    _______ , TRANS_ROW     , TRANS_ROW        , _______ ,
+    _______ , TRANS_ROW     , TRANS_ROW , _______ ,
+    _______ , LEFT_HOME_ROW , TRANS_ROW , _______ ,
+    _______ , TRANS_ROW     , TRANS_ROW , _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
     RIGHT_HOME_ROW_THUMB_CLUSTER
   ),
   [_LHR] = LAYOUT_wrapper(
-    _______ , TRANS_ROW        , TRANS_ROW      , _______ ,
-    _______ , RIGHT_HOME_ROW_A , RIGHT_HOME_ROW , _______ ,
-    _______ , TRANS_ROW        , TRANS_ROW      , _______ ,
+    _______ , TRANS_ROW , TRANS_ROW      , _______ ,
+    _______ , TRANS_ROW , RIGHT_HOME_ROW , _______ ,
+    _______ , TRANS_ROW , TRANS_ROW      , _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
     RIGHT_HOME_ROW_THUMB_CLUSTER
   ),
