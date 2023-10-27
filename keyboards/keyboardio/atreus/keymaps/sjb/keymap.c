@@ -13,10 +13,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    LEFT_QW_ROW_2                            , RIGHT_QW_ROW_2 ,
    LEFT_QW_ROW_3 , TG(_NUMPAD) , TG(_MOUSE) , RIGHT_QW_ROW_3 ,
 
-   KC_TAB , OSM_CTL, OSM_GUI,
+   KC_TAB , OSM_SFT, OSM_ALT,
    LEFT_PRIMARY_THUMB_CLUSTER ,
    RIGHT_PRIMARY_THUMB_CLUSTER ,
-   OSM_HYPR, OSM_MEH, OSM_SFT
+   OSM_MEH, OSM_SFT, OSM_HYPR
   ),
   [_RAISE] = LAYOUT_wrapper(
      LEFT_RAISE_ROW_1                     , RIGHT_RAISE_ROW_1 ,
@@ -39,9 +39,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , _______
   ),
   [_NAV] = LAYOUT_wrapper(
-    LEFT_NAV_ROW_1                       , RIGHT_SYS_ROW_1 ,
-    LEFT_NAV_ROW_2                       , RIGHT_SYS_ROW_2 ,
-    LEFT_NAV_ROW_3 , _______ , _______   , RIGHT_SYS_ROW_3 ,
+    LEFT_SYS_ROW_1                       , RIGHT_NAV_ROW_1 ,
+    LEFT_SYS_ROW_2                       , RIGHT_NAV_ROW_2 ,
+    LEFT_SYS_ROW_3 , _______ , _______   , RIGHT_NAV_ROW_3 ,
 
     NK_TOGG , KC_NO , KC_NO ,
     LEFT_NAV_THUMB_CLUSTER ,
@@ -59,9 +59,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , _______
   ),
   [_RHR] = LAYOUT_wrapper(
-    TRANS_ROW,                   TRANS_ROW,
-    LEFT_HOME_ROW,               RIGHT_HOME_ROW_A,
-    TRANS_ROW, _______, _______, TRANS_ROW,
+    TRANS_ROW,                   TRANS_ROW ,
+    LEFT_HOME_ROW,               TRANS_ROW ,
+    TRANS_ROW, _______, _______, TRANS_ROW ,
 
     _______ , _______, _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
@@ -69,9 +69,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______, _______
   ),
   [_LHR] = LAYOUT_wrapper(
-    TRANS_ROW,                   TRANS_ROW,
-    RIGHT_HOME_ROW_A,            RIGHT_HOME_ROW,
-    TRANS_ROW, _______, _______, TRANS_ROW,
+    TRANS_ROW ,                   TRANS_ROW,
+    TRANS_ROW ,                   RIGHT_HOME_ROW,
+    TRANS_ROW , _______, _______, TRANS_ROW,
 
     _______ , _______, _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
