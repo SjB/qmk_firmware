@@ -18,20 +18,23 @@
 #include QMK_KEYBOARD_H
 #include "sjb.h"
 
+#include "version.h"
+#include <stdio.h>
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wrapper(
-      OSM_CTL , LEFT_QW_ROW_1 , G(KC_SPC)   , CW_TOGG    , RIGHT_QW_ROW_1 , OSM_HYPR,
-      KC_TAB  , LEFT_QW_ROW_2 , TG(_NUMPAD) , TG(_MOUSE) , RIGHT_QW_ROW_2 , OSM_SFT ,
-      OSM_GUI , LEFT_QW_ROW_3 , QK_LOCK     , SB_LLOCK   , RIGHT_QW_ROW_3 , OSM_MEH ,
+      OSM_HYPR , LEFT_QW_ROW_1 , G(KC_SPC)   , CW_TOGG    , RIGHT_QW_ROW_1 , OSM_MEH ,
+      KC_Q     , LEFT_QW_ROW_2 , TG(_NUMPAD) , TG(_MOUSE) , RIGHT_QW_ROW_2 , KC_P    ,
+      OSM_SFT  , LEFT_QW_ROW_3 , QK_LOCK     , SB_LLOCK   , RIGHT_QW_ROW_3 , OSM_SFT ,
 
-      OSM_MEH,
+      OSM_ALT ,
       LEFT_PRIMARY_THUMB_CLUSTER  ,
       RIGHT_PRIMARY_THUMB_CLUSTER ,
       OSM_CTL
     ),
     [_RAISE] = LAYOUT_wrapper(
       _______ , LEFT_RAISE_ROW_1 , _______ , _______ , RIGHT_RAISE_ROW_1 , _______ ,
-      _______ , LEFT_RAISE_ROW_2 , _______ , _______ , RIGHT_RAISE_ROW_2 , _______ ,
+      S(KC_1) , LEFT_RAISE_ROW_2 , _______ , _______ , RIGHT_RAISE_ROW_2 , S(KC_0) ,
       _______ , LEFT_RAISE_ROW_3 , _______ , _______ , RIGHT_RAISE_ROW_3 , _______ ,
 
       _______ ,
@@ -41,9 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NUMPAD] = LAYOUT_wrapper(
-      OSM_CTL , FUNCPAD_ROW_1 , _______ , _______ , NUMPAD_ROW_1 , _______ ,
-      OSM_ALT , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , _______ ,
-      OSM_SFT , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , _______ ,
+      _______ , FUNCPAD_ROW_1 , _______ , _______ , NUMPAD_ROW_1 , _______ ,
+      OSM_F1  , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , KC_PMNS ,
+      _______ , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , _______ ,
 
       _______ ,
       LEFT_NUMPAD_THUMB_CLUSTER ,

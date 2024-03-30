@@ -7,16 +7,16 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_wrapper(
-    OSM_ALT , LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_MEH  ,
-    OSM_SFT , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , OSM_SFT  ,
-    KC_TAB  , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_HYPR ,
+    OSM_HYPR, LEFT_QW_ROW_1            , RIGHT_QW_ROW_1 , OSM_MEH  ,
+    KC_Q    , LEFT_QW_ROW_2            , RIGHT_QW_ROW_2 , KC_P ,
+    OSM_SFT , LEFT_QW_ROW_3            , RIGHT_QW_ROW_3 , OSM_SFT ,
 
     LEFT_PRIMARY_THUMB_CLUSTER ,
     RIGHT_PRIMARY_THUMB_CLUSTER
   ),
   [_RAISE] = LAYOUT_wrapper(
     _______ , LEFT_RAISE_ROW_1          , RIGHT_RAISE_ROW_1 , _______ ,
-    _______ , LEFT_RAISE_ROW_2          , RIGHT_RAISE_ROW_2 , _______ ,
+    S(KC_1) , LEFT_RAISE_ROW_2          , RIGHT_RAISE_ROW_2 , S(KC_0) ,
     _______ , LEFT_RAISE_ROW_3          , RIGHT_RAISE_ROW_3 , _______ ,
 
     LEFT_RAISE_THUMB_CLUSTER ,
@@ -24,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NUMPAD] = LAYOUT_wrapper(
     _______ , FUNCPAD_ROW_1              , NUMPAD_ROW_1 , _______ ,
-    _______ , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , _______ ,
+    KC_F1   , FUNCPAD_ROW_2              , NUMPAD_ROW_2 , KC_PMNS ,
     _______ , FUNCPAD_ROW_3              , NUMPAD_ROW_3 , _______ ,
 
     LEFT_NUMPAD_THUMB_CLUSTER,
