@@ -14,9 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include QMK_KEYBOARD_H
+
 #include "action.h"
 #include "action_tapping.h"
-#include QMK_KEYBOARD_H
 
 #include "sjb.h"
 
@@ -24,7 +25,7 @@
 #include "layer_lock.h"
 #endif
 
-#ifdef CALLUM_ONESHOT
+#ifdef CALLUM_ONESHOT_ENABLE
 #include "oneshot.h"
 #endif
 
@@ -141,12 +142,8 @@ bool process_record_sjb(uint16_t keycode, keyrecord_t* record) {
 
 #ifdef SB_SPECIAL_KEY
 bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
-    if (record->event.pressed){
-        switch (keycode) {
-        case SB_TCM:
-            SEND_STRING(SS_LCTL("b") SS_TAP(X_LBRC));
-            return false;
-        case SB_RSTL:
+    if (keycode == SB_RSTL) {
+        if (record->event.pressed) {
             layer_clear();
             clear_oneshot_locked_mods();
             clear_oneshot_mods();
@@ -159,7 +156,7 @@ bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
 }
 #endif
 
-#ifdef CALLUM_ONESHOT
+#ifdef CALLUM_ONESHOT_ENABLE
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
     case SB_ESC:
@@ -218,40 +215,45 @@ bool process_callum_oneshot(uint16_t keycode, keyrecord_t* record) {
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!(process_record_sjb(keycode, record) &&
+
 
 #ifdef LAYER_LOCK_ENABLE
-          process_layer_lock(keycode, record, SB_LLOCK) &&
+    if (!process_layer_lock(keycode, record, SB_LLOCK)) { return false; }
 #endif
 
-#ifdef CALLUM_ONESHOT
-          process_callum_oneshot(keycode, record) &&
+#ifdef CALLUM_ONESHOT_ENABLE
+    if (!process_callum_oneshot(keycode, record)) { return false; }
 #endif
 
 #ifdef SB_SPECIAL_KEY
-          process_special_keys(keycode, record) &&
+    if (!process_special_keys(keycode, record)) { return false; }
 #endif
 
 #ifdef SB_THUMB_SUPER
-          process_thumb_super(keycode, record) &&
+    if (!process_thumb_super(keycode, record)) { return false; }
 #endif
 
 #ifdef SB_THUMB_TAB
-          process_thumb_tab(keycode, record) &&
+    if (!process_thumb_tab(keycode, record)) { return false; }
 #endif
 
 #ifdef SB_SHIFTED_BACKSPACE
-          process_shifted_backspace(keycode, record) &&
+    if (!process_shifted_backspace(keycode, record)) { return false; }
 #endif
-          true)) {
-    return false;
-    }
+
+    if (!process_record_sjb(keycode, record)) { return false; }
+
     return true;
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case RSE(KC_SPC):
+    case SB_RSE:
+    case SB_NAV:
+#ifdef SB_HRL
+    case SB_LHRL:
+    case SB_RHRL:
+#endif
         return true;
     }
     return false;
