@@ -13,6 +13,8 @@ SEND_STRING_ENABLE = no
 UNICODE_ENABLE = no
 CAPS_WORD_ENABLE = yes
 REPEAT_KEY_ENABLE = yes
+ACHORDION_ENABLE = yes
+
 SB_SHIFTED_BACKSPACE = yes
 SB_THUMB_TAB = no
 SB_SPECIAL_KEY = yes
@@ -22,6 +24,11 @@ SB_HR_COMBO_KEY = no
 SB_THUMB_SUPER = no
 
 SRC += sjb.c
+
+ifeq ($(strip $(ACHORDION_ENABLE)), yes)
+SRC += achordion.c
+OPT_DEFS += -DACHORDION_ENABLE
+endif
 
 ifeq ($(strip $(CALLUM_ONESHOT_ENABLE)), yes)
 SRC += oneshot.c

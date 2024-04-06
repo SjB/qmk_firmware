@@ -21,6 +21,10 @@
 
 #include "sjb.h"
 
+#ifdef ACHORDION_ENABLE
+#include "achordion.h"
+#endif
+
 #ifdef LAYER_LOCK_ENABLE
 #include "layer_lock.h"
 #endif
@@ -123,15 +127,98 @@ bool process_thumb_super(uint16_t keycode, keyrecord_t *record) {
 }
 #endif
 
+#ifdef ACHORDION_ENABLE
+
+/*
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t* record) {
+  switch (keycode) {
+    // Increase the tapping term a little for slower ring and pinky fingers.
+    case HR_A:
+    case HR_S:
+    case HR_D:
+    case HR_F:
+    case HR_G:
+    case HR_H:
+    case HR_J:
+    case HR_K:
+    case HR_L:
+    case HR_SCLN:
+      return TAPPING_TERM + 15;
+    default:
+      return TAPPING_TERM;
+  }
+}
+*/
+
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
+  // If you quickly hold a tap-hold key after tapping it, the tap action is
+  // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
+  // lead to missed triggers in fast typing. Here, returning 0 means we
+  // instead want to "force hold" and disable key repeating.
+  switch (keycode) {
+    case HR_H:
+    // Repeating is useful for Vim navigation keys.
+    case HR_J:
+    case HR_K:
+    case HR_L:
+      return QUICK_TAP_TERM;  // Enable key repeating.
+    default:
+      return 0;  // Otherwise, force hold and disable key repeating.
+  }
+}
+
+bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode, keyrecord_t* other_record) {
+  switch (tap_hold_keycode) {
+  case SB_NAV:
+  case SB_RSE:
+  case SB_SFT:
+  case SB_CTL:
+      return true;
+  }
+
+  // Otherwise, follow the opposite hands rule.
+  return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+  return 800;  // Use a timeout of 800 ms.
+}
+
+uint16_t achordion_streak_timeout(uint16_t tap_hold_keycode) {
+  if (IS_QK_LAYER_TAP(tap_hold_keycode)) {
+    return 0;  // Disable streak detection on layer-tap keys.
+  }
+
+  // Otherwise, tap_hold_keycode is a mod-tap key.
+  uint8_t mod = mod_config(QK_MOD_TAP_GET_MODS(tap_hold_keycode));
+  if ((mod & MOD_LSFT) != 0) {
+    return 0;  // Disable for Shift mod-tap keys.
+  } else {
+    return 100;
+  }
+}
+
+#endif
+
 __attribute__ ((weak))
 void matrix_scan_sjb(void) {
     return;
 }
 
 void matrix_scan_user(void) {
+#ifdef ACHORDION_ENABLE
+    achordion_task();
+#endif
+
 #ifdef LAYER_LOCK_ENABLE
     layer_lock_task();
 #endif
+
+#ifdef FLOW_ENABLE
+    flow_matrix_scan();
+#endif
+
     matrix_scan_sjb();
 }
 
@@ -216,6 +303,9 @@ bool process_callum_oneshot(uint16_t keycode, keyrecord_t* record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
+#ifdef ACHORDION_ENABLE
+    if (!process_achordion(keycode, record)) { return false; }
+#endif
 
 #ifdef LAYER_LOCK_ENABLE
     if (!process_layer_lock(keycode, record, SB_LLOCK)) { return false; }

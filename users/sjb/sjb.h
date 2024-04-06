@@ -83,7 +83,18 @@ enum custom_keycodes {
 #define HR_G LT(_LHR, KC_G)
 #define HR_H LT(_RHR, KC_H)
 
+#ifdef ACHORDION_ENABLE
 
+#define HR_A LALT_T(KC_A)
+#define HR_S LGUI_T(KC_S)
+#define HR_D LCTL_T(KC_D)
+#define HR_F LSFT_T(KC_F)
+#define HR_J RSFT_T(KC_J)
+#define HR_K RCTL_T(KC_K)
+#define HR_L RGUI_T(KC_L)
+#define HR_SCLN LALT_T(KC_SCLN)
+
+#else
 
 #define HR_A KC_A
 #define HR_S KC_S
