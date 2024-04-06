@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMPAD] = LAYOUT_wrapper(
       _______ , FUNCPAD_ROW_1 , _______ , _______ , NUMPAD_ROW_1 , _______ ,
-      OSM_F1  , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , KC_PMNS ,
+      KC_F1   , FUNCPAD_ROW_2 , _______ , _______ , NUMPAD_ROW_2 , KC_PMNS ,
       _______ , FUNCPAD_ROW_3 , _______ , _______ , NUMPAD_ROW_3 , _______ ,
 
       _______ ,
@@ -54,9 +54,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______
     ),
     [_NAV] = LAYOUT_wrapper(
-      RGB_TOG , LEFT_NAV_ROW_1 , _______ , _______ , RIGHT_SYS_ROW_1 , RGB_HUI ,
-      RGB_MOD , LEFT_NAV_ROW_2 , _______ , _______ , RIGHT_SYS_ROW_2 , RGB_SAI ,
-      NK_TOGG , LEFT_NAV_ROW_3 , _______ , _______ , RIGHT_SYS_ROW_3 , RGB_VAI ,
+      RGB_TOG , LEFT_SYS_ROW_1 , _______ , _______ , RIGHT_NAV_ROW_1 , RGB_HUI ,
+      RGB_MOD , LEFT_SYS_ROW_2 , _______ , _______ , RIGHT_NAV_ROW_2 , RGB_SAI ,
+      NK_TOGG , LEFT_SYS_ROW_3 , _______ , _______ , RIGHT_NAV_ROW_3 , RGB_VAI ,
 
       _______ ,
       LEFT_NAV_THUMB_CLUSTER ,
@@ -77,6 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, TRANS_ROW,     _______ , _______ , TRANS_ROW,        _______,
       _______, LEFT_HOME_ROW, _______ , _______ , RIGHT_HOME_ROW_A, _______,
       _______, TRANS_ROW,     _______ , _______ , TRANS_ROW,        _______,
+
       _______ ,
       LEFT_HOME_ROW_THUMB_CLUSTER,
       RIGHT_HOME_ROW_THUMB_CLUSTER,
@@ -86,12 +87,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, TRANS_ROW,        _______ , _______ , TRANS_ROW,      _______,
       _______, RIGHT_HOME_ROW_A, _______ , _______ , RIGHT_HOME_ROW, _______,
       _______, TRANS_ROW,        _______ , _______ , TRANS_ROW,      _______,
+
       _______ ,
       LEFT_HOME_ROW_THUMB_CLUSTER,
       RIGHT_HOME_ROW_THUMB_CLUSTER,
       _______
     ),
-
 };
 
 #ifdef RGBLIGHT_LAYERS

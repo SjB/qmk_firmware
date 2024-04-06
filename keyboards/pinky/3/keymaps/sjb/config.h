@@ -23,7 +23,10 @@
 #define EE_HANDS
 
 #define USE_SERIAL_PD2
-#define RGB_DI_PIN D3
+
+#undef WS2812_DI_PIN
+#define WS2812_DI_PIN D3
+
 
 #ifdef RGBLIGHT_ENABLE
 #    define RGBLED_NUM 4

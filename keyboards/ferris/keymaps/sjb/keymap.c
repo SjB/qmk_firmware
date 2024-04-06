@@ -1,6 +1,7 @@
 // Copyright (c) 2023 Sagacity Solutions Inc. All right reserved.
 
 #include QMK_KEYBOARD_H
+
 #include "sjb.h"
 
 #define RIGHT_SWEEP_THUMB_TRIM(...) _RIGHT_SWEEP_THUMB_TRIM(__VA_ARGS__)
