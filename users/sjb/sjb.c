@@ -16,9 +16,6 @@
 
 #include QMK_KEYBOARD_H
 
-#include "action.h"
-#include "action_tapping.h"
-
 #include "sjb.h"
 
 #ifdef ACHORDION_ENABLE
@@ -29,57 +26,22 @@
 #include "layer_lock.h"
 #endif
 
-#ifdef CALLUM_ONESHOT_ENABLE
-#include "oneshot.h"
-#endif
-
-
 __attribute__ ((weak))
 layer_state_t layer_state_set_keymap(layer_state_t state) {
     return state;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    if (IS_LAYER_ON_STATE(state, _NUMPAD)
-        && IS_LAYER_OFF_STATE(state, _RAISE)
-        && IS_LAYER_OFF_STATE(state, _NAV)) {
-        return layer_state_set_keymap(state);
-    }
-
     state = update_tri_layer_state(state, _RAISE, _NAV, _NUMPAD);
     return layer_state_set_keymap(state);
 }
 
 static uint8_t mod_state;
-#ifdef SB_SHIFTED_BACKSPACE
-bool process_shifted_backspace(uint16_t keycode, keyrecord_t *record) {
+bool process_special_keys(uint16_t keycode, keyrecord_t *record) {
     mod_state = get_mods();
-    if (keycode == SB_BSPC) {
-        static bool delkey_registered;
-        if (record->event.pressed) {
-            if (mod_state & MOD_MASK_SHIFT) {
-                del_mods(MOD_MASK_SHIFT);
-                register_code(KC_DEL);
-                delkey_registered = true;
-                set_mods(mod_state);
-                return false;
-            }
-        } else {
-            if (delkey_registered) {
-                unregister_code(KC_DEL);
-                delkey_registered = false;
-                return false;
-            }
-        }
-    }
-    return true;
-};
-#endif
 
 #ifdef SB_THUMB_TAB
-bool process_thumb_tab(uint16_t keycode, keyrecord_t *record) {
-    if (keycode == SB_TAB) {
-        mod_state = get_mods();
+    if (keycode == SB_THUMB_TAB) {
         static bool thumb_tab_registered;
         if (record->event.pressed) {
             if (mod_state & MOD_MASK_SHIFT) {
@@ -97,14 +59,10 @@ bool process_thumb_tab(uint16_t keycode, keyrecord_t *record) {
             }
         }
     }
-    return true;
-}
 #endif
 
 #ifdef SB_THUMB_SUPER
-bool process_thumb_super(uint16_t keycode, keyrecord_t *record) {
-    if (keycode == SB_GUI) {
-        mod_state = get_mods();
+    if (keycode == SB_THUMB_SUPER) {
         static bool thumb_super_registered;
         if (record->event.pressed) {
             if (mod_state & MOD_MASK_CTRL) {
@@ -123,9 +81,28 @@ bool process_thumb_super(uint16_t keycode, keyrecord_t *record) {
             }
         }
     }
-    return true;
-}
 #endif
+    return true;
+};
+
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
+    // If you quickly hold a tap-hold key after tapping it, the tap action is
+    // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
+    // lead to missed triggers in fast typing. Here, returning 0 means we
+    // instead want to "force hold" and disable key repeating.
+    if (IS_QK_MOD_TAP(keycode) || IS_QK_LAYER_TAP(keycode)) {
+        switch (keycode & 0xff) {  // strip mod tap
+        case KC_H:
+        case KC_J:
+        case KC_K:
+        case KC_L:
+        case KC_BSPC:
+        case KC_SPC:
+            return QUICK_TAP_TERM;
+        }
+    }
+    return 0;  // Otherwise, force hold and disable key repeating.
+}
 
 #ifdef ACHORDION_ENABLE
 
@@ -150,30 +127,13 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t* record) {
 }
 */
 
-uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
-  // If you quickly hold a tap-hold key after tapping it, the tap action is
-  // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
-  // lead to missed triggers in fast typing. Here, returning 0 means we
-  // instead want to "force hold" and disable key repeating.
-  switch (keycode) {
-    case HR_H:
-    // Repeating is useful for Vim navigation keys.
-    case HR_J:
-    case HR_K:
-    case HR_L:
-      return QUICK_TAP_TERM;  // Enable key repeating.
-    default:
-      return 0;  // Otherwise, force hold and disable key repeating.
-  }
-}
-
 bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                      uint16_t other_keycode, keyrecord_t* other_record) {
   switch (tap_hold_keycode) {
   case SB_NAV:
   case SB_RSE:
-  case SB_SFT:
-  case SB_CTL:
+  case SB_MOUSE:
+  case SB_BHRL:
       return true;
   }
 
@@ -186,19 +146,19 @@ uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
 }
 
 uint16_t achordion_streak_timeout(uint16_t tap_hold_keycode) {
-  if (IS_QK_LAYER_TAP(tap_hold_keycode)) {
+  if (IS_QK_LAYER_TAP(tap_hold_keycode) || IS_QK_MOD_TAP(tap_hold_keycode)) {
     return 0;  // Disable streak detection on layer-tap keys.
   }
 
   // Otherwise, tap_hold_keycode is a mod-tap key.
+  /*
   uint8_t mod = mod_config(QK_MOD_TAP_GET_MODS(tap_hold_keycode));
   if ((mod & MOD_LSFT) != 0) {
-    return 0;  // Disable for Shift mod-tap keys.
-  } else {
-    return 100;
+    return 50;  // Disable is 0 for Shift mod-tap keys.
   }
+  */
+  return 100;
 }
-
 #endif
 
 __attribute__ ((weak))
@@ -215,10 +175,6 @@ void matrix_scan_user(void) {
     layer_lock_task();
 #endif
 
-#ifdef FLOW_ENABLE
-    flow_matrix_scan();
-#endif
-
     matrix_scan_sjb();
 }
 
@@ -227,8 +183,8 @@ bool process_record_sjb(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
-#ifdef SB_SPECIAL_KEY
-bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
+#ifdef SB_RSTL_ENABLE
+bool process_reset_layer(uint16_t keycode, keyrecord_t* record) {
     if (keycode == SB_RSTL) {
         if (record->event.pressed) {
             layer_clear();
@@ -243,64 +199,6 @@ bool process_special_keys(uint16_t keycode, keyrecord_t* record) {
 }
 #endif
 
-#ifdef CALLUM_ONESHOT_ENABLE
-bool is_oneshot_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-    case SB_ESC:
-    case SB_RSTL:
-        return true;
-    default:
-        return false;
-    }
-}
-
-bool is_oneshot_ignored_key(uint16_t keycode) {
-    switch (keycode) {
-    case SB_RSE:
-    case SB_NAV:
-    case KC_LSFT:
-    case OS_CTL:
-    case OS_ALT:
-    case OS_GUI:
-    case OS_RALT:
-    case OS_MEH:
-        return true;
-    default:
-        return false;
-    }
-}
-
-oneshot_state os_ctrl_state = os_up_unqueued;
-oneshot_state os_alt_state = os_up_unqueued;
-oneshot_state os_cmd_state = os_up_unqueued;
-oneshot_state os_ralt_state = os_up_unqueued;
-oneshot_state os_meh_state = os_up_unqueued;
-
-bool process_callum_oneshot(uint16_t keycode, keyrecord_t* record) {
-    update_oneshot(
-        &os_ralt_state, KC_RALT, OS_RALT,
-        keycode, record
-    );
-    update_oneshot(
-        &os_meh_state, KC_MEH, OS_MEH,
-        keycode, record
-    );
-    update_oneshot(
-        &os_ctrl_state, KC_LCTL, OS_CTL,
-        keycode, record
-    );
-    update_oneshot(
-        &os_alt_state, KC_LALT, OS_ALT,
-        keycode, record
-    );
-    update_oneshot(
-        &os_cmd_state, KC_LGUI, OS_GUI,
-        keycode, record
-    );
-    return true;
-}
-#endif
-
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 #ifdef ACHORDION_ENABLE
@@ -311,25 +209,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     if (!process_layer_lock(keycode, record, SB_LLOCK)) { return false; }
 #endif
 
-#ifdef CALLUM_ONESHOT_ENABLE
-    if (!process_callum_oneshot(keycode, record)) { return false; }
+#ifdef SB_RSTL_ENABLE
+    if (!process_reset_layer(keycode, record)) { return false; }
 #endif
 
-#ifdef SB_SPECIAL_KEY
     if (!process_special_keys(keycode, record)) { return false; }
-#endif
-
-#ifdef SB_THUMB_SUPER
-    if (!process_thumb_super(keycode, record)) { return false; }
-#endif
-
-#ifdef SB_THUMB_TAB
-    if (!process_thumb_tab(keycode, record)) { return false; }
-#endif
-
-#ifdef SB_SHIFTED_BACKSPACE
-    if (!process_shifted_backspace(keycode, record)) { return false; }
-#endif
 
     if (!process_record_sjb(keycode, record)) { return false; }
 
@@ -337,14 +221,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case SB_RSE:
-    case SB_NAV:
-#ifdef SB_HRL
-    case SB_LHRL:
-    case SB_RHRL:
-#endif
+    if (IS_QK_LAYER_TAP(keycode)) {
         return true;
     }
+
     return false;
 }

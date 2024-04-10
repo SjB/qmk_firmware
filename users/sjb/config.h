@@ -18,13 +18,13 @@
     #undef TAPPING_TERM
 #endif
 
-//#define ENABLE_HOME_ROW 1
 #define TAPPING_TERM 200 // default 200
 // #define RETRO_TAPPPING
 // #define PERMISSIVE_HOLD
 // #define HOLD_ON_OTHER_KEY_PRESS
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-// #define QUICK_TAP_TERM 0
+#define QUICK_TAP_TERM_PER_KEY
+// #define QUICK_TAP_TERM
 
 #define COMBO_TERM 60
 #define COMBO_ONLY_FROM_LAYER 0
@@ -46,10 +46,8 @@
 
 #define LAYER_LOCK_IDLE_TIMEOUT 60000 // Turn off after 60 seconds.
 
+//#define IGNORE_MOD_TAP_INTERRUPT
 #define ONESHOT_TAP_TOGGLE 2
 #define ONESHOT_TIMEOUT 2000
 
 #define FORCE_NKRO
-
-#define FLOW_COUNT 6
-#define FLOW_LAYERS_COUNT 5

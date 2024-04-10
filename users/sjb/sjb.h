@@ -33,29 +33,37 @@ enum custom_keycodes {
   NEW_SAFE_RANGE
 };
 
-
 #define _QWERTY 0
 #define _RAISE 1
 #define _NAV 2
 #define _NUMPAD 3
 #define _MOUSE 4
-#define _RHR 5
-#define _LHR 6
+#define _BHRL 5
+#define _RHRL 6
+#define _LHRL 7
 
 #define OSL_RSE OSL(_RAISE)
 #define OSL_NUM OSL(_NUMPAD)
 #define OSL_NAV OSL(_NAV)
-
-#define LT_RSE(_key) LT(_RAISE, _key)
-#define LT_NUM(_key) LT(_NUMPAD, _key)
-#define LT_NAV(_key) LT(_NAV, _key)
-
-#ifdef LAYER_LOCK_ENABLE
-#define LK_LSFT LSFT_T(SB_LLOCK)
-#endif
+#define OSL_MOUSE OSL(_MOUSE)
 
 #define NAV(_key) LT(_NAV, _key)
 #define RSE(_key) LT(_RAISE, _key)
+#define MOUSE(_key) LT(_MOUSE, _key)
+
+#ifdef SB_LR_HOMEROW_LAYER
+#define SB_RHRL(_key) LT(_RHRL, _key)
+#define SB_LHRL(_key) LT(_LHRL, _key)
+#else
+#define SB_RHRL(_key) _key
+#define SB_LHRL(_key) _key
+#endif
+
+#ifdef SB_HOMEROW_LAYER
+#define BHRL(_key) LT(_BHRL, _key)
+#else
+#define BHRL(_key) _key
+#endif
 
 #define ENT_SFT LSFT_T(KC_ENT)
 #define ENT_GUI LGUI_T(KC_ENT)
@@ -78,84 +86,55 @@ enum custom_keycodes {
 #define OSM_MEH OSM(MOD_MEH)
 #define OSM_HYPR OSM(MOD_HYPR)
 
-#ifdef SB_HRL
-
-#define HR_G LT(_LHR, KC_G)
-#define HR_H LT(_RHR, KC_H)
-
 #ifdef ACHORDION_ENABLE
-
-#define HR_A LALT_T(KC_A)
-#define HR_S LGUI_T(KC_S)
-#define HR_D LCTL_T(KC_D)
-#define HR_F LSFT_T(KC_F)
-#define HR_J RSFT_T(KC_J)
-#define HR_K RCTL_T(KC_K)
-#define HR_L RGUI_T(KC_L)
-#define HR_SCLN LALT_T(KC_SCLN)
-
+#define LHRM(k1, k2, k3, k4, k5) LALT_T(k1), LGUI_T(k2), LCTL_T(k3), LSFT_T(k4), SB_LHRL(k5)
+#define RHRM(k1, k2, k3, k4, k5) SB_RHRL(k1), RSFT_T(k2), RCTL_T(k3), RGUI_T(k4), LALT_T(k5)
 #else
-
-#define HR_A KC_A
-#define HR_S KC_S
-#define HR_D KC_D
-#define HR_F KC_F
-#define HR_J KC_J
-#define HR_K KC_K
-#define HR_L KC_L
-#define HR_SCLN KC_SCLN
-
+#define LHRM(k1, k2, k3, k4, k5) k1, k2, k3, k4, k5
+#define RHRM(k1, k2, k3, k4, k5) k1, k2, k3, k4, k5
 #endif
 
-#else
+#define SB_HRM_K1(k1, k2, k3, k4, k5) k1
+#define SB_HRM_K2(k1, k2, k3, k4, k5) k2
+#define SB_HRM_K3(k1, k2, k3, k4, k5) k3
+#define SB_HRM_K4(k1, k2, k3, k4, k5) k4
+#define SB_HRM_K5(k1, k2, k3, k4, k5) k5
 
-#define HR_A KC_A
-#define HR_S KC_S
-#define HR_D KC_D
-#define HR_F KC_F
-#define HR_G KC_G
-#define HR_H KC_H
-#define HR_J KC_J
-#define HR_K KC_K
-#define HR_L KC_L
-#define HR_SCLN KC_SCLN
-
-#endif
+#define HRM_COL1(...) SB_HRM_K1(__VA_ARGS__)
+#define HRM_COL2(...) SB_HRM_K2(__VA_ARGS__)
+#define HRM_COL3(...) SB_HRM_K3(__VA_ARGS__)
+#define HRM_COL4(...) SB_HRM_K4(__VA_ARGS__)
+#define HRM_COL5(...) SB_HRM_K5(__VA_ARGS__)
 
 #ifdef KEY_LOCK_ENABLE
 #define SB_EXTRA  QK_LOCK
 #else
-#define SB_EXTRA  QK_BOOT
+#define SB_EXTRA  TO(_NUMPAD)
 #endif
 
-#define SB_LHRL HR_G
-#define SB_RHRL HR_H
-#define SB_RSE RSE(KC_SPC)
-#define SB_NAV NAV(KC_BSPC)
-#define SB_BSPC SB_NAV
-#define SB_TAB ESC_CTL
-#define SB_SFT ENT_SFT
-#define SB_CTL ESC_CTL
+#define SB_RSE  RSE(KC_SPC)
+#define SB_NAV  NAV(KC_BSPC)
+#define SB_BHRL  BHRL(KC_ESC)
+#define SB_MOUSE MOUSE(KC_ENT)
 
-#ifndef CAPS_WORD_ENABLE
-#define CW_TOGG  KC_CAPS
-#endif
+#define CB_LLEADER SB_NAV
+#define CB_RLEADER SB_RSE
 
-#ifndef REPEAT_KEY_ENABLE
-#define QK_REP KC_APP
+// #define SB_SFT_BSPC SB_NAV
+// #define SB_THUMB_TAB ESC_CTL
+// #define SB_THUMB_SUPER ESC_GUI
+
+#ifdef CAPS_WORD_ENABLE
+#define SB_CWTG CW_TOGG
+#else
+#define SB_CWTG KC_CAPS
 #endif
 
 #define TRANS_ROW _______, _______, _______, _______, _______
 #define BLANK_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 
-#define LEFT_HOME_ROW  OSM_ALT , OSM_GUI, OSM_CTL, OSM_SFT, CW_TOGG
-#define RIGHT_HOME_ROW CW_TOGG , OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT
-
-#define LEFT_HOME_ROW_A   _______, _______, _______, _______, SB_LHRL
-#define RIGHT_HOME_ROW_A  SB_RHRL, _______, _______, _______, _______
-
-#define LEFT_HOME_ROW_THUMB_CLUSTER  _______, TG(_NUMPAD), SB_RSTL
-#define RIGHT_HOME_ROW_THUMB_CLUSTER KC_TAB, TG(_MOUSE) , _______
+#define LEFT_HOME_ROW  OSM_ALT  , OSM_GUI, OSM_CTL, OSM_SFT, SB_CWTG
+#define RIGHT_HOME_ROW OSM_HYPR , OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT
 
 #define LEFT_FUNC_ROW KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
 #define RIGHT_FUNC_ROW KC_F6, KC_F7, KC_F8, KC_F9, KC_F10
@@ -164,11 +143,11 @@ enum custom_keycodes {
 #define RIGHT_NUM_ROW KC_6, KC_7, KC_8, KC_9, KC_0
 
 #define LEFT_QW_ROW_1 KC_Q, KC_W, KC_E, KC_R, KC_T
-#define LEFT_QW_ROW_2 HR_A, HR_S, HR_D, HR_F, HR_G
+#define LEFT_QW_ROW_2 LHRM(KC_A, KC_S, KC_D, KC_F, KC_G)
 #define LEFT_QW_ROW_3 KC_Z, KC_X, KC_C, KC_V, KC_B
 
 #define RIGHT_QW_ROW_1 KC_Y, KC_U, KC_I   , KC_O  , KC_P
-#define RIGHT_QW_ROW_2 HR_H, HR_J, HR_K   , HR_L  , HR_SCLN
+#define RIGHT_QW_ROW_2 RHRM(KC_H, KC_J, KC_K, KC_L, KC_SCLN)
 #define RIGHT_QW_ROW_3 KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH
 
 #define LEFT_RAISE_ROW_1 S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5)
@@ -195,26 +174,29 @@ enum custom_keycodes {
 #define RIGHT_NAV_ROW_2 KC_TAB  , KC_LEFT, KC_DOWN, KC_RIGHT, KC_MPLY
 #define RIGHT_NAV_ROW_3 KC_END  , KC_PGDN, KC_MUTE, KC_VOLD , KC_MNXT
 
-#define LEFT_MOUSE_ROW_1 _______, _______, OSM_HYPR, C(KC_C), C(KC_X)
+#define LEFT_MOUSE_ROW_1 OSM_RALT, KC_DEL, OSM_MEH , C(KC_C), C(KC_X)
 #define LEFT_MOUSE_ROW_2 LEFT_HOME_ROW
-#define LEFT_MOUSE_ROW_3 _______, _______, OSM_MEH , C(KC_V), G(KC_SPC)
+#define LEFT_MOUSE_ROW_3 OSM_SFT, SB_CWTG, OSM_HYPR, C(KC_V), G(KC_SPC)
 
-#define LEFT_SYS_ROW_1 OSM_RALT , QK_REP  , OSM_MEH  , KC_LBRC, KC_RBRC
+#define LEFT_SYS_ROW_1 OSM_RALT , KC_DEL  , OSM_MEH  , KC_LBRC, KC_RBRC
 #define LEFT_SYS_ROW_2 OSM_ALT  , OSM_GUI , OSM_CTL  , KC_LPRN, KC_RPRN
-#define LEFT_SYS_ROW_3 OSM_SFT  , CW_TOGG , OSM_HYPR , KC_LCBR, KC_RCBR
+#define LEFT_SYS_ROW_3 OSM_SFT  , SB_CWTG , OSM_HYPR , KC_LCBR, KC_RCBR
 
-#define RIGHT_SYS_ROW_1 KC_LBRC , KC_RBRC , OSM_MEH  , KC_APP  , OSM_RALT
+#define RIGHT_SYS_ROW_1 KC_LBRC , KC_RBRC , OSM_MEH  , KC_DEL  , OSM_RALT
 #define RIGHT_SYS_ROW_2 KC_LPRN , KC_RPRN , OSM_CTL  , OSM_GUI , OSM_ALT
-#define RIGHT_SYS_ROW_3 KC_LCBR , KC_RCBR , OSM_HYPR , CW_TOGG , OSM_SFT
+#define RIGHT_SYS_ROW_3 KC_LCBR , KC_RCBR , OSM_HYPR , SB_CWTG , OSM_SFT
 
 #define TRANSPARENT_THUMB_CLUSTER _______, _______, _______
 #define RIGHT_TRANSPARENT_THUMB_CLUSTER(_key) _______, _______, _key
 
-#define LEFT_RSTL_THUMB_CLUSTER  _______,  _______, SB_RSTL
-#define RIGHT_RSTL_THUMB_CLUSTER RSTL_SFT, _______, _______
+#define LEFT_HOME_ROW_THUMB_CLUSTER  _______, TG(_NUMPAD), SB_RSTL
+#define RIGHT_HOME_ROW_THUMB_CLUSTER KC_TAB, TG(_MOUSE) , _______
 
-#define LEFT_PRIMARY_THUMB_CLUSTER  OSM_SFT, SB_NAV, SB_CTL
-#define RIGHT_PRIMARY_THUMB_CLUSTER SB_SFT , SB_RSE, OSM_GUI
+#define LEFT_RSTL_THUMB_CLUSTER  _______,  _______, SB_RSTL
+#define RIGHT_RSTL_THUMB_CLUSTER SB_RSTL, _______, _______
+
+#define LEFT_PRIMARY_THUMB_CLUSTER  OSM_SFT, SB_NAV, SB_BHRL
+#define RIGHT_PRIMARY_THUMB_CLUSTER SB_MOUSE , SB_RSE, OSM_GUI
 
 #define LEFT_RAISE_THUMB_CLUSTER  _______, _______, SB_RSTL
 #define RIGHT_RAISE_THUMB_CLUSTER _______, _______, _______

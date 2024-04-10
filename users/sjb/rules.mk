@@ -15,13 +15,11 @@ CAPS_WORD_ENABLE = yes
 REPEAT_KEY_ENABLE = yes
 ACHORDION_ENABLE = yes
 
-SB_SHIFTED_BACKSPACE = yes
-SB_THUMB_TAB = no
-SB_SPECIAL_KEY = yes
-SB_HRL = yes # homerow layer
+SB_LR_HOMEROW_LAYER = yes # homerow layer
+SB_HOMEROW_LAYER = yes
 SB_LAYER_SWITCH_COMBO_KEY = no
 SB_HR_COMBO_KEY = no
-SB_THUMB_SUPER = no
+SB_RSTL_ENABLE = yes
 
 SRC += sjb.c
 
@@ -30,13 +28,8 @@ SRC += achordion.c
 OPT_DEFS += -DACHORDION_ENABLE
 endif
 
-ifeq ($(strip $(CALLUM_ONESHOT_ENABLE)), yes)
-SRC += oneshot.c
-OPT_DEFS += -DCALLUM_ONESHOT_ENABLE
-endif
-
 ifeq ($(strip $(LAYER_LOCK_ENABLE)), yes)
-SRC += layer_lock.c
+SRC+= layer_lock.c
 OPT_DEFS += -DLAYER_LOCK_ENABLE
 endif
 
@@ -49,30 +42,18 @@ SRC += encoder.c
 OPT_DEFS += -DENCODER_ENABLE
 endif
 
-ifeq ($(strip $(SB_SHIFTED_BACKSPACE)), yes)
-OPT_DEFS += -DSB_SHIFTED_BACKSPACE
+ifeq ($(strip $(SB_LR_HOMEROW_LAYER)), yes)
+OPT_DEFS += -DSB_LR_HOMEROW_LAYER
 endif
 
-ifeq ($(strip $(SB_THUMB_TAB)), yes)
-OPT_DEFS += -DSB_THUMB_TAB
-endif
-
-ifeq ($(strip $(SB_SPECIAL_KEY)), yes)
-OPT_DEFS += -DSB_SPECIAL_KEY
-endif
-
-ifeq ($(strip $(SB_HRL)), yes)
-OPT_DEFS += -DSB_HRL
+ifeq ($(strip $(SB_HOMEROW_LAYER)), yes)
+OPT_DEFS += -DSB_HOMEROW_LAYER
 endif
 
 ifeq ($(strip $(SB_LAYER_SWITCH_COMBO_KEY)), yes)
 OPT_DEFS += -DSB_LAYER_SWITCH_COMBO_KEY
 endif
 
-ifeq ($(strip $(SB_HR_COMBO_KEY)), yes)
-OPT_DEFS += -DSB_HR_COMBO_KEY
-endif
-
-ifeq ($(strip $(SB_THUMB_SUPER)), yes)
-OPT_DEFS += -DSB_THUMB_SUPER
+ifeq ($(strip $(SB_RSTL_ENABLE)), yes)
+OPT_DEFS += -DSB_RSTL_ENABLE
 endif

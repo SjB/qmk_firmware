@@ -63,20 +63,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LEFT_MOUSE_THUMB_CLUSTER ,
     RIGHT_MOUSE_THUMB_CLUSTER
   ),
-  [_RHR] = LAYOUT_wrapper(
+  [_BHRL] = LAYOUT_wrapper(
+    _______, TRANS_ROW    , TRANS_ROW, _______,
+    _______, LEFT_HOME_ROW, RIGHT_HOME_ROW, _______,
+    _______, TRANS_ROW    , TRANS_ROW, _______,
+    LEFT_HOME_ROW_THUMB_CLUSTER,
+    RIGHT_HOME_ROW_THUMB_CLUSTER
+  ),
+  /*
+  [_RHRL] = LAYOUT_wrapper(
     _______ , TRANS_ROW     , TRANS_ROW , _______ ,
     _______ , LEFT_HOME_ROW , TRANS_ROW , _______ ,
     _______ , TRANS_ROW     , TRANS_ROW , _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
     RIGHT_HOME_ROW_THUMB_CLUSTER
   ),
-  [_LHR] = LAYOUT_wrapper(
+  [_LHRL] = LAYOUT_wrapper(
     _______ , TRANS_ROW , TRANS_ROW      , _______ ,
     _______ , TRANS_ROW , RIGHT_HOME_ROW , _______ ,
     _______ , TRANS_ROW , TRANS_ROW      , _______ ,
     LEFT_HOME_ROW_THUMB_CLUSTER,
     RIGHT_HOME_ROW_THUMB_CLUSTER
   ),
+  */
 };
 
 #ifdef OLED_ENABLE
@@ -110,16 +119,22 @@ const char *build_information(void) {
 
 const char *oled_layer_state_text(void) {
     switch (get_highest_layer(layer_state)) {
-        case _RAISE:
-            return PSTR("RAI");
-        case _NUMPAD:
-            return PSTR("NUM");
-        case _NAV:
-            return PSTR("NAV");
-        case _MOUSE:
-            return PSTR("MOU");
-        default:
-            return PSTR("DEF");
+    case _RAISE:
+        return PSTR("RAI");
+    case _NUMPAD:
+        return PSTR("NUM");
+    case _NAV:
+        return PSTR("NAV");
+    case _MOUSE:
+        return PSTR("MOU");
+    case _BHRL:
+        /*
+    case _RHRL:
+    case _LHRL:
+        */
+        return PSTR("HRM");
+    default:
+        return PSTR("DEF");
     }
 }
 
