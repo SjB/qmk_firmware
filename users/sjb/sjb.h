@@ -87,8 +87,8 @@ enum custom_keycodes {
 #define OSM_HYPR OSM(MOD_HYPR)
 
 #ifdef ACHORDION_ENABLE
-#define LHRM(k1, k2, k3, k4, k5) LALT_T(k1), LGUI_T(k2), LCTL_T(k3), LSFT_T(k4), SB_LHRL(k5)
-#define RHRM(k1, k2, k3, k4, k5) SB_RHRL(k1), RSFT_T(k2), RCTL_T(k3), RGUI_T(k4), LALT_T(k5)
+#define LHRM(k1, k2, k3, k4, k5) LALT_T(k1), LGUI_T(k2), LSFT_T(k3), LCTL_T(k4), SB_LHRL(k5)
+#define RHRM(k1, k2, k3, k4, k5) SB_RHRL(k1), RCTL_T(k2), RSFT_T(k3), RGUI_T(k4), LALT_T(k5)
 #else
 #define LHRM(k1, k2, k3, k4, k5) k1, k2, k3, k4, k5
 #define RHRM(k1, k2, k3, k4, k5) k1, k2, k3, k4, k5
@@ -133,8 +133,8 @@ enum custom_keycodes {
 #define TRANS_ROW _______, _______, _______, _______, _______
 #define BLANK_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 
-#define LEFT_HOME_ROW  OSM_ALT  , OSM_GUI, OSM_CTL, OSM_SFT, SB_CWTG
-#define RIGHT_HOME_ROW OSM_HYPR , OSM_SFT, OSM_CTL, OSM_GUI, OSM_ALT
+#define LEFT_HOME_ROW  OSM_ALT  , OSM_GUI, OSM_SFT, OSM_CTL, KC_TAB
+#define RIGHT_HOME_ROW OSM_HYPR , OSM_CTL, OSM_SFT, OSM_GUI, OSM_ALT
 
 #define LEFT_FUNC_ROW KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
 #define RIGHT_FUNC_ROW KC_F6, KC_F7, KC_F8, KC_F9, KC_F10
@@ -171,16 +171,16 @@ enum custom_keycodes {
 #define RIGHT_MOUSE_ROW_3 KC_WH_D, KC_WH_L, KC_BTN3, KC_WH_R, KC_ACL1
 
 #define RIGHT_NAV_ROW_1 KC_HOME , KC_PGUP, KC_UP  , KC_VOLU , KC_MPRV
-#define RIGHT_NAV_ROW_2 KC_TAB  , KC_LEFT, KC_DOWN, KC_RIGHT, KC_MPLY
+#define RIGHT_NAV_ROW_2 SB_CWTG , KC_LEFT, KC_DOWN, KC_RIGHT, KC_MPLY
 #define RIGHT_NAV_ROW_3 KC_END  , KC_PGDN, KC_MUTE, KC_VOLD , KC_MNXT
 
 #define LEFT_MOUSE_ROW_1 OSM_RALT, KC_DEL, OSM_MEH , C(KC_C), C(KC_X)
 #define LEFT_MOUSE_ROW_2 LEFT_HOME_ROW
 #define LEFT_MOUSE_ROW_3 OSM_SFT, SB_CWTG, OSM_HYPR, C(KC_V), G(KC_SPC)
 
-#define LEFT_SYS_ROW_1 OSM_RALT , KC_DEL  , OSM_MEH  , KC_LBRC, KC_RBRC
-#define LEFT_SYS_ROW_2 OSM_ALT  , OSM_GUI , OSM_CTL  , KC_LPRN, KC_RPRN
-#define LEFT_SYS_ROW_3 OSM_SFT  , SB_CWTG , OSM_HYPR , KC_LCBR, KC_RCBR
+#define LEFT_SYS_ROW_1 OSM_RALT , OSM_MEH , OSM_CTL  , KC_LBRC, KC_RBRC
+#define LEFT_SYS_ROW_2 OSM_ALT  , OSM_GUI , OSM_SFT  , KC_LPRN, KC_RPRN
+#define LEFT_SYS_ROW_3 KC_DEL   , SB_CWTG , OSM_HYPR , KC_LCBR, KC_RCBR
 
 #define RIGHT_SYS_ROW_1 KC_LBRC , KC_RBRC , OSM_MEH  , KC_DEL  , OSM_RALT
 #define RIGHT_SYS_ROW_2 KC_LPRN , KC_RPRN , OSM_CTL  , OSM_GUI , OSM_ALT
